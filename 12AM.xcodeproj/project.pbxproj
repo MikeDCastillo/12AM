@@ -17,6 +17,9 @@
 		737E794D1E9B180200172355 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 737E794B1E9B180200172355 /* Main.storyboard */; };
 		737E794F1E9B180200172355 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 737E794E1E9B180200172355 /* Assets.xcassets */; };
 		737E79521E9B180200172355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 737E79501E9B180200172355 /* LaunchScreen.storyboard */; };
+		738E78FF1E9D2D630072CE95 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738E78FE1E9D2D630072CE95 /* Post.swift */; };
+		738E79011E9D30220072CE95 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738E79001E9D30220072CE95 /* Comment.swift */; };
+		738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738E79031E9D471C0072CE95 /* CloudKitSyncable.swift */; };
 		73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E901B31E9B55C500EA7E0A /* LoginViewController.swift */; };
 		73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E901B51E9B5BA600EA7E0A /* MockViewController.swift */; };
 		C893C4701E9C274400185BB9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C46F1E9C274400185BB9 /* Login.storyboard */; };
@@ -40,6 +43,9 @@
 		737E794E1E9B180200172355 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		737E79511E9B180200172355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		737E79531E9B180200172355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		738E78FE1E9D2D630072CE95 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		738E79001E9D30220072CE95 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		738E79031E9D471C0072CE95 /* CloudKitSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
 		73E901B31E9B55C500EA7E0A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		73E901B51E9B5BA600EA7E0A /* MockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		91455D1C35EE249F4F19FF5E /* Pods-12AM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.release.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,9 +119,18 @@
 				73E901BD1E9B683300EA7E0A /* Controllers */,
 				73E901B91E9B67E000EA7E0A /* View */,
 				73E901BA1E9B67F300EA7E0A /* Resources */,
+				738E79021E9D46EF0072CE95 /* CloudKitManager */,
 				73E901B71E9B67B400EA7E0A /* TrialAndError */,
 			);
 			path = 12AM;
+			sourceTree = "<group>";
+		};
+		738E79021E9D46EF0072CE95 /* CloudKitManager */ = {
+			isa = PBXGroup;
+			children = (
+				738E79031E9D471C0072CE95 /* CloudKitSyncable.swift */,
+			);
+			name = CloudKitManager;
 			sourceTree = "<group>";
 		};
 		73E901B71E9B67B400EA7E0A /* TrialAndError */ = {
@@ -161,6 +176,8 @@
 		73E901BB1E9B681600EA7E0A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				738E78FE1E9D2D630072CE95 /* Post.swift */,
+				738E79001E9D30220072CE95 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -310,9 +327,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				738E79011E9D30220072CE95 /* Comment.swift in Sources */,
+				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */,
 				73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */,
 				737E79481E9B180200172355 /* AppDelegate.swift in Sources */,
+				738E78FF1E9D2D630072CE95 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
