@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0n0-vc-4aH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,55 +9,155 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="Vjl-ya-QXg">
+        <!--Time to Midnight: <time>-->
+        <scene sceneID="W5A-Yd-lkj">
             <objects>
-                <viewController id="U4A-DG-o1B" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Rdf-5n-Tvy"/>
-                        <viewControllerLayoutGuide type="bottom" id="l3X-eV-30E"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RZh-85-dcd">
+                <tableViewController id="vDB-Xm-Gx6" customClass="FeedTableViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="297" sectionHeaderHeight="28" sectionFooterHeight="28" id="5U2-H5-xwJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="q5v-QM-6bu">
-                                <rect key="frame" x="0.0" y="220" width="375" height="447"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="U4A-DG-o1B" id="WPh-eb-UiG"/>
-                                    <outlet property="delegate" destination="U4A-DG-o1B" id="ZLV-fQ-4CL"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="wJo-lS-HMc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8wm-VS-UTP"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="postCell" rowHeight="297" id="kkh-UU-IVS" customClass="PostTableViewCell" customModule="_2AM" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="297"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kkh-UU-IVS" id="OQe-vc-DPp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="296"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIE-K5-wnp">
+                                            <rect key="frame" x="96" y="8" width="182" height="183"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="doomsdayclock2"/>
+                                            <connections>
+                                                <action selector="imageButtonTapped:" destination="kkh-UU-IVS" eventType="touchUpInside" id="xYm-UT-0Hd"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is where the rating clock or first line of text from the caption goes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCL-4o-oFc">
+                                            <rect key="frame" x="8" y="200" width="530" height="57"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="captionLabel" destination="DCL-4o-oFc" id="i3B-11-AA1"/>
+                                    <outlet property="imageButton" destination="gIE-K5-wnp" id="5Nr-jt-gGO"/>
+                                    <segue destination="kLx-rj-zgj" kind="show" id="TRU-GX-56m"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vDB-Xm-Gx6" id="4Wj-4b-2zq"/>
+                            <outlet property="delegate" destination="vDB-Xm-Gx6" id="6VA-8r-m6A"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Time to Midnight: &lt;time&gt;" id="xma-vy-Oaw">
+                        <barButtonItem key="leftBarButtonItem" title="Map" id="SIg-Ef-4tj"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qAe-rx-Qjn">
+                            <connections>
+                                <segue destination="BU3-kI-xAn" kind="show" identifier="addPhotoButtonTappedToCamera" id="oaN-ft-Bl2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bli-IJ-gRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vKy-z7-nw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103.2" y="134.48275862068968"/>
+            <point key="canvasLocation" x="1690.4000000000001" y="-374.66266866566718"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="qbD-i5-4Ok">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Camera" id="BU3-kI-xAn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="44e-Rf-NPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="-738"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Hx9-5W-fBB">
+        <scene sceneID="ftx-Jb-DBN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yx6-n8-E1q" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0n0-vc-4aH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xxa-ER-OiL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Dqg-xr-wrp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="U4A-DG-o1B" kind="relationship" relationship="rootViewController" id="Squ-95-KX9"/>
+                        <segue destination="vDB-Xm-Gx6" kind="relationship" relationship="rootViewController" id="XPh-Tq-TuJ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vgj-ou-9s5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UyE-BB-T6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="164" y="134.48275862068968"/>
+            <point key="canvasLocation" x="868" y="-375"/>
+        </scene>
+        <!--Post Detail From Feed View Controller-->
+        <scene sceneID="Eeh-Ub-815">
+            <objects>
+                <viewController id="kLx-rj-zgj" customClass="PostDetailFromFeedViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dta-K1-01J"/>
+                        <viewControllerLayoutGuide type="bottom" id="xom-vg-AGx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EMs-cc-WbD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bg0-Eq-Hsw">
+                                <rect key="frame" x="67" y="72" width="240" height="241"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time Photo was taken" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jl7-b2-UjN">
+                                <rect key="frame" x="103" y="321" width="169" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Captuion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGt-Xi-dep">
+                                <rect key="frame" x="152" y="350" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add A Comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P4P-AO-C7J">
+                                <rect key="frame" x="67" y="379" width="240" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rcS-LZ-pKK">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vlJ-Cf-l7H">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="kLx-rj-zgj" id="UMX-E3-8jO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Lqe-LM-ki4">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="kLx-rj-zgj" id="rN0-38-TAv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captionLabel" destination="HGt-Xi-dep" id="tWc-Ie-jTr"/>
+                        <outlet property="commentTextField" destination="P4P-AO-C7J" id="tVm-6f-ZFp"/>
+                        <outlet property="imageView" destination="Bg0-Eq-Hsw" id="OPq-Dw-NeW"/>
+                        <outlet property="timeLabel" destination="Jl7-b2-UjN" id="ph1-Np-Hmh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yQB-dv-Yom" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2572" y="-351"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="doomsdayclock2" width="128" height="128"/>
+    </resources>
 </document>

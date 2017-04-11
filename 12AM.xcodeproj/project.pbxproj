@@ -25,8 +25,11 @@
 		C893C4701E9C274400185BB9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C46F1E9C274400185BB9 /* Login.storyboard */; };
 		C893C4721E9C277100185BB9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C4711E9C277100185BB9 /* Feed.storyboard */; };
 		C893C4741E9C27E800185BB9 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C4731E9C27E800185BB9 /* Camera.storyboard */; };
-		C893C4761E9C281000185BB9 /* PostDetailFromCamera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C4751E9C281000185BB9 /* PostDetailFromCamera.storyboard */; };
-		C893C4781E9C2B6700185BB9 /* PostDetailFromFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C4771E9C2B6700185BB9 /* PostDetailFromFeed.storyboard */; };
+		C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */; };
+		C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47D1E9C41B400185BB9 /* CameraViewController.swift */; };
+		C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */; };
+		C893C4821E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C4811E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift */; };
+		C893C4861E9D3A5000185BB9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C4851E9D3A5000185BB9 /* PostTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,8 +55,11 @@
 		C893C46F1E9C274400185BB9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = ../Login.storyboard; sourceTree = "<group>"; };
 		C893C4711E9C277100185BB9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		C893C4731E9C27E800185BB9 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
-		C893C4751E9C281000185BB9 /* PostDetailFromCamera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostDetailFromCamera.storyboard; sourceTree = "<group>"; };
-		C893C4771E9C2B6700185BB9 /* PostDetailFromFeed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostDetailFromFeed.storyboard; sourceTree = "<group>"; };
+		C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
+		C893C47D1E9C41B400185BB9 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailFromCameraViewController.swift; sourceTree = "<group>"; };
+		C893C4811E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailFromFeedViewController.swift; sourceTree = "<group>"; };
+		C893C4851E9D3A5000185BB9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostTableViewCell.swift; path = ../PostTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,11 @@
 			isa = PBXGroup;
 			children = (
 				73E901B31E9B55C500EA7E0A /* LoginViewController.swift */,
+				C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */,
+				C893C47D1E9C41B400185BB9 /* CameraViewController.swift */,
+				C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */,
+				C893C4851E9D3A5000185BB9 /* PostTableViewCell.swift */,
+				C893C4811E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -157,8 +168,6 @@
 				C893C46F1E9C274400185BB9 /* Login.storyboard */,
 				C893C4711E9C277100185BB9 /* Feed.storyboard */,
 				C893C4731E9C27E800185BB9 /* Camera.storyboard */,
-				C893C4751E9C281000185BB9 /* PostDetailFromCamera.storyboard */,
-				C893C4771E9C2B6700185BB9 /* PostDetailFromFeed.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -261,12 +270,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				737E79521E9B180200172355 /* LaunchScreen.storyboard in Resources */,
-				C893C4781E9C2B6700185BB9 /* PostDetailFromFeed.storyboard in Resources */,
 				C893C4741E9C27E800185BB9 /* Camera.storyboard in Resources */,
 				7348C6CB1E9B4B6600D54ABB /* Default-568h@2x.png in Resources */,
 				C893C4721E9C277100185BB9 /* Feed.storyboard in Resources */,
 				737E794F1E9B180200172355 /* Assets.xcassets in Resources */,
-				C893C4761E9C281000185BB9 /* PostDetailFromCamera.storyboard in Resources */,
 				C893C4701E9C274400185BB9 /* Login.storyboard in Resources */,
 				737E794D1E9B180200172355 /* Main.storyboard in Resources */,
 			);
@@ -330,9 +337,14 @@
 				738E79011E9D30220072CE95 /* Comment.swift in Sources */,
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */,
+				C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */,
 				73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */,
+				C893C4861E9D3A5000185BB9 /* PostTableViewCell.swift in Sources */,
+				C893C4821E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift in Sources */,
 				737E79481E9B180200172355 /* AppDelegate.swift in Sources */,
 				738E78FF1E9D2D630072CE95 /* Post.swift in Sources */,
+				C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */,
+				C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="apj-2f-cAj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="6Rt-Ni-CTe">
             <objects>
-                <viewController id="apj-2f-cAj" sceneMemberID="viewController">
+                <viewController id="apj-2f-cAj" customClass="CameraViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8dy-pZ-y6l"/>
                         <viewControllerLayoutGuide type="bottom" id="gj2-y8-0OC"/>
@@ -25,11 +25,18 @@
                                 <rect key="frame" x="277" y="617" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Use Photo"/>
+                                <connections>
+                                    <action selector="usePhotoButtonTapped:" destination="apj-2f-cAj" eventType="touchUpInside" id="p8P-wL-Mzd"/>
+                                    <segue destination="r1f-P8-6DC" kind="show" identifier="usePhotoButtonToPostDetail" id="EsR-en-DXn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dao-Ep-76h">
                                 <rect key="frame" x="16" y="617" width="112" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Take New Photo"/>
+                                <connections>
+                                    <action selector="takeNewPhotoButtonTapped:" destination="apj-2f-cAj" eventType="touchUpInside" id="i8M-6B-MCC"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="This is the view for after the tap the &quot;Take pic&quot; button in the middle of the camera" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qYu-Z8-ctX">
                                 <rect key="frame" x="22" y="132" width="240" height="128"/>
@@ -45,6 +52,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPC-T5-R8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="187.55622188905548"/>
+        </scene>
+        <!--Post Detail From Camera View Controller-->
+        <scene sceneID="gii-Tk-usP">
+            <objects>
+                <viewController id="dVD-5Y-hsj" customClass="PostDetailFromCameraViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yfm-Hy-tFk"/>
+                        <viewControllerLayoutGuide type="bottom" id="3pY-NS-9Rq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lEk-hR-1ZV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-5D-emn">
+                                <rect key="frame" x="67" y="105" width="240" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time Photo was taken" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8k-OB-I6h">
+                                <rect key="frame" x="67" y="353" width="240" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caption ( added by user )" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UmK-ZM-ccO">
+                                <rect key="frame" x="67" y="382" width="240" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4PX-uR-E5Q">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ivs-ej-7Vo">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="dVD-5Y-hsj" id="jsW-Z0-OES"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="o6M-B4-xOn">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="dVD-5Y-hsj" id="Zju-b2-t8F"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captionTextField" destination="UmK-ZM-ccO" id="vih-AJ-6xb"/>
+                        <outlet property="timeLabel" destination="R8k-OB-I6h" id="MyD-rv-VQN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4bh-Cw-FgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="187.55622188905548"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9wd-xn-sYE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r1f-P8-6DC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T1r-wP-n1S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dVD-5Y-hsj" kind="relationship" relationship="rootViewController" id="Qfg-pE-9tp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ar3-Fb-vMn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999" y="188"/>
         </scene>
     </scenes>
 </document>
