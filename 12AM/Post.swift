@@ -39,10 +39,10 @@ class Post {
     
     var cloudKitRecordID: CKRecordID?
     
-    convenience required init?(record: CKRecord) {
-        guard let timestamp = record.creationDate,
-        let photoData = try? Data(contentsOf: photoAsset.fileURL)
-    }
+//    convenience required init?(record: CKRecord) {
+//        guard let timestamp = record.creationDate,
+//        let photoData = try? Data(contentsOf: photoAsset.fileURL)
+//    }
     
     
     
