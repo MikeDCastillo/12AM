@@ -9,7 +9,7 @@
 import UIKit
 
 class CameraViewController: UIViewController {
-
+    
     @IBAction func takeNewPhotoButtonTapped(_ sender: Any) {
     }
     
@@ -20,15 +20,13 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "usePhotoButtonToPostDetail" {
+//            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? <#DetailVCName#> else { return }
+//            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
+//            detailVC.<#object#> <#from dvc File#>= <#object#>
+//        }
+//    }
+    
 }
