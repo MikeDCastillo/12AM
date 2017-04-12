@@ -44,7 +44,8 @@ class Post: CloudKitSyncable {
     
     convenience required init?(record: CKRecord) {
         guard let timestamp = record.creationDate,
-        let text = record[Post.textKey] as? String
+        let photoAsset = record[Post.photoDataKey] as? CKAsset,
+        let text = record[Post.textKey] as? String,
         let photoData = try? Data(contentsOf: photoAsset.fileURL) else { return nil }
         
         self.init(photoData: photoData, timestamp: timestamp, text: text)

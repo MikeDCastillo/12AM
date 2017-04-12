@@ -37,7 +37,7 @@ class Comment: CloudKitSyncable {
         guard let timestamp = record.creationDate,
             let text = record[Comment.textKey] as? String else { return nil }
         
-        self.init(post: nil, text: text, timestamp: timestamp)
+        self.init(text: text, timestamp: timestamp, post: nil)
         
         cloudKitRecordID = record.recordID
         
@@ -57,7 +57,7 @@ extension CKRecord {
         self.init(recordType: comment.recordType, recordID: recordID)
         self[Comment.timestampKey] = comment.timestamp as CKRecordValue?
         self[Comment.textKey] = comment.text as CKRecordValue?
-        self[Comment.postKey] = CKReference(record: postRecordID, action: .deleteSelf)
+        self[Comment.postKey] = CKReference(recordID: postRecordID, action: .deleteSelf)
     }
 }
 
