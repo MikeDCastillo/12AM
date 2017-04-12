@@ -24,12 +24,11 @@ class UserController {
     // More eefficiten when you want to find a user
     var currentUser: User? {
         didSet {
-            
+            NotificationCenter.default.post(name: currentUserW  asSentNotification, object: self)
         }
     }
     
     // MARK: - CRUD
-    
     func createUserWith(userName: String, email: String, profileImage: UIImage?, appleUserRef: CKReference) {
         let user = User(username: userName, email: email, profileImage: profileImage , appleUserRef: appleUserRef)
         let userRecord = CKRecord(user: user) // Makeing a record of our model from our extension3
@@ -39,4 +38,5 @@ class UserController {
             self.users.append(user)
         }
     }
+    
 }
