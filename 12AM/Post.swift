@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CloudKit
 
-class Post {
+class Post: CloudKitSyncable {
     
     static let typeKey = "Post"
     static let photoDataKey = "photoData"
@@ -39,11 +39,40 @@ class Post {
     
     var cloudKitRecordID: CKRecordID?
     
-//    convenience required init?(record: CKRecord) {
-//        guard let timestamp = record.creationDate,
-//        let photoData = try? Data(contentsOf: photoAsset.fileURL)
-//    }
+    convenience required init?(record: CKRecord) {
+        guard let timestamp = record.creationDate,
+        let photoAsset = record[Post.photoDataKey] as? CKAsset,
+        let photoData = try? Data(contentsOf: photoAsset.fileURL) else { return nil }
+        
+        self.init(photoData: photoData, timestamp: timestamp)
+        
+        cloudKitRecordID = record.recordID
+    }
     
     
+    //MARK: - Photo computed property
+    
+    fileprivate var temporaryPhotoURL: URL {
+        
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathComponent("jpg")
+        
+        try? photoData?.write(to: fileURL, options: .atomic)
+        
+        return fileURL
+    }
     
 }
+
+extension CKRecord {
+    
+    convenience init(_ post: Post) {
+        let recordID = CKRecordID(recordName: UUID().uuidString)
+        self.init(recordType: post.recordType, recordID: recordID)
+        self[Post.timestampKey] = post.timestamp as CKRecordValue?
+        self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
+    }
+}
+
+
