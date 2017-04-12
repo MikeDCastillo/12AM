@@ -22,6 +22,7 @@ class User {
     var username: String
     var email: String
     var profileImage: UIImage?
+    var currentTimeZone: String { return TimeZone.current.identifier }
 
     // This is the reference to the default Apple 'Users' record ID
     let appleUserRef: CKReference
