@@ -19,19 +19,12 @@ class CloudKitManager {
     
     func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
         
-        publicDatabase.save(record, completionHandler: { (record, error) in
+        publicDataBase.save(record, completionHandler: { (record, error) in
             
             completion?(record, error)
         })
     }
     
-    func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
-        
-        publicDatabase.save(record, completionHandler: { (record, error) in
-            
-            completion?(record, error)
-        })
-    }
     
     
     // Give us everyting
@@ -63,7 +56,7 @@ class CloudKitManager {
                 continuedQueryOperation.recordFetchedBlock = perRecordBlock
                 continuedQueryOperation.queryCompletionBlock = queryCompletionBlock
                 
-                self.publicDatabase.add(continuedQueryOperation)
+                self.publicDataBase.add(continuedQueryOperation)
                 
             } else {
                 completion?(fetchedRecords, error)
@@ -71,7 +64,7 @@ class CloudKitManager {
         }
         queryOperation.queryCompletionBlock = queryCompletionBlock
         
-        self.publicDatabase.add(queryOperation)
+        self.publicDataBase.add(queryOperation)
     } // Bring back all the records for the specified type (all trooper records, all starship blaster records, all trooper gun record, etc.)
 }
 

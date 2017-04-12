@@ -4,7 +4,8 @@
 //
 //  Created by Nick Reichard on 4/11/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
-//
+// 
+
 
 import Foundation
 import UIKit
@@ -21,8 +22,8 @@ class User {
     
     var username: String
     var email: String
-    let image: UIImage
-    
+    var image: UIImage?
+
     // This is the reference to the default Apple 'Users' record ID
     let appleUserRef: CKReference
     
@@ -30,7 +31,7 @@ class User {
     var cloudKitRecordID: CKRecordID?
     
     var imageData: Data? {
-        guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
+        guard let image = image, let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
         return imageData
     }
     
@@ -42,13 +43,13 @@ class User {
         let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
         
         try? imageData?.write(to: fileURL, options: [.atomic])
-        
+     
         return fileURL
     }
     
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, age: String, image: UIImage, appleUserRef: CKReference) {
+    init(username: String, email: String, age: String, image: UIImage?, appleUserRef: CKReference) {
         self.username = username
         self.image = image
         self.email = email
