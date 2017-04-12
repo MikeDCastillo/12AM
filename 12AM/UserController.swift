@@ -24,7 +24,7 @@ class UserController {
     // More eefficiten when you want to find a user
     var currentUser: User? {
         didSet {
-            NotificationCenter.default.post(name: currentUserW  asSentNotification, object: self)
+            NotificationCenter.default.post(name: currentUserWasSentNotification, object: self)
         }
     }
     
@@ -39,4 +39,13 @@ class UserController {
         }
     }
     
+    func updateCurrentUser(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference) {
+        guard let currentUser = currentUser, let profileImage = profileImage else { return }
+        
+        DispatchQueue.main.async {
+            currentUser.username = username
+            currentUser.email = email
+            currentUser.profileImage = profileImage
+        }
+    }
 }
