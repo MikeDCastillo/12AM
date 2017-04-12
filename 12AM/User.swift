@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CloudKit
 
 class User {
@@ -15,10 +16,12 @@ class User {
     static let emailKey = "email"
     static let appleUserRefKey = "appleUserRef"
     static let recordTypeKey = "User"
+    static let imageKey = "image"
+    static let typeKey = "Photo"
     
     var username: String
     var email: String
-    
+    let image: UIImage
     
     // This is the reference to the default Apple 'Users' record ID
     let appleUserRef: CKReference
@@ -26,10 +29,28 @@ class User {
     // This is your CUSTOM user record's ID
     var cloudKitRecordID: CKRecordID?
     
+    var imageData: Data? {
+        guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
+        return imageData
+    }
+    
+    fileprivate var temporaryPhotoURL: URL {
+        
+        // Must write to temporary direcory to be able to pass image file path url to CKAsset 
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+        
+        try? imageData?.write(to: fileURL, options: [.atomic])
+        
+        return fileURL
+    }
+    
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, age: String, appleUserRef: CKReference) {
+    init(username: String, email: String, age: String, image: UIImage, appleUserRef: CKReference) {
         self.username = username
+        self.image = image
         self.email = email
         self.appleUserRef = appleUserRef
     }
@@ -42,20 +63,14 @@ class User {
         
         self.username = username
         self.email = email
-        
         self.appleUserRef = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
     }
 }
 
-// So it won't create a new copy or duplicate
-// Saving up to cloudKit
-
+// So it won't create a new copy or duplicate. // Saving up to cloudKit
 extension CKRecord {
     
-    // Apple gave us this CKRecord. The extension alows ups to add things on to it. More costomized!!! Awesome!!!
-    //cunck of clay. like objective - C
-    // When you want to add something to the original object
     convenience init(user: User) {
         
         // check the record id.
@@ -65,6 +80,9 @@ extension CKRecord {
         self.setValue(user.username, forKey: User.usernameKey)
         self.setValue(user.email, forKey: User.emailKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
-        
+        let imageAsset = CKAsset(fileURL: user.temporaryPhotoURL)
+        self.setValue(imageAsset, forKey: User.imageKey)
     }
 }
+
+
