@@ -25,8 +25,6 @@ class CloudKitManager {
         })
     }
     
-    
-    
     // Give us everyting
     // To fetch information from cloudKit we run a Quiery. Can be: Give me all of the objects with this type or it can be very specific using predicates. Quiery Operations - lets us handel multiple objects.
     func fetchRecordsWithType(_ type: String,

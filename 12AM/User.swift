@@ -21,7 +21,7 @@ class User {
     
     var username: String
     var email: String
-    var image: UIImage?
+    var profileImage: UIImage?
 
     // This is the reference to the default Apple 'Users' record ID
     let appleUserRef: CKReference
@@ -30,7 +30,7 @@ class User {
     var cloudKitRecordID: CKRecordID?
     
     var imageData: Data? {
-        guard let image = image, let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
+        guard let image = profileImage, let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
         return imageData
     }
     
@@ -48,9 +48,9 @@ class User {
     
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, age: String, image: UIImage?, appleUserRef: CKReference) {
+    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference) {
         self.username = username
-        self.image = image
+        self.profileImage = profileImage
         self.email = email
         self.appleUserRef = appleUserRef
     }
@@ -80,6 +80,8 @@ extension CKRecord {
         self.setValue(user.username, forKey: User.usernameKey)
         self.setValue(user.email, forKey: User.emailKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
+        
+        guard user.profileImage != nil else { return }
         let imageAsset = CKAsset(fileURL: user.temporaryPhotoURL)
         self.setValue(imageAsset, forKey: User.imageKey)
     }
