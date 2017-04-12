@@ -15,12 +15,15 @@ class PostDetailFromFeedViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+
+        // ? _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         // ? _ = navigationController?.popViewController(animated: true)
     }
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var commentTextField: UITextField!

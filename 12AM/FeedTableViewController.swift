@@ -15,11 +15,11 @@ class FeedTableViewController: UITableViewController {
         
     }
     
-//    var posts: [Post] = [] {
-//        didSet {
-//            updateViews()
-//        }
-//    }
+    //    var posts: [Post] = [] {
+    //        didSet {
+    //            updateViews()
+    //        }
+    //    }
     
     // MARK: - Table view data source
     
@@ -37,10 +37,15 @@ class FeedTableViewController: UITableViewController {
     // MARK: - Navigation
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "<#segueIdentifier#>" {
-//            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? <#DetailVCName#> else { return }
+//        if segue.identifier == "feedToPostDetail" {
+//            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
 //            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
 //            detailVC.<#object#> <#from dvc File#>= <#object#>
+//        } else {
+//            if segue.identifier == "addPhotoButtonTappedToCamera" {guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? CameraViewController else { return }
+//                let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
+//                detailVC.<#object#> <#from dvc File#>= <#object#>
+//            }
 //        }
-//    } 
+//    }
 }
