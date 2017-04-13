@@ -8,22 +8,23 @@
 
 import Foundation
 import CloudKit
+import UIKit
+
+private let CreatorUserRecordIDKey = "creatorUserRecordID"
+private let CreationDateKey = "creationDate"
+
 
 class CloudKitManager {
     
-    let publicDataBase = CKContainer.default().publicCloudDatabase
+    static let shared = CloudKitManager()
+    let publicDatabase = CKContainer.default().publicCloudDatabase
     
     enum CloudKitTypes: String {
         case userType = "User"
     }
     
-    func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
-        
-        publicDataBase.save(record, completionHandler: { (record, error) in
-            
-            completion?(record, error)
-        })
-    }
+    
+    // MARK: - Fetch Records 
     
     // Give us everyting
     // To fetch information from cloudKit we run a Quiery. Can be: Give me all of the objects with this type or it can be very specific using predicates. Quiery Operations - lets us handel multiple objects.
@@ -54,7 +55,7 @@ class CloudKitManager {
                 continuedQueryOperation.recordFetchedBlock = perRecordBlock
                 continuedQueryOperation.queryCompletionBlock = queryCompletionBlock
                 
-                self.publicDataBase.add(continuedQueryOperation)
+                self.publicDatabase.add(continuedQueryOperation)
                 
             } else {
                 completion?(fetchedRecords, error)
@@ -62,7 +63,91 @@ class CloudKitManager {
         }
         queryOperation.queryCompletionBlock = queryCompletionBlock
         
-        self.publicDataBase.add(queryOperation)
-    } // Bring back all the records for the specified type (all trooper records, all starship blaster records, all trooper gun record, etc.)
+        self.publicDatabase.add(queryOperation)
+    } // Bring back all the records for the specified type
+    
+    // MARK: - User Info Discovery
+    
+    func fetchLoggedInUserRecord(_ completion: ((_ record: CKRecord?, _ error: Error? ) -> Void)?) {
+        
+        CKContainer.default().fetchUserRecordID { (recordID, error) in
+            
+            if let error = error,
+                let completion = completion {
+                completion(nil, error)
+            }
+            
+            if let recordID = recordID,
+                let completion = completion {
+                
+                self.fetchRecord(withID: recordID, completion: completion)
+            }
+        }
+    }
+    
+    func fetchRecord(withID recordID: CKRecordID, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
+        
+        publicDatabase.fetch(withRecordID: recordID) { (record, error) in
+            
+            completion?(record, error)
+        }
+    } // Bring back the reocord for whatever item has that ID
+    
+    
+    func fetchCurrentUserRecords(_ type: String, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
+        
+        fetchLoggedInUserRecord { (record, error) in
+            
+            if let record = record {
+                
+                let predicate = NSPredicate(format: "%K == %@", argumentArray: [CreatorUserRecordIDKey, record.recordID])
+                
+                self.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil, completion: completion)
+            }
+        }
+    } // Retrieve the logged in user's record, and then all of the records that belong to that specific user --> Get Finn's record and then get all of the records associated with him (gun record, helmet record, etc.)
+    
+    func fetchRecordsFromDateRange(_ type: String, fromDate: Date, toDate: Date, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
+        
+        let startDatePredicate = NSPredicate(format: "%K > %@", argumentArray: [CreationDateKey, fromDate])
+        let endDatePredicate = NSPredicate(format: "%K < %@", argumentArray: [CreationDateKey, toDate])
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startDatePredicate, endDatePredicate])
+        
+        
+        self.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
+            
+            completion?(records, error)
+        }
+    } // Get all the records that were created between a start and end date (if you want the old stormtrooper helmet records, you might use this)
+    
+    // MARK: - Save
+    
+    func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
+        
+        publicDatabase.save(record, completionHandler: { (record, error) in
+            
+            completion?(record, error)
+        })
+    }
+    
+    // MARK: - Delete 
+    
+    func deleteRecordWithID(_ recordID: CKRecordID, completion: ((_ recordID: CKRecordID?, _ error: Error?) -> Void)?) {
+        
+        publicDatabase.delete(withRecordID: recordID) { (recordID, error) in
+            completion?(recordID, error)
+        }
+    } // The record with the specified will be DESTROYED
+    
+    func deleteRecordsWithID(_ recordIDs: [CKRecordID], completion: ((_ records: [CKRecord]?, _ recordIDs: [CKRecordID]?, _ error: Error?) -> Void)?) {
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordIDs)
+        operation.savePolicy = .ifServerRecordUnchanged
+        
+        operation.modifyRecordsCompletionBlock = completion
+        
+        publicDatabase.add(operation)
+    } // Find the younglings for these IDs, and kill their records
 }
+
 
