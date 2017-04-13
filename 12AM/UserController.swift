@@ -49,10 +49,26 @@ class UserController {
         }
     }
     
-    func checkForEsistingUserWith(username: String, completion: (Bool) -> Void) {
-        let predicate = NSPredicate(format: "username ==%@", username)
-       
-     
+    func checkForEsistingUserWith(username: String, completion: @escaping (Bool) -> Void) {
+        let predicate = NSPredicate(format: "username == %@", username)
+        
+        let query = CKQuery(recordType: username, predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if records?.count == 0 {
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
+    }
     
+    // MARK: - Validate Email Address
+    
+    func isValidEmail(testStr:String) -> Bool {
+        // print("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
 }
