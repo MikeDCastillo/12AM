@@ -74,3 +74,5 @@ extension CKRecord {
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
     }
 }
+
+
