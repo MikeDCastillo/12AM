@@ -11,6 +11,7 @@ import CloudKit
 
 class CloudKitManager {
     
+    static let shared = CloudKitManager()
     let publicDataBase = CKContainer.default().publicCloudDatabase
     
     enum CloudKitTypes: String {

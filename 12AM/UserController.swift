@@ -34,7 +34,7 @@ class UserController {
         let userRecord = CKRecord(user: user) // Makeing a record of our model from our extension3
         
         publicDB.save(userRecord) { (record, error) in
-            if let error = error { print(error.localizedDescription) }
+            if let error = error { print("Error: creading user record\(error.localizedDescription)") }
             self.users.append(user)
         }
     }
@@ -48,4 +48,11 @@ class UserController {
             currentUser.profileImage = profileImage
         }
     }
+    
+    func checkForEsistingUserWith(username: String, completion: (Bool) -> Void) {
+        let predicate = NSPredicate(format: "username ==%@", username)
+       
+     
+        }
+    
 }
