@@ -9,6 +9,8 @@
 import Foundation
 import CloudKit
 
+// Checks to see if data is in place and if so doesn't make duplicate or crash or deletes
+
 protocol CloudKitSyncable {
     
     init?(record: CKRecord)
