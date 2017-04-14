@@ -12,17 +12,13 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         
     }
     
-    var posts: [Post] = [] {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    func updateViews() {
-        
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     // MARK: - Table view data source
@@ -33,10 +29,9 @@ class FeedTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
         
         let post = PostController.sharedController.posts[indexPath.row]
-        
         
         
         return cell
@@ -47,13 +42,9 @@ class FeedTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
-            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-            detailVC.<#object#> <#from dvc File#>= <#object#>
-        } else {
-            if segue.identifier == "addPhotoButtonTappedToCamera" {guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? CameraViewController else { return }
-                let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-                detailVC.<#object#> <#from dvc File#>= <#object#>
-            }
+            let post = PostController.sharedController.posts[indexPath.row]
+            detailVC.post = post
         }
     }
 }
+
