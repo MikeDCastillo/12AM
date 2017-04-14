@@ -4,7 +4,7 @@
 //
 //  Created by Josh "Big JDawg" McDonald on 4/12/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
-//
+// git test
 
 import Foundation
 import UIKit
@@ -18,7 +18,7 @@ class Post: CloudKitSyncable {
     static let textKey = "text"
     
     let photoData: Data?
-    let timestamp: Date
+    let timestamp: String
     let text: String
     var comments: [Comment]
     
@@ -27,7 +27,7 @@ class Post: CloudKitSyncable {
         return UIImage(data: photoData)
     }
     
-    init(photoData: Data?, timestamp: Date = Date(), text: String, comments: [Comment] = []){
+    init(photoData: Data?, timestamp: String = Date().description(with: Locale.current), text: String, comments: [Comment] = []){
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
@@ -43,9 +43,9 @@ class Post: CloudKitSyncable {
     var cloudKitRecordID: CKRecordID?
     
     convenience required init?(record: CKRecord) {
-        guard let timestamp = record.creationDate,
-            let photoAsset = record[Post.photoDataKey] as? CKAsset,
+        guard let timestamp = record.creationDate?.description(with: Locale.current),
             let text = record[Post.textKey] as? String,
+            let photoAsset = record[Post.photoDataKey] as? CKAsset,
             let photoData = try? Data(contentsOf: photoAsset.fileURL) else { return nil }
         
         self.init(photoData: photoData, timestamp: timestamp, text: text)
