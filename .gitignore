@@ -15,6 +15,7 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+*.orig
 
 build
 .DS_Store
