@@ -12,40 +12,39 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         
     }
     
-    //    var posts: [Post] = [] {
-    //        didSet {
-    //            updateViews()
-    //        }
-    //    }
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0 //posts.count
+        return PostController.sharedController.posts.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
+        
+        let post = PostController.sharedController.posts[indexPath.row]
+        
         
         return cell
     }
     
     // MARK: - Navigation
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "feedToPostDetail" {
-//            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
-//            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-//            detailVC.<#object#> <#from dvc File#>= <#object#>
-//        } else {
-//            if segue.identifier == "addPhotoButtonTappedToCamera" {guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? CameraViewController else { return }
-//                let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-//                detailVC.<#object#> <#from dvc File#>= <#object#>
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "feedToPostDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
+            let post = PostController.sharedController.posts[indexPath.row]
+            detailVC.post = post
+        }
+    }
 }
+

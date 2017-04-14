@@ -2,7 +2,7 @@
 //  Post.swift
 //  12AM
 //
-//  Created by Josh & Erica on 4/11/17.
+//  Created by Josh "Big JDawg" McDonald on 4/12/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 // git test
 
@@ -79,5 +79,4 @@ extension CKRecord {
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
     }
 }
-
 
