@@ -35,8 +35,8 @@ class PostDetailFromFeedViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-
-         _ = navigationController?.popViewController(animated: true)
+        // TODO: - do stuff here to save the image and caption
+        _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -51,7 +51,8 @@ class PostDetailFromFeedViewController: UIViewController {
     // MARK: -Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return post?.comments.count
+        guard let post = post else { return 0 }  // returning 0 because there would be no comments
+        return post.comments.count
     }
     
     
@@ -59,12 +60,12 @@ class PostDetailFromFeedViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
         
         let comment = post?.comments[indexPath.row]
-       // cell.textLabel = comment?.text
-        
+        cell.textLabel?.text = comment?.text
+// TODO: -        cell.detailTextLabel.text = User.username
         
         return cell
     }
-
+    
     
     
     /*

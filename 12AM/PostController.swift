@@ -60,7 +60,7 @@ class PostController {
         
         // Sets image property of jpeg
         guard let data = UIImageJPEGRepresentation(image, 1.0) else { return }
-        let post = Post(photoData: data)
+        let post = Post(record: data)
         
         // Adds post to first cell
         posts.insert(post, at: 0)
