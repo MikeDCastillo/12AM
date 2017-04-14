@@ -2,7 +2,7 @@
 //  Comment.swift
 //  12AM
 //
-//  Created by Josh "Big Sexy" on 4/12/17.
+//  Created by Josh & Erica on 4/11/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
@@ -60,3 +60,4 @@ extension CKRecord {
         self[Comment.postKey] = CKReference(recordID: postRecordID, action: .deleteSelf)
     }
 }
+

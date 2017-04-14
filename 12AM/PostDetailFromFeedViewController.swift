@@ -10,23 +10,61 @@ import UIKit
 
 class PostDetailFromFeedViewController: UIViewController {
     
+    var post: Post? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    func updateViews() {
+        
+        guard let post = post else { return }
+        
+        imageView.image = post.photo
+        timeLabel.text = post.timestamp
+        captionLabel.text = post.text
+        //commentTextField
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
 
-        // ? _ = navigationController?.popViewController(animated: true)
+         _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        // ? _ = navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var commentTextField: UITextField!
+    
+    // MARK: -Table View Data Source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return post?.comments.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+        
+        let comment = post?.comments[indexPath.row]
+       // cell.textLabel = comment?.text
+        
+        
+        return cell
+    }
+
     
     
     /*
