@@ -15,37 +15,45 @@ class FeedTableViewController: UITableViewController {
         
     }
     
-    //    var posts: [Post] = [] {
-    //        didSet {
-    //            updateViews()
-    //        }
-    //    }
+    var posts: [Post] = [] {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    func updateViews() {
+        
+    }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0 //posts.count
+        return PostController.sharedController.posts.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell
+        
+        let post = PostController.sharedController.posts[indexPath.row]
+        
+        
         
         return cell
     }
     
     // MARK: - Navigation
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "feedToPostDetail" {
-//            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
-//            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-//            detailVC.<#object#> <#from dvc File#>= <#object#>
-//        } else {
-//            if segue.identifier == "addPhotoButtonTappedToCamera" {guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? CameraViewController else { return }
-//                let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-//                detailVC.<#object#> <#from dvc File#>= <#object#>
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "feedToPostDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
+            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
+            detailVC.<#object#> <#from dvc File#>= <#object#>
+        } else {
+            if segue.identifier == "addPhotoButtonTappedToCamera" {guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? CameraViewController else { return }
+                let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
+                detailVC.<#object#> <#from dvc File#>= <#object#>
+            }
+        }
+    }
 }
