@@ -42,7 +42,7 @@ class Comment: CloudKitSyncable {
         cloudKitRecordID = record.recordID
     }
     
-    // SearchableRecord Delegate function 
+    // SearchableRecord Delegate function. 
     func matches(searchTerm: String) -> Bool {
         return text.contains(searchTerm)
     }
