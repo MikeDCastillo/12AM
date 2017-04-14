@@ -334,7 +334,12 @@
 				C893C4861E9D3A5000185BB9 /* PostTableViewCell.swift in Sources */,
 				C893C4821E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift in Sources */,
 				737E79481E9B180200172355 /* AppDelegate.swift in Sources */,
+<<<<<<< HEAD
+				C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */,
+				C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */,
+=======
 				73A538121E9E9E550013A5CE /* Post.swift in Sources */,
+>>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
