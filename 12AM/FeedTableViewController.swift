@@ -32,7 +32,7 @@ class FeedTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
         
         let post = PostController.sharedController.posts[indexPath.row]
-        
+        cell.post = post
         
         return cell
     }
