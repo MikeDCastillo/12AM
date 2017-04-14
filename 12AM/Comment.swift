@@ -17,10 +17,10 @@ class Comment: CloudKitSyncable {
     static let postKey = "post"
     
     var text: String
-    var timestamp: Date
+    var timestamp: String
     var post: Post?
     
-    init(text: String, timestamp: Date = Date(), post: Post?) {
+    init(text: String, timestamp: String = Date().description(with: Locale.current), post: Post?) {
         self.text = text
         self.timestamp = timestamp
         self.post = post
@@ -34,15 +34,13 @@ class Comment: CloudKitSyncable {
     var cloudKitRecordID: CKRecordID?
     
     convenience required init?(record: CKRecord) {
-        guard let timestamp = record.creationDate,
+        guard let timestamp = record.creationDate?.description(with: Locale.current),
             let text = record[Comment.textKey] as? String else { return nil }
         
         self.init(text: text, timestamp: timestamp, post: nil)
         
         cloudKitRecordID = record.recordID
-        
     }
-    
 }
 
 extension CKRecord {
@@ -60,4 +58,3 @@ extension CKRecord {
         self[Comment.postKey] = CKReference(recordID: postRecordID, action: .deleteSelf)
     }
 }
-
