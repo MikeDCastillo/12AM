@@ -19,8 +19,8 @@ class Post: CloudKitSyncable {
     
     let photoData: Data?
     let timestamp: String
-    let text: String
     var comments: [Comment]
+    let text: String
     
     var photo: UIImage? {
         guard let photoData = self.photoData else { return nil }

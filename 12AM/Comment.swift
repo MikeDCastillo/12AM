@@ -58,4 +58,3 @@ extension CKRecord {
         self[Comment.postKey] = CKReference(recordID: postRecordID, action: .deleteSelf)
     }
 }
-
