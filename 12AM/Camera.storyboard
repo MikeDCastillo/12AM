@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="OGE-pT-z9J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="OGE-pT-z9J">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -57,6 +57,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="captionTextField" destination="UmK-ZM-ccO" id="vih-AJ-6xb"/>
+                        <outlet property="imageView" destination="sLq-5D-emn" id="rNP-pk-K6U"/>
                         <outlet property="timeLabel" destination="R8k-OB-I6h" id="MyD-rv-VQN"/>
                     </connections>
                 </viewController>
@@ -108,6 +109,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXE-Ve-SqA">
                                 <rect key="frame" x="16" y="623" width="343" height="44"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="cancel" id="Qt0-cb-ZlK">
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="OGE-pT-z9J" id="2Wp-eg-LyK"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ghj-6J-vi5"/>
                                     <barButtonItem systemItem="camera" id="njj-lk-qcX">
                                         <connections>
@@ -115,6 +121,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="JNo-2p-6gT"/>
+                                    <barButtonItem image="Next Arrow" style="plain" id="Bt7-qx-y94">
+                                        <connections>
+                                            <action selector="editPhotoButtonTapped:" destination="OGE-pT-z9J" id="1hj-Zz-i7w"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -142,4 +153,7 @@
             <point key="canvasLocation" x="119" y="188"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Next Arrow" width="25" height="25"/>
+    </resources>
 </document>

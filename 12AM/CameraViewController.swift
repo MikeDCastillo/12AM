@@ -38,6 +38,16 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        
+        
+        
+    }
+    
+    @IBAction func editPhotoButtonTapped(_ sender: Any) {
+    }
+    
+    
     func noCameraOnDevice() {
         let alertVC = UIAlertController(
             title: "No Camera",
