@@ -99,7 +99,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00 am " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWI-TE-uvO">
-                                <rect key="frame" x="16" y="28" width="343" height="24.5"/>
+                                <rect key="frame" x="16" y="28" width="343" height="25"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="21"/>
                                 <nil key="textColor"/>
@@ -133,6 +133,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="photoImageView" destination="vvR-yW-J4c" id="3M3-E8-iOD"/>
                         <segue destination="r1f-P8-6DC" kind="show" id="0JC-eE-3bT"/>
                     </connections>
                 </viewController>
