@@ -59,8 +59,8 @@ class PostController {
     func createPost(image: UIImage, caption: String, completion: ((Post) -> Void)? = nil) {
         
         // Sets image property of jpeg
-        guard let data = UIImageJPEGRepresentation(image, 1.0) else { return }
-        let post = Post(photoData: data, text: "")
+        guard let data = UIImageJPEGRepresentation(image, 1.0), let currentUser = UserController.shared.currentUser else { return }
+        let post = Post(photoData: data, text: "", owner: currentUser)
         
         // Adds post to first cell
         posts.insert(post, at: 0)
