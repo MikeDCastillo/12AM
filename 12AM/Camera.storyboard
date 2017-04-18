@@ -46,7 +46,7 @@
                     <navigationItem key="navigationItem" id="4PX-uR-E5Q">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ivs-ej-7Vo">
                             <connections>
-                                <action selector="cancelButtonTapped:" destination="dVD-5Y-hsj" id="jsW-Z0-OES"/>
+                                <action selector="cancelButtonTapped:" destination="dVD-5Y-hsj" id="nVb-7g-0P2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="o6M-B4-xOn">

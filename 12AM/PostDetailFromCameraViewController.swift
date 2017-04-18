@@ -21,8 +21,7 @@ class PostDetailFromCameraViewController: UIViewController {
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         
-        //_ = navigationController?.popViewController(animated: true)
-        _ = navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
 
     }
     
