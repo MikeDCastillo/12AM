@@ -31,28 +31,27 @@ class UserController {
     // MARK: - CRUD
     
     func createUserWith(userName: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
-        
-        guard let appleUserRecordID = appleUserRecordID else { completion(nil); return }
-        
-        let profileImage = profileImage
-        
-        let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
-        
-        let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef)
-        
-        let userRecord = CKRecord(user: user)
-        
-        publicDB.save(userRecord) { (record, error) in
-            if let error = error { print( "Error saving user record: \(error.localizedDescription)") }
+        CKContainer.default().fetchUserRecordID { recordId, error in
+            guard let recordId = recordId, error == nil else {
+                print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
+            self.appleUserRecordID = recordId
             
-            guard let record = record, let currentUser = User(cloudKitRecord: record) else { return }
+            let appleUserRef = CKReference(recordID: recordId, action: .deleteSelf)
+            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef)
+            let userRecord = CKRecord(user: user)
             
-            self.currentUser = currentUser
-            completion(currentUser)
-            NSLog("Success")
+            self.publicDB.save(userRecord) { (record, error) in
+               if let record = record, error == nil {
+                guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user"); return }
+                self.currentUser = currentUser
+                completion(currentUser)
+                print("Success")
+               } else {
+                print( "Error saving user record:\(String(describing: error?.localizedDescription))")
+                }
+            }
         }
     }
-    
     
     func updateCurrentUser(username: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
         guard let currentUser = currentUser, let profileImage = profileImage else { return }

@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -21,13 +21,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Life Cycle
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
         facebookLogIn()
         self.emailTextField.delegate = self
         self.userNameTextField.delegate = self
-        
+  
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
     }
     
@@ -53,7 +54,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addConstraint(fbLoginButton.heightAnchor.constraint(equalToConstant: 44))
     }
     
-    // MARK: - Actions 
+    // MARK: - Actions
     
     @IBAction func SkipButtonTapped(_ sender: Any) {
         // Add animation when pressed
@@ -63,14 +64,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userAdded()
         
     }
-
-   
+    
+    
     // MARK: - Main
     
     func showActivityIndicatory(uiView: UIView) {
         let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
         actInd.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)
-        actInd.center = uiView.center
+        actInd.center = loginView.center
         actInd.hidesWhenStopped = true
         actInd.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
@@ -86,16 +87,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if UserController.shared.currentUser == nil {
             // Creat a new user
-           UserController.shared.createUserWith(userName: userName, email: email, profileImage: profileImage, completion: { (user) in
-            
-            guard let user = user else { return }
-            DispatchQueue.main.async {
-                self.userNameTextField.text = user.username
-                self.emailTextField.text = user.email
-                self.profileImageView.image = user.profileImage
-            }
-            
-           })
+            UserController.shared.createUserWith(userName: userName, email: email, profileImage: profileImage, completion: { (user) in
+                
+                if let user = user {
+                    DispatchQueue.main.async {
+                        self.userNameTextField.text = user.username
+                        self.emailTextField.text = user.email
+                        self.profileImageView.image = user.profileImage
+                    }
+                }
+                else { return }
+            })
         } else {
             UserController.shared.updateCurrentUser(username: userName, email: email, profileImage: profileImage, completion: { (user) in
                 self.updateViews()
