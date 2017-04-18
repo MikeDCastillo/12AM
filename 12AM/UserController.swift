@@ -30,17 +30,30 @@ class UserController {
     
     // MARK: - CRUD
     
-    func createUserWith(userName: String, email: String, profileImage: UIImage?, appleUserRef: CKReference) {
-        let user = User(username: userName, email: email, profileImage: profileImage , appleUserRef: appleUserRef)
-        let userRecord = CKRecord(user: user) // Makeing a record of our model from our extension3
+    func createUserWith(userName: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
+        
+        guard let appleUserRecordID = appleUserRecordID, let profileImage = profileImage else { completion(nil); return }
+        
+        let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
+        
+        let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef)
+        
+        let userRecord = CKRecord(user: user)
         
         publicDB.save(userRecord) { (record, error) in
-            if let error = error { print("Error: creading user record\(error.localizedDescription)") }
-            self.users.append(user)
+            if let error = error { print( "Error saving user record: \(error.localizedDescription)") }
+            
+            guard let record = record, let currentUser = User(cloudKitRecord: record) else { return }
+            
+            self.currentUser = currentUser
+            completion(currentUser)
+            NSLog("Success")
         }
+        
     }
     
-    func updateCurrentUser(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference) {
+    
+    func updateCurrentUser(username: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
         guard let currentUser = currentUser, let profileImage = profileImage else { return }
         
         DispatchQueue.main.async {
