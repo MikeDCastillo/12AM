@@ -33,7 +33,7 @@ class Post: CloudKitSyncable {
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
-        self.comments = comments
+        self.comments = comments.sorted(by: { $0.timestamp > $1.timestamp })
     }
     
     //MARK: - CloudKit

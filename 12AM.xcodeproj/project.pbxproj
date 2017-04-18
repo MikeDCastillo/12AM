@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011940781E9EC28000F2047D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011940771E9EC28000F2047D /* CloudKit.framework */; };
 		013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57E91E9D51A900AA9CA4 /* User.swift */; };
 		013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */; };
 		0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0165FEB41E9EEC6300A4F2A1 /* UserController.swift */; };
@@ -28,7 +27,6 @@
 		73A5381D1E9EC2290013A5CE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A5381C1E9EC2290013A5CE /* CloudKit.framework */; };
 		73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E901B31E9B55C500EA7E0A /* LoginViewController.swift */; };
 		73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E901B51E9B5BA600EA7E0A /* MockViewController.swift */; };
-		C893C4701E9C274400185BB9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C46F1E9C274400185BB9 /* Login.storyboard */; };
 		C893C4721E9C277100185BB9 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C4711E9C277100185BB9 /* Feed.storyboard */; };
 		C893C4741E9C27E800185BB9 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C893C4731E9C27E800185BB9 /* Camera.storyboard */; };
 		C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */; };
@@ -39,8 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		011940761E9EC27C00F2047D /* 12AM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = 12AM.entitlements; sourceTree = "<group>"; };
-		011940771E9EC28000F2047D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		013F57E91E9D51A900AA9CA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		0165FEB41E9EEC6300A4F2A1 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -66,7 +62,6 @@
 		73E901B31E9B55C500EA7E0A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		73E901B51E9B5BA600EA7E0A /* MockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		91455D1C35EE249F4F19FF5E /* Pods-12AM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.release.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.release.xcconfig"; sourceTree = "<group>"; };
-		C893C46F1E9C274400185BB9 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = ../Login.storyboard; sourceTree = "<group>"; };
 		C893C4711E9C277100185BB9 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		C893C4731E9C27E800185BB9 /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
@@ -182,7 +177,6 @@
 			children = (
 				737E79501E9B180200172355 /* LaunchScreen.storyboard */,
 				737E794B1E9B180200172355 /* Main.storyboard */,
-				C893C46F1E9C274400185BB9 /* Login.storyboard */,
 				C893C4711E9C277100185BB9 /* Feed.storyboard */,
 				C893C4731E9C27E800185BB9 /* Camera.storyboard */,
 			);
@@ -304,7 +298,6 @@
 				7348C6CB1E9B4B6600D54ABB /* Default-568h@2x.png in Resources */,
 				C893C4721E9C277100185BB9 /* Feed.storyboard in Resources */,
 				737E794F1E9B180200172355 /* Assets.xcassets in Resources */,
-				C893C4701E9C274400185BB9 /* Login.storyboard in Resources */,
 				737E794D1E9B180200172355 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

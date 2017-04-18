@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="OGE-pT-z9J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kfp-qc-7oX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -63,25 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bh-Cw-FgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1852" y="187.55622188905548"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="9wd-xn-sYE">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r1f-P8-6DC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T1r-wP-n1S">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dVD-5Y-hsj" kind="relationship" relationship="rootViewController" id="Qfg-pE-9tp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ar3-Fb-vMn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="999" y="188"/>
+            <point key="canvasLocation" x="2048.8000000000002" y="187.55622188905548"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="QJz-XY-34u">
@@ -96,11 +78,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vvR-yW-J4c">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00 am " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWI-TE-uvO">
-                                <rect key="frame" x="16" y="28" width="343" height="25"/>
+                                <rect key="frame" x="16" y="72" width="343" height="25"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="21"/>
                                 <nil key="textColor"/>
@@ -133,16 +115,35 @@
                             <constraint firstItem="DWI-TE-uvO" firstAttribute="leading" secondItem="lhX-vG-yuC" secondAttribute="leadingMargin" id="zGY-wZ-ww5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="clf-JM-eoH"/>
                     <connections>
                         <outlet property="photoImageView" destination="vvR-yW-J4c" id="3M3-E8-iOD"/>
-                        <segue destination="r1f-P8-6DC" kind="show" identifier="usePhotoButtonToPostDetail" id="0JC-eE-3bT"/>
                         <segue destination="Pfx-ac-rdu" kind="unwind" unwindAction="unwindWithSegue:" id="EoD-iM-zPP"/>
+                        <segue destination="dVD-5Y-hsj" kind="show" identifier="usePhotoButtonToPostDetail" id="TFy-fg-Ixw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bve-42-CQ0" sceneMemberID="firstResponder"/>
                 <exit id="Pfx-ac-rdu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="119" y="188"/>
+            <point key="canvasLocation" x="1056.8" y="187.55622188905548"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iLt-Fl-unu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kfp-qc-7oX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="biw-bG-yg4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OGE-pT-z9J" kind="relationship" relationship="rootViewController" id="85J-hK-Idz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ds3-jx-9Q6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="187.55622188905548"/>
         </scene>
     </scenes>
 </document>

@@ -19,6 +19,8 @@ class Comment: CloudKitSyncable {
     var text: String
     var timestamp: String
     var post: Post?
+    var owner: User?
+    var ownerReference: CKReference?
     
     init(text: String, timestamp: String = Date().description(with: Locale.current), post: Post?) {
         self.text = text
@@ -61,5 +63,8 @@ extension CKRecord {
         self[Comment.timestampKey] = comment.timestamp as CKRecordValue?
         self[Comment.textKey] = comment.text as CKRecordValue?
         self[Comment.postKey] = CKReference(recordID: postRecordID, action: .deleteSelf)
+        guard let owner = post.owner, let ownerRecordID = owner.cloudKitRecordID else { return }
+        self["ownerRef"] = CKReference(recordID: ownerRecordID, action: .none)
+
     }
 }
