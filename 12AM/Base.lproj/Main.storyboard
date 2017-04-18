@@ -129,38 +129,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2d-tk-XDD">
+                                <rect key="frame" x="170" y="404" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="TFR-wv-aBC"/>
+                                    <segue destination="1PB-68-Ho0" kind="show" identifier="toFeedTVC" id="TAt-1g-ZcQ"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGM-MX-DPl">
-                                <rect key="frame" x="138" y="568" width="99" height="30"/>
+                                <rect key="frame" x="138" y="453" width="99" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.98841296690000002" blue="0.62107911719999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Skip for now &gt;"/>
                                 <connections>
                                     <segue destination="1PB-68-Ho0" kind="show" identifier="toFeedTVC" id="4Qz-3f-0wV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2d-tk-XDD">
-                                <rect key="frame" x="170" y="404" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="TFR-wv-aBC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="top" secondItem="DzU-r3-QTQ" secondAttribute="bottom" constant="93" id="6RG-Zf-cd6"/>
-                            <constraint firstItem="Q43-6v-M7g" firstAttribute="top" secondItem="Atf-5l-PGl" secondAttribute="bottom" constant="15" id="M4L-vw-GoO"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Q43-6v-M7g" secondAttribute="leading" id="Prw-LS-zEa"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="top" secondItem="09T-jk-1Wm" secondAttribute="bottom" constant="32" id="VRt-GL-Wfr"/>
-                            <constraint firstItem="bBq-F5-gDg" firstAttribute="top" secondItem="bGM-MX-DPl" secondAttribute="bottom" constant="69" id="YJp-Cp-0Sp"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Q43-6v-M7g" secondAttribute="trailing" id="a0X-JZ-AeP"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Mnt-wo-Ctx" secondAttribute="trailingMargin" id="cGI-VE-ARj"/>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="centerX" secondItem="Atf-5l-PGl" secondAttribute="centerX" id="cyQ-zq-C4v"/>
-                            <constraint firstItem="H2d-tk-XDD" firstAttribute="centerX" secondItem="bGM-MX-DPl" secondAttribute="centerX" id="fVt-65-pmM"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" id="hYz-OL-l5O"/>
-                            <constraint firstItem="H2d-tk-XDD" firstAttribute="top" secondItem="Q43-6v-M7g" secondAttribute="bottom" constant="56" id="jg4-m2-55S"/>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" constant="51" id="tiP-Ps-rtU"/>
-                            <constraint firstItem="Q43-6v-M7g" firstAttribute="centerX" secondItem="H2d-tk-XDD" secondAttribute="centerX" id="ujP-98-CPs"/>
-                            <constraint firstItem="Q43-6v-M7g" firstAttribute="centerY" secondItem="Mnt-wo-Ctx" secondAttribute="centerY" id="ulS-rc-3kS"/>
+                            <constraint firstItem="Q43-6v-M7g" firstAttribute="centerX" secondItem="H2d-tk-XDD" secondAttribute="centerX" id="0F5-wp-Din"/>
+                            <constraint firstItem="Q43-6v-M7g" firstAttribute="top" secondItem="Atf-5l-PGl" secondAttribute="bottom" constant="15" id="9sL-dc-Ddm"/>
+                            <constraint firstItem="09T-jk-1Wm" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" constant="51" id="Ahd-cg-PoY"/>
+                            <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Q43-6v-M7g" secondAttribute="trailing" id="Ck9-rb-D9V"/>
+                            <constraint firstItem="09T-jk-1Wm" firstAttribute="top" secondItem="DzU-r3-QTQ" secondAttribute="bottom" constant="93" id="H1m-vs-qcd"/>
+                            <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Q43-6v-M7g" secondAttribute="leading" id="Q5n-rw-NXZ"/>
+                            <constraint firstItem="bGM-MX-DPl" firstAttribute="top" secondItem="H2d-tk-XDD" secondAttribute="bottom" constant="19" id="eS4-EF-jrk"/>
+                            <constraint firstItem="H2d-tk-XDD" firstAttribute="top" secondItem="Q43-6v-M7g" secondAttribute="bottom" constant="56" id="hky-f0-Npu"/>
+                            <constraint firstItem="H2d-tk-XDD" firstAttribute="centerX" secondItem="bGM-MX-DPl" secondAttribute="centerX" id="kmq-jp-oZ5"/>
+                            <constraint firstItem="09T-jk-1Wm" firstAttribute="centerX" secondItem="Atf-5l-PGl" secondAttribute="centerX" id="lW2-m1-KDk"/>
+                            <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" id="mKK-qE-YJ7"/>
+                            <constraint firstItem="Atf-5l-PGl" firstAttribute="top" secondItem="09T-jk-1Wm" secondAttribute="bottom" constant="32" id="vO2-SX-gki"/>
+                            <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Mnt-wo-Ctx" secondAttribute="trailingMargin" id="xRM-lg-0Jh"/>
+                            <constraint firstItem="Q43-6v-M7g" firstAttribute="centerY" secondItem="Mnt-wo-Ctx" secondAttribute="centerY" id="xdw-Qx-z4f"/>
                         </constraints>
                     </view>
                     <connections>
@@ -180,7 +181,10 @@
                 <viewControllerPlaceholder storyboardName="Feed" id="1PB-68-Ho0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7m-2l-BBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1134" y="636"/>
+            <point key="canvasLocation" x="1179" y="647"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TAt-1g-ZcQ"/>
+    </inferredMetricsTieBreakers>
 </document>
