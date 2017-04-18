@@ -10,17 +10,20 @@ import UIKit
 import FBSDKLoginKit
 
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     
+    var imagePickerWasDismissed = false
+    
     var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
+    let imagePicker = UIImagePickerController()
+    
     
     // MARK: - Life Cycle
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +31,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         facebookLogIn()
         self.emailTextField.delegate = self
         self.userNameTextField.delegate = self
-  
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() != nil)
-        {
+        if FBSDKAccessToken.current() != nil && !imagePickerWasDismissed {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
         }
     }
@@ -54,17 +56,42 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addConstraint(fbLoginButton.heightAnchor.constraint(equalToConstant: 44))
     }
     
+    
+    
     // MARK: - Actions
+    @IBAction func profileImageButtonTapped(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = .photo
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.delegate = self
+            present(imagePicker, animated:  true, completion: nil)
+        
+        } else {
+            noCameraOnDevice()
+        }
+    }
     
     @IBAction func SkipButtonTapped(_ sender: Any) {
-        // Add animation when pressed
+        // TODO: animation when pressed
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         userAdded()
-       
+        guard let email = emailTextField.text else { return }
+        let isEmailAddressValid = UserController.shared.isValidEmailAddress(emailAddressString: email)
+        
+        if isEmailAddressValid {
+            print("Email address is valid")
+            self.performSegue(withIdentifier: "toFeedTVC", sender: self)
+        } else {
+            print("Invalid Email")
+            invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
+        }
     }
     
+ 
     
     // MARK: - Main
     
@@ -79,7 +106,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         activityIndicaor.startAnimating()
         
     }
-
+    
     func userAdded() {
         guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
         
@@ -118,6 +145,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    // MARK: - Delegates
+    
+    // TODO: - Put animation clock while pic is loading to postdetaifromcameraviewcontroller
+    
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        if chosenImage != nil {
+            profileImageView.contentMode = .scaleAspectFit
+            profileImageView.image = chosenImage
+        }
+        imagePickerWasDismissed = true
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        imagePickerWasDismissed = true
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - FBSDK Delegate protocols
@@ -136,6 +183,40 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         print("Succesfully logged into Facebook")
     }
 }
+
+// MARK: Alerts
+
+extension LoginViewController  {
+    
+    func noCameraOnDevice() {
+        let alertVC = UIAlertController(
+            title: "No Camera",
+            message: "Sorry, this device has no camera",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "OK",
+            style:.default,
+            handler: nil)
+        alertVC.addAction(okAction)
+        present(
+            alertVC,
+            animated: true,
+            completion: nil)
+    }
+    
+    func invalidEmailAlerMessage(messageToDisplay: String ) {
+        let alertController = UIAlertController(title: "Invalid Email", message: messageToDisplay, preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+            
+            // Code in this block will trigger when Save button tapped.
+            print("Save button tapped");
+        }
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion:nil)
+    }
+}
+
 
 
 
