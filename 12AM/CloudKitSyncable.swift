@@ -13,7 +13,7 @@ import CloudKit
 
 protocol CloudKitSyncable {
     
-    init?(record: CKRecord)
+//    init?(record: CKRecord)
     
     var cloudKitRecordID: CKRecordID? { get set }
     var recordType: String { get }

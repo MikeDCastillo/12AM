@@ -16,12 +16,15 @@ class PostDetailFromCameraViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         
-        // ? _ = navigationController?.popViewController(animated: true)
+        
+        
+        let _ = self.navigationController?.popToRootViewController(animated: true)
+        
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         
-        self.navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popViewController(animated: true)
 
     }
     
@@ -34,7 +37,11 @@ class PostDetailFromCameraViewController: UIViewController {
     }
     
     
-    
+    func saveImage() {
+        
+        
+        
+    }
     
     
     /*
