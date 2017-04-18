@@ -20,12 +20,22 @@ class PostDetailFromCameraViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        // ? _ = navigationController?.popViewController(animated: true)
+        
+        //_ = navigationController?.popViewController(animated: true)
+        _ = navigationController?.popToRootViewController(animated: true)
+
     }
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var captionTextField: UITextField!
+    
+    
+    @IBAction func unwind(segue ofType: UIStoryboardSegue) {
+    }
+    
+    
+    
     
     
     /*
