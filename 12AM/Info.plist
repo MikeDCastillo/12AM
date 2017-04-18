@@ -63,5 +63,9 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow Users To Take Pics</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Allow user to upload media from phone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow user to access photo library </string>
 </dict>
 </plist>
