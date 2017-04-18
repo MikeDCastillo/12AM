@@ -32,7 +32,9 @@ class UserController {
     
     func createUserWith(userName: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
         
-        guard let appleUserRecordID = appleUserRecordID, let profileImage = profileImage else { completion(nil); return }
+        guard let appleUserRecordID = appleUserRecordID else { completion(nil); return }
+        
+        let profileImage = profileImage
         
         let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
         
@@ -49,7 +51,6 @@ class UserController {
             completion(currentUser)
             NSLog("Success")
         }
-        
     }
     
     

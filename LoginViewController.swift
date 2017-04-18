@@ -26,7 +26,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         updateViews()
         facebookLogIn()
         self.emailTextField.delegate = self
-        self.userNameTextField.delegate = self 
+        self.userNameTextField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
