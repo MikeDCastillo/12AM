@@ -22,6 +22,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicer.delegate = self
+    
     }
     
     // MARK: - Actions
@@ -37,16 +38,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             noCameraOnDevice()
         }
     }
-    
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        
-        
-        
-    }
-    
-    @IBAction func editPhotoButtonTapped(_ sender: Any) {
-    }
-    
     
     func noCameraOnDevice() {
         let alertVC = UIAlertController(
@@ -66,9 +57,26 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     // MARK: - Delegates
     
+    // TODO: - Put animation clock while pic is loading to postdetaifromcameraviewcontroller
+    
     internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var chosenImage = UIImage()
-        chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        if chosenImage != nil {
+        
+            let queue = DispatchQueue(label: "testQueue")
+            
+            queue.async {
+            
+                Thread.sleep(forTimeInterval: 1)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "usePhotoButtonToPostDetail", sender: self)
+                }
+            }
+        } else {
+            return
+        }
+        
         photoImageView.contentMode = .scaleAspectFit
         photoImageView.image = chosenImage
         dismiss(animated: true, completion: nil)
@@ -82,14 +90,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     // MARK: - Camera Selection
 
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "usePhotoButtonToPostDetail" {
-    //            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? <#DetailVCName#> else { return }
-    //            let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
-    //            detailVC.<#object#> <#from dvc File#>= <#object#>
-    //        }
-    //    }
-    
+//        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//            if segue.identifier == "usePhotoButtonToPostDetail" {
+//                guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? <#DetailVCName#> else { return }
+//                let <#object#> = <#ModelController#>.shared.<#object#>[indexPath.row]
+//                detailVC.<#object#> <#from dvc File#>= <#object#>
+//            }
+//        }
+  
 }
 
 protocol PhotoSelectViewControllerDelegate: class {
