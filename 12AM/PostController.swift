@@ -65,9 +65,12 @@ class PostController {
         // Adds post to first cell
         posts.insert(post, at: 0)
         
+        let record = CKRecord(post)
+        
         // Saves post to CloudKit or gives error
-        cloudKitManager.saveRecord(CKRecord(post)) { (record, error) in
-            guard let record = record else { return }
+        cloudKitManager.saveRecord(record) { (record, error) in
+            guard let record = record
+                else { return }
             post.cloudKitRecordID = record.recordID
             if let error = error {
                 print("Error saving new post to CloudKit: \(error)")

@@ -16,6 +16,7 @@ class Post: CloudKitSyncable {
     static let photoDataKey = "photoData"
     static let timestampKey = "timestamp"
     static let textKey = "text"
+    static let ownerKey = "owner"
     
     let photoData: Data?
     let timestamp: String
@@ -34,6 +35,7 @@ class Post: CloudKitSyncable {
         self.timestamp = timestamp
         self.text = text
         self.comments = comments.sorted(by: { $0.timestamp > $1.timestamp })
+        self.owner = owner
     }
     
     //MARK: - CloudKit
@@ -67,7 +69,7 @@ class Post: CloudKitSyncable {
         
         let temporaryDirectory = NSTemporaryDirectory()
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathComponent("jpg")
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
         
         try? photoData?.write(to: fileURL, options: .atomic)
         
@@ -84,7 +86,10 @@ extension CKRecord {
         self[Post.textKey] = post.text as CKRecordValue?
         self[Post.timestampKey] = post.timestamp as CKRecordValue?
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
-        guard let owner = post.owner, let ownerRecordID = owner.cloudKitRecordID else { return }
+        guard
+            let owner = post.owner,
+            let ownerRecordID = owner.cloudKitRecordID
+            else { return }
         self["ownerRef"] = CKReference(recordID: ownerRecordID, action: .none)
     }
 }
