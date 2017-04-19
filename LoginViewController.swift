@@ -22,6 +22,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
     let imagePicker = UIImagePickerController()
     
+    // TODO: - Password
+    
     
     // MARK: - Life Cycle
     
@@ -29,6 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         super.viewDidLoad()
         updateViews()
         facebookLogIn()
+        uiStyle()
         self.emailTextField.delegate = self
         self.userNameTextField.delegate = self
         
@@ -89,6 +92,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             print("Invalid Email")
             invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
         }
+    }
+    
+    // MARK: - UI Style 
+    
+    func uiStyle() {
+        emailTextField.backgroundColor = UIColor.gray
+        userNameTextField.backgroundColor = UIColor.gray
     }
     
  
