@@ -170,11 +170,10 @@ class PostController {
         isSyncing = true
         
         self.fetchNewRecords(ofType: Post.typeKey) {
-            self.fetchNewRecords(ofType: Comment.typeKey) {
                 self.isSyncing = false
                 completion()
             }
-        }
+        
     }
     
     func requestFullSync(_ completion: (() -> Void)? = nil) {
