@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     
     var imagePickerWasDismissed = false
     
@@ -31,9 +33,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         super.viewDidLoad()
         updateViews()
         facebookLogIn()
-        uiStyle()
         self.emailTextField.delegate = self
         self.userNameTextField.delegate = self
+        self.passwordTextField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
     }
@@ -93,15 +95,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
         }
     }
-    
-    // MARK: - UI Style 
-    
-    func uiStyle() {
-        emailTextField.backgroundColor = UIColor.gray
-        userNameTextField.backgroundColor = UIColor.gray
-    }
-    
- 
     
     // MARK: - Main
     
@@ -224,6 +217,23 @@ extension LoginViewController  {
         }
         alertController.addAction(OKAction)
         self.present(alertController, animated: true, completion:nil)
+    }
+}
+
+extension LoginViewController {
+    
+    // MARK: - UI Style
+    
+    func setupUi() {
+        
+        // TextFields
+        emailTextField.backgroundColor = UIColor.gray
+        userNameTextField.backgroundColor = UIColor.gray
+        // Profile Image
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.clipsToBounds = true
+        // Background
+        view.backgroundColor = UIColor(red: 55.0, green: 52.0, blue: 71.0, alpha: 100.0)
     }
 }
 

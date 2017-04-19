@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -114,68 +113,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Screen Shot 2017-04-18 at 12.10.35 PM" translatesAutoresizingMaskIntoConstraints="NO" id="09T-jk-1Wm">
-                                <rect key="frame" x="103" y="110" width="169" height="130"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username...." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Atf-5l-PGl">
-                                <rect key="frame" x="16" y="273" width="343" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username...." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Atf-5l-PGl">
+                                <rect key="frame" x="16" y="218" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="JOSHISSEXY@me.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-6v-M7g">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="***********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uLl-nC-Ghd">
                                 <rect key="frame" x="16" y="318" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2d-tk-XDD">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2d-tk-XDD">
                                 <rect key="frame" x="170" y="404" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="TFR-wv-aBC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGM-MX-DPl">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGM-MX-DPl">
                                 <rect key="frame" x="138" y="453" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.98841296690000002" blue="0.62107911719999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Skip for now &gt;"/>
                                 <connections>
                                     <segue destination="1PB-68-Ho0" kind="show" identifier="toFeedTVC" id="4Qz-3f-0wV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XlC-ac-Nvz">
-                                <rect key="frame" x="149" y="160" width="77" height="30"/>
-                                <state key="normal" title="Profile Pick"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6F7-x5-b0W">
+                                <rect key="frame" x="119" y="51" width="136" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-Fk-k5t">
+                                <rect key="frame" x="109" y="37" width="156" height="157"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ProfileImage"/>
                                 <connections>
-                                    <action selector="profileImageButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="HpO-aS-WEJ"/>
+                                    <action selector="profileImageButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="9rD-FG-ias"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="JOSHISSEXY@me.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-6v-M7g">
+                                <rect key="frame" x="16" y="266" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="XlC-ac-Nvz" firstAttribute="centerX" secondItem="Atf-5l-PGl" secondAttribute="centerX" id="0Gv-R3-A54"/>
-                            <constraint firstItem="H2d-tk-XDD" firstAttribute="top" secondItem="Q43-6v-M7g" secondAttribute="bottom" constant="56" id="0kV-pW-1iX"/>
-                            <constraint firstItem="bGM-MX-DPl" firstAttribute="top" secondItem="H2d-tk-XDD" secondAttribute="bottom" constant="19" id="5vZ-Ua-Q3X"/>
-                            <constraint firstItem="Q43-6v-M7g" firstAttribute="centerY" secondItem="Mnt-wo-Ctx" secondAttribute="centerY" id="6dK-hv-Ox2"/>
-                            <constraint firstItem="Q43-6v-M7g" firstAttribute="centerX" secondItem="H2d-tk-XDD" secondAttribute="centerX" id="7IO-CK-QhT"/>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="top" secondItem="DzU-r3-QTQ" secondAttribute="bottom" constant="90" id="9RF-2W-AOY"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Mnt-wo-Ctx" secondAttribute="trailingMargin" id="BLe-ak-Ndh"/>
-                            <constraint firstItem="H2d-tk-XDD" firstAttribute="centerX" secondItem="bGM-MX-DPl" secondAttribute="centerX" id="Q3j-7m-Gqt"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="top" secondItem="09T-jk-1Wm" secondAttribute="bottom" constant="33" id="XYy-o3-nhN"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Q43-6v-M7g" secondAttribute="trailing" id="aoX-hZ-8Kt"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Q43-6v-M7g" secondAttribute="leading" id="bpZ-tr-iLc"/>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" constant="87" id="e7w-Zs-KfQ"/>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="centerX" secondItem="XlC-ac-Nvz" secondAttribute="centerX" id="ltO-b6-ug8"/>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" id="lw1-vp-Fi1"/>
-                            <constraint firstItem="Q43-6v-M7g" firstAttribute="top" secondItem="Atf-5l-PGl" secondAttribute="bottom" constant="15" id="m81-jE-pXR"/>
-                            <constraint firstItem="09T-jk-1Wm" firstAttribute="centerY" secondItem="XlC-ac-Nvz" secondAttribute="centerY" id="rFQ-wd-W0N"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Q43-6v-M7g" id="C6x-lC-ugh"/>
                         <outlet property="loginView" destination="Mnt-wo-Ctx" id="1RR-5C-x58"/>
-                        <outlet property="profileImageView" destination="09T-jk-1Wm" id="MW0-w6-nmS"/>
+                        <outlet property="passwordTextField" destination="uLl-nC-Ghd" id="vcN-gS-j92"/>
+                        <outlet property="profileImageView" destination="6F7-x5-b0W" id="Fa7-Ao-bMC"/>
                         <outlet property="userNameTextField" destination="Atf-5l-PGl" id="Rza-36-8rb"/>
                         <segue destination="1PB-68-Ho0" kind="presentation" identifier="toFeedTVC" id="7CO-V8-Sda"/>
                     </connections>
@@ -194,7 +189,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Screen Shot 2017-04-18 at 12.10.35 PM" width="406" height="395"/>
+        <image name="ProfileImage" width="156" height="157"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7CO-V8-Sda"/>
