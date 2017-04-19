@@ -111,13 +111,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     func userAdded() {
-        guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
+        guard let userName = userNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else { return }
         
         let profileImage = profileImageView.image
         
         if UserController.shared.currentUser == nil {
             // Creat a new user
-            UserController.shared.createUserWith(userName: userName, email: email, profileImage: profileImage, completion: { (user) in
+            UserController.shared.createUserWith(userName: userName, email: email, profileImage: profileImage, password: password, completion: { (user) in
                 
                 if let user = user {
                     DispatchQueue.main.async {

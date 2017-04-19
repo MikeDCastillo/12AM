@@ -38,7 +38,7 @@ class UserController {
             self.appleUserRecordID = recordId
             
             let appleUserRef = CKReference(recordID: recordId, action: .deleteSelf)
-            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef)
+            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, password: password)
             let userRecord = CKRecord(user: user)
             
             self.publicDB.save(userRecord) { (record, error) in
