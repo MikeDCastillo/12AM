@@ -30,6 +30,8 @@ class User {
     // This is your CUSTOM user record's ID
     var cloudKitRecordID: CKRecordID?
     
+    
+    
     var imageData: Data? {
         guard let image = profileImage, let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
         return imageData
@@ -56,6 +58,7 @@ class User {
         self.appleUserRef = appleUserRef
     }
     
+
     // FetchLogedInUserRcord - this is for fetching
     init?(cloudKitRecord: CKRecord) {
         guard let username = cloudKitRecord[User.usernameKey] as? String,

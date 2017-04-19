@@ -15,6 +15,7 @@ class UserController {
     static let shared = UserController()
     
     let publicDB = CKContainer.default().publicCloudDatabase
+    let privateDB = CKContainer.default().privateCloudDatabase
     
     var users: [User] = []
     var appleUserRecordID: CKRecordID?
@@ -30,7 +31,7 @@ class UserController {
     
     // MARK: - CRUD
     
-    func createUserWith(userName: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
+    func createUserWith(userName: String, email: String, profileImage: UIImage?, password: String, completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
@@ -45,12 +46,27 @@ class UserController {
                 guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user"); return }
                 self.currentUser = currentUser
                 completion(currentUser)
+                
+                self.saveUserToPrivateDatabase(userRecord: record, password: password, completion: { 
+                    self.privateDB.save(userRecord, completionHandler: { (record, error) in
+                        if let record = record, error == nil {
+                            guard let currentUser = User(cloudKitRecord: record) else {print("Error saving to private DB"); return}
+                            self.currentUser = currentUser
+                            completion(currentUser)
+                        }
+                    })
+                })
+                
                 print("Success")
                } else {
                 print( "Error saving user record:\(String(describing: error?.localizedDescription))")
                 }
             }
         }
+    }
+    
+    func saveUserToPrivateDatabase(userRecord: CKRecord, password: String, completion: () -> Void) {
+        
     }
     
     func updateCurrentUser(username: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {

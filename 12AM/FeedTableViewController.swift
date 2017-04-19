@@ -13,10 +13,19 @@ class FeedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
-        
+        PostController.sharedController.performFullSync()
+    }
+    
+    @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
+        handleRefresh(sender)
+        PostController.sharedController.requestFullSync {
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     func handleRefresh(_ refreshControl: UIRefreshControl) {
+        PostController.sharedController.requestFullSync()
+        PostController.sharedController.performFullSync()
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
