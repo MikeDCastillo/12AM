@@ -45,7 +45,11 @@ class PostDetailFromCameraViewController: UIViewController {
     
     
     func saveImage() {
-        guard let caption = captionTextField?.text, let image = imageView?.image else { return }
-        PostController.sharedController.createPost(image: image, caption: caption)
+        var caption = captionTextField?.text
+        var image = imageView?.image
+        
+        PostController.sharedController.createPost(image: image!, caption: caption!) { (post) in
+            guard let post = post else { return }
+        }
     }
 }

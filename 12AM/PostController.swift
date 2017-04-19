@@ -56,7 +56,7 @@ class PostController {
     //MARK: - CRUD
     
     // Create Post Function
-    func createPost(image: UIImage, caption: String, completion: ((Post) -> Void)? = nil) {
+    func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
         
         // Sets image property of jpeg
         guard let data = UIImageJPEGRepresentation(image, 1.0), let currentUser = UserController.shared.currentUser else { return }
@@ -72,7 +72,7 @@ class PostController {
             if let error = error {
                 print("Error saving new post to CloudKit: \(error)")
             }
-            completion?(post)
+            completion(post)
         }
         
     }
