@@ -14,6 +14,8 @@ class PostDetailFromCameraViewController: UIViewController {
         super.viewDidLoad()
         
         self.imageView.image = self.image
+        
+        captionTextField.resignFirstResponder()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
