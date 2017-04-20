@@ -2,7 +2,7 @@
 //  Comment.swift
 //  12AM
 //
-//  Created by Josh "Big Sexy" on 4/12/17.
+//  Created by Josh & Erica on 4/11/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
@@ -17,10 +17,12 @@ class Comment: CloudKitSyncable {
     static let postKey = "post"
     
     var text: String
-    var timestamp: Date
+    var timestamp: String
     var post: Post?
+    var owner: User?
+    var ownerReference: CKReference?
     
-    init(text: String, timestamp: Date = Date(), post: Post?) {
+    init(text: String, timestamp: String = Date().description(with: Locale.current), post: Post?) {
         self.text = text
         self.timestamp = timestamp
         self.post = post
@@ -34,15 +36,18 @@ class Comment: CloudKitSyncable {
     var cloudKitRecordID: CKRecordID?
     
     convenience required init?(record: CKRecord) {
-        guard let timestamp = record.creationDate,
+        guard let timestamp = record.creationDate?.description(with: Locale.current),
             let text = record[Comment.textKey] as? String else { return nil }
         
         self.init(text: text, timestamp: timestamp, post: nil)
         
         cloudKitRecordID = record.recordID
-        
     }
     
+    // SearchableRecord Delegate function. 
+    func matches(searchTerm: String) -> Bool {
+        return text.contains(searchTerm)
+    }
 }
 
 extension CKRecord {
@@ -58,5 +63,8 @@ extension CKRecord {
         self[Comment.timestampKey] = comment.timestamp as CKRecordValue?
         self[Comment.textKey] = comment.text as CKRecordValue?
         self[Comment.postKey] = CKReference(recordID: postRecordID, action: .deleteSelf)
+        guard let owner = post.owner, let ownerRecordID = owner.cloudKitRecordID else { return }
+        self["ownerRef"] = CKReference(recordID: ownerRecordID, action: .none)
+
     }
 }

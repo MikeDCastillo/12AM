@@ -41,7 +41,7 @@ class MockViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     @IBAction func fbLoginButtonDoneSigningIn(_ loginButton: FBSDKLoginButton) {
-        loginButtonDidLogOut(loginButton)
+        let be = loginButtonDidLogOut(loginButton)
         animateOut()
     }
 

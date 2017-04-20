@@ -4,7 +4,7 @@
 //
 //  Created by Josh "Big JDawg" McDonald on 4/12/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
-//
+// git test
 
 import Foundation
 import UIKit
@@ -16,22 +16,27 @@ class Post: CloudKitSyncable {
     static let photoDataKey = "photoData"
     static let timestampKey = "timestamp"
     static let textKey = "text"
+    static let ownerKey = "owner"
+    static let ownerReferenceKey = "ownerRef"
     
     let photoData: Data?
-    let timestamp: Date
-    let text: String
+    let timestamp: String
     var comments: [Comment]
+    let text: String
+    var owner: User?
+    var ownerReference: CKReference?
     
     var photo: UIImage? {
         guard let photoData = self.photoData else { return nil }
         return UIImage(data: photoData)
     }
     
-    init(photoData: Data?, timestamp: Date = Date(), text: String, comments: [Comment] = []){
+    init(photoData: Data?, timestamp: String = Date().description(with: Locale.current), text: String, comments: [Comment] = [], owner: User) {
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
-        self.comments = comments
+        self.comments = comments.sorted(by: { $0.timestamp > $1.timestamp })
+        self.owner = owner
     }
     
     //MARK: - CloudKit
@@ -42,15 +47,20 @@ class Post: CloudKitSyncable {
     
     var cloudKitRecordID: CKRecordID?
     
-    convenience required init?(record: CKRecord) {
-        guard let timestamp = record.creationDate,
-            let photoAsset = record[Post.photoDataKey] as? CKAsset,
+    init?(record: CKRecord) {
+        guard let timestamp = record.creationDate?.description(with: Locale.current),
             let text = record[Post.textKey] as? String,
-            let photoData = try? Data(contentsOf: photoAsset.fileURL) else { return nil }
+            let photoAsset = record[Post.photoDataKey] as? CKAsset,
+            let photoData = try? Data(contentsOf: photoAsset.fileURL),
+            let ownerReference = record[Post.ownerReferenceKey] as? CKReference else { return nil }
         
-        self.init(photoData: photoData, timestamp: timestamp, text: text)
         
-        cloudKitRecordID = record.recordID
+        self.photoData = photoData
+        self.timestamp = timestamp
+        self.text = text
+        self.ownerReference = ownerReference
+        self.cloudKitRecordID = record.recordID
+        self.comments = []
     }
     
     
@@ -60,7 +70,7 @@ class Post: CloudKitSyncable {
         
         let temporaryDirectory = NSTemporaryDirectory()
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathComponent("jpg")
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
         
         try? photoData?.write(to: fileURL, options: .atomic)
         
@@ -77,6 +87,11 @@ extension CKRecord {
         self[Post.textKey] = post.text as CKRecordValue?
         self[Post.timestampKey] = post.timestamp as CKRecordValue?
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
+        guard
+            let owner = post.owner,
+            let ownerRecordID = owner.cloudKitRecordID
+            else { return }
+        self[Post.ownerReferenceKey] = CKReference(recordID: ownerRecordID, action: .none)
     }
 }
 

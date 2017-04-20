@@ -9,30 +9,51 @@
 import UIKit
 
 class PostDetailFromCameraViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.imageView.image = self.image
+        
+        captionTextField.resignFirstResponder()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        saveImage()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        // ? _ = navigationController?.popViewController(animated: true)
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        
     }
-
+    
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var captionTextField: UITextField!
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    var image: UIImage? {
+        didSet {
+            if isViewLoaded {
+                imageView.image = image
+            }
+        }
     }
-    */
-
+    
+    @IBAction func unwind(segue ofType: UIStoryboardSegue) {
+    }
+    
+    
+    func saveImage() {
+         guard let caption = captionTextField?.text,
+            let image = imageView?.image else { return }
+        
+        
+        // TODO: - This might be creating a new post rather tahn updating the existing one, need to check that. possibly need to have a updatePost function in the PostController
+        PostController.sharedController.createPost(image: image, caption: caption) { (post) in
+            guard let post = post else { return }
+        }
+    }
 }

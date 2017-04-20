@@ -2,16 +2,18 @@
 //  CloudKitSyncable.swift
 //  12AM
 //
-//  Created by Josh "McAbs" McDonald on 4/12/17.
+//  Created by Josh & Erica on 4/11/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
 import Foundation
 import CloudKit
 
+// Checks to see if data is in place and if so doesn't make duplicate or crash or deletes
+
 protocol CloudKitSyncable {
     
-    init?(record: CKRecord)
+//    init?(record: CKRecord)
     
     var cloudKitRecordID: CKRecordID? { get set }
     var recordType: String { get }
