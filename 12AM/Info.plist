@@ -16,28 +16,8 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb932694600206117</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>FacebookAppID</key>
-	<string>932694600206117</string>
-	<key>FacebookDisplayName</key>
-	<string>12AM - Test1</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -61,7 +41,29 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
+ 
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb409814249378132</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>409814249378132</string>
+    <key>FacebookDisplayName</key>
+    <string>12AM</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+ <key>NSCameraUsageDescription</key>
 	<string>Allow Users To Take Pics</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Allow user to upload media from phone</string>
