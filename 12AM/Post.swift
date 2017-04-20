@@ -17,6 +17,7 @@ class Post: CloudKitSyncable {
     static let timestampKey = "timestamp"
     static let textKey = "text"
     static let ownerKey = "owner"
+    static let ownerReferenceKey = "ownerRef"
     
     let photoData: Data?
     let timestamp: String
@@ -51,7 +52,7 @@ class Post: CloudKitSyncable {
             let text = record[Post.textKey] as? String,
             let photoAsset = record[Post.photoDataKey] as? CKAsset,
             let photoData = try? Data(contentsOf: photoAsset.fileURL),
-            let ownerReference = record["ownerRef"] as? CKReference else { return nil }
+            let ownerReference = record[Post.ownerReferenceKey] as? CKReference else { return nil }
         
         
         self.photoData = photoData
@@ -90,7 +91,7 @@ extension CKRecord {
             let owner = post.owner,
             let ownerRecordID = owner.cloudKitRecordID
             else { return }
-        self["ownerRef"] = CKReference(recordID: ownerRecordID, action: .none)
+        self[Post.ownerReferenceKey] = CKReference(recordID: ownerRecordID, action: .none)
     }
 }
 

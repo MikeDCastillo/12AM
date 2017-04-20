@@ -50,6 +50,8 @@ class PostDetailFromCameraViewController: UIViewController {
          guard let caption = captionTextField?.text,
             let image = imageView?.image else { return }
         
+        
+        // TODO: - This might be creating a new post rather tahn updating the existing one, need to check that. possibly need to have a updatePost function in the PostController
         PostController.sharedController.createPost(image: image, caption: caption) { (post) in
             guard let post = post else { return }
         }

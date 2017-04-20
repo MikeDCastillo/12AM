@@ -23,13 +23,12 @@ class PostDetailFromFeedViewController: UIViewController {
         imageView.image = post.photo
         timeLabel.text = post.timestamp
         captionLabel.text = post.text
-        //commentTextField
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
+        updateViews()
     }
 
     @IBAction func addCommentButtonTapped(_ sender: Any) {

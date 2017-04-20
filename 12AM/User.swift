@@ -17,7 +17,7 @@ class User {
     static let appleUserRefKey = "appleUserRef"
     static let recordTypeKey = "User"
     static let imageKey = "image"
-    static let typeKey = "Photo"
+    static let typeKey = "User"
     static let passwordKey = "password"
     
     var username: String
@@ -25,6 +25,8 @@ class User {
     var profileImage: UIImage?
     var currentTimeZone: String { return TimeZone.current.identifier }
     var password: String
+    
+    var posts: [Post] = []
 
     // This is the reference to the default Apple 'Users' record ID
     let appleUserRef: CKReference

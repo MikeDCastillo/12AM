@@ -48,6 +48,11 @@ class FeedTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
@@ -57,3 +62,4 @@ class FeedTableViewController: UITableViewController {
     }
 }
 
+//potential feature: replace login button with a Map button that shows where in the world is currently active

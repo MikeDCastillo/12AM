@@ -42,7 +42,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIE-K5-wnp">
                                             <rect key="frame" x="96" y="37" width="182" height="183"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button" image="doomsdayclock2"/>
+                                            <state key="normal" title="Button"/>
                                             <connections>
                                                 <action selector="imageButtonTapped:" destination="kkh-UU-IVS" eventType="touchUpInside" id="xYm-UT-0Hd"/>
                                             </connections>
@@ -63,7 +63,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Time to Midnight: &lt;time&gt;" id="xma-vy-Oaw">
-                        <barButtonItem key="leftBarButtonItem" title="Map" id="SIg-Ef-4tj"/>
+                        <barButtonItem key="leftBarButtonItem" title="Login" id="SIg-Ef-4tj">
+                            <connections>
+                                <action selector="loginButtonTapped:" destination="vDB-Xm-Gx6" id="fO9-8b-Ggu"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qAe-rx-Qjn">
                             <connections>
                                 <segue destination="BU3-kI-xAn" kind="show" identifier="addPhotoButtonTappedToCamera" id="oaN-ft-Bl2"/>
@@ -71,6 +75,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ARX-Yv-uBY">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="swipToRefresh:forEvent:" destination="vDB-Xm-Gx6" eventType="valueChanged" id="0ob-Hz-5iu"/>
@@ -211,7 +216,4 @@
             <point key="canvasLocation" x="2572" y="-351.27436281859076"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="doomsdayclock2" width="128" height="128"/>
-    </resources>
 </document>
