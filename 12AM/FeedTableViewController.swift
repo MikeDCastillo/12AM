@@ -16,6 +16,10 @@ class FeedTableViewController: UITableViewController {
         PostController.sharedController.performFullSync()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
         handleRefresh(sender)
         PostController.sharedController.requestFullSync {
@@ -55,7 +59,7 @@ class FeedTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
-            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
             let post = PostController.sharedController.posts[indexPath.row]
             detailVC.post = post
         }

@@ -15,6 +15,7 @@
 		7348C6C71E9B2D2400D54ABB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C31E9B2D2400D54ABB /* FBSDKCoreKit.framework */; };
 		7348C6C81E9B2D2400D54ABB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C41E9B2D2400D54ABB /* FBSDKLoginKit.framework */; };
 		7348C6C91E9B2D2400D54ABB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C51E9B2D2400D54ABB /* FBSDKShareKit.framework */; };
+		737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */; };
 		737E79481E9B180200172355 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E79471E9B180200172355 /* AppDelegate.swift */; };
 		737E794F1E9B180200172355 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 737E794E1E9B180200172355 /* Assets.xcassets */; };
 		738E78FF1E9D2D630072CE95 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738E78FE1E9D2D630072CE95 /* Post.swift */; };
@@ -32,7 +33,6 @@
 		C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */; };
 		C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47D1E9C41B400185BB9 /* CameraViewController.swift */; };
 		C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */; };
-		C893C4821E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C4811E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +45,7 @@
 		7348C6C31E9B2D2400D54ABB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		7348C6C41E9B2D2400D54ABB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		7348C6C51E9B2D2400D54ABB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		737E79441E9B180200172355 /* 12AM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 12AM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		737E79471E9B180200172355 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		737E794E1E9B180200172355 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		C893C47D1E9C41B400185BB9 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailFromCameraViewController.swift; sourceTree = "<group>"; };
-		C893C4811E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailFromFeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +176,7 @@
 				C893C47D1E9C41B400185BB9 /* CameraViewController.swift */,
 				C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */,
 				73D396581EA845FC00D488A1 /* PostTableViewCell.swift */,
-				C893C4811E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift */,
+				737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -358,9 +358,9 @@
 				73D396591EA845FC00D488A1 /* PostTableViewCell.swift in Sources */,
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */,
+				737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */,
 				C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */,
 				73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */,
-				C893C4821E9C42FE00185BB9 /* PostDetailFromFeedViewController.swift in Sources */,
 				737E79481E9B180200172355 /* AppDelegate.swift in Sources */,
 				738E78FF1E9D2D630072CE95 /* Post.swift in Sources */,
 				C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */,

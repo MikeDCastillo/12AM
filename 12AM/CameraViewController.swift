@@ -39,6 +39,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             noCameraOnDevice()
         }
     }
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+         self.dismiss(animated: true, completion: nil)
+    }
     
     func noCameraOnDevice() {
         let alertVC = UIAlertController(
