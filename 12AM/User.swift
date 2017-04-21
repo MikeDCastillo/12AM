@@ -27,6 +27,8 @@ class User {
     var profileImage: UIImage?
     var currentTimeZone: String { return TimeZone.current.identifier }
     var accessToken: AccessToken?
+    
+    var posts: [Post] = []
 
     // This is the reference to the default Apple 'Users' record ID
     var appleUserRef: CKReference
