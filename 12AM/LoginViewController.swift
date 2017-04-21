@@ -10,24 +10,23 @@ import UIKit
 import FBSDKLoginKit
 import FacebookCore
 
-
-
 class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var loginView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    
-    
+    @IBOutlet weak var profileImageButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+   
     var imagePickerWasDismissed = false
+    
+    let emailLine = UIView()
+    let usernameLine = UIView()
     
     var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
     let imagePicker = UIImagePickerController()
     let accessToken = AccessToken.current
-    
-    // TODO: - Password
     
     
     // MARK: - Life Cycle
@@ -36,16 +35,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         super.viewDidLoad()
         updateViews()
         facebookLogIn()
+        setupUi()
         self.emailTextField.delegate = self
         self.userNameTextField.delegate = self
-        self.passwordTextField.delegate = self
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
-        
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupUi()
         if AccessToken.current != nil && !imagePickerWasDismissed {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
         }
@@ -81,10 +80,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         } else {
             noCameraOnDevice()
         }
-    }
-    
-    @IBAction func SkipButtonTapped(_ sender: Any) {
-        // TODO: animation when pressed
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -167,7 +162,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         
         let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         if chosenImage != nil {
-            profileImageView.contentMode = .scaleAspectFit
+            profileImageView.contentMode = .scaleAspectFill
             profileImageView.image = chosenImage
         }
         imagePickerWasDismissed = true
@@ -195,6 +190,18 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         }
         print("Succesfully logged into Facebook")
     }
+}
+
+// MARK: UI
+
+extension LoginViewController {
+    
+    func userInterface() {
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        profileImageView.clipsToBounds = true
+        
+    }
+    
 }
 
 // MARK: Alerts
@@ -230,19 +237,63 @@ extension LoginViewController  {
     }
 }
 
+ // MARK: - UI Style
+
 extension LoginViewController {
     
-    // MARK: - UI Style
     func setupUi() {
         
+        // Most Used Colors
+        let backgroundColor12am = UIColor(red: 50/255, green: 45/255, blue: 58/255, alpha: 1)
+
         // TextFields
-        emailTextField.backgroundColor = UIColor.gray
-        userNameTextField.backgroundColor = UIColor.gray
+        userNameTextField.textColor = UIColor.white
+        userNameTextField.backgroundColor = backgroundColor12am
+        userNameTextField.layer.borderColor = backgroundColor12am.cgColor
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username", attributes:[NSForegroundColorAttributeName: UIColor.white])
+
+        emailTextField.textColor = UIColor.white
+        emailTextField.backgroundColor = backgroundColor12am
+        emailTextField.layer.borderColor = backgroundColor12am.cgColor
+        emailTextField.attributedPlaceholder = NSAttributedString(string: "email@me.com", attributes:[NSForegroundColorAttributeName: UIColor.white])
+       
+        // Line Holders 
+        usernameLine.frame = CGRect(x: 20, y: 305, width: 330, height: 1)
+        usernameLine.backgroundColor = UIColor.white
+        usernameLine.layer.cornerRadius = usernameLine.frame.size.height / 2
+        self.view.addSubview(usernameLine)
+        
+        emailLine.frame = CGRect(x: 20, y: 360, width: 330, height: 1)
+        emailLine.backgroundColor = UIColor.white
+        emailLine.layer.cornerRadius = emailLine.frame.size.height / 2
+        self.view.addSubview(emailLine)
+        
+        // Constraints
+        NSLayoutConstraint.activate([
+            usernameLine.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -40),
+            usernameLine.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: view.bounds.height * -0.28),
+            usernameLine.heightAnchor.constraint(equalToConstant: 1),
+            usernameLine.widthAnchor.constraint(equalToConstant: 70),
+            emailLine.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -40),
+            emailLine.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: view.bounds.height * -0.28),
+            emailLine.heightAnchor.constraint(equalToConstant: 1),
+            emailLine.widthAnchor.constraint(equalToConstant: 70)
+            ])
+
         // Profile Image
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
         profileImageView.clipsToBounds = true
+        
         // Background
-        view.backgroundColor = UIColor(red: 55.0, green: 52.0, blue: 71.0, alpha: 100.0)
+        self.view.backgroundColor = backgroundColor12am
+        
+        // Login Button 
+        
+        loginButton.backgroundColor = UIColor.white
+        loginButton.layer.cornerRadius = 20.0
+        loginButton.frame = CGRect(x: 40, y: 400, width: 280, height: 40)
+        self.view.addSubview(loginButton)
+
     }
 }
 
