@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import CloudKit
 import FBSDKLoginKit
+import FacebookCore
+
 
 class UserController {
     
@@ -21,7 +23,11 @@ class UserController {
     var users: [User] = []
     var appleUserRecordID: CKRecordID?
     
+    var dict : [String : AnyObject]?
     let currentUserWasSentNotification = Notification.Name("currentUserWasSet")
+    
+    
+    
     
     // More efficient when you want to find a user
     var currentUser: User? {
@@ -32,50 +38,38 @@ class UserController {
     
     // MARK: - CRUD
     
-    func createUserWithLogIn(userName: String, email: String, profileImage: UIImage?, password: String, facebookToken: FBSDKAccessToken?, completion: @escaping (User?) -> Void) {
+    func createUserWithLogIn(userName: String, email: String, profileImage: UIImage?, accessToken:AccessToken?, completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
             self.appleUserRecordID = recordId
             
             let appleUserRef = CKReference(recordID: recordId, action: .deleteSelf)
-            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, password: password, facebookToken: nil)
+            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: nil)
             let userRecord = CKRecord(user: user)
             
             self.publicDB.save(userRecord) { (record, error) in
-               if let record = record, error == nil {
-                guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user"); return }
-                self.currentUser = currentUser
-                completion(currentUser)
-                
-                
-                // TODO: Fix Me
-                self.saveUserToPrivateDatabase(userRecord: record, password: password, completion: { 
-                    self.privateDB.save(userRecord, completionHandler: { (record, error) in
-                        if let record = record, error == nil {
-                            guard let currentUser = User(cloudKitRecord: record) else {print("Error saving to private DB"); return}
-                            self.currentUser = currentUser
-                            completion(currentUser)
-                        }
-                    })
-                })
-                
-                print("Success")
-               } else {
-                print( "Error saving user record:\(String(describing: error?.localizedDescription))")
+                if let record = record, error == nil {
+                    guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user"); return }
+                    self.currentUser = currentUser
+                    completion(currentUser)
+                    
+                    print("Success")
+                } else {
+                    print( "Error saving user record:\(String(describing: error?.localizedDescription))")
                 }
             }
         }
     }
     
-    func createUserWithFacebook(userName: String, email: String, profileImage: UIImage?, password: String?, facebookToken: FBSDKAccessToken, completion: @escaping (User?) -> Void) {
+    func createUserWithFacebook(userName: String, email: String, profileImage: UIImage?, password: String?, accessToken: AccessToken, completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
             self.appleUserRecordID = recordId
             
             let appleUserRef = CKReference(recordID: recordId, action: .deleteSelf)
-            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, password: password, facebookToken: nil)
+            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: accessToken)
             let userRecord = CKRecord(user: user)
             
             self.publicDB.save(userRecord) { (record, error) in
@@ -90,7 +84,7 @@ class UserController {
             }
         }
     }
-
+    
     func saveUserToPrivateDatabase(userRecord: CKRecord, password: String, completion: () -> Void) {
         
     }
@@ -141,6 +135,9 @@ class UserController {
         }
         return  returnValue
     }
+    
+    // MARK: - Networking
+
 }
 
 

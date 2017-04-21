@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013F3A5C1EA93CC2004BCEBE /* FacebookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F3A5B1EA93CC2004BCEBE /* FacebookController.swift */; };
 		013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57E91E9D51A900AA9CA4 /* User.swift */; };
 		013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */; };
 		0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0165FEB41E9EEC6300A4F2A1 /* UserController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013F3A5B1EA93CC2004BCEBE /* FacebookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookController.swift; sourceTree = "<group>"; };
 		013F57E91E9D51A900AA9CA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		0165FEB41E9EEC6300A4F2A1 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013D1BE31EA81DEC00ED1BEA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				013F3A5B1EA93CC2004BCEBE /* FacebookController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		5AD8618F9506B58409E645EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				73E901B81E9B67CE00EA7E0A /* ViewController */,
+				013D1BE31EA81DEC00ED1BEA /* Controller */,
 				73E901BC1E9B682100EA7E0A /* Model Controllers */,
 			);
 			name = Controllers;
@@ -358,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */,
+				013F3A5C1EA93CC2004BCEBE /* FacebookController.swift in Sources */,
 				738E79011E9D30220072CE95 /* Comment.swift in Sources */,
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */,

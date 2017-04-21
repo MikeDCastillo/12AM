@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CloudKit
 import FBSDKLoginKit
+import FacebookCore
 
 class User {
     
@@ -19,22 +20,32 @@ class User {
     static let recordTypeKey = "User"
     static let imageKey = "image"
     static let typeKey = "Photo"
-    static let passwordKey = "password"
     static let facebookTokenKey = "facebookAccessToken"
     
     var username: String
     var email: String
     var profileImage: UIImage?
     var currentTimeZone: String { return TimeZone.current.identifier }
-    var password: String?
-    let facebookToken: FBSDKAccessToken?
+    var accessToken: AccessToken?
 
     // This is the reference to the default Apple 'Users' record ID
-    let appleUserRef: CKReference
+    var appleUserRef: CKReference
     
     // This is your CUSTOM user record's ID
     var cloudKitRecordID: CKRecordID?
     
+    // Facebook
+    init?(dictionary: [String: Any], appleUserRef: CKReference) {
+        //FIXME: - add imageURL
+        guard let username = dictionary["name"] as? String,
+        let email = dictionary["email"] as? String,
+        let profileImage = dictionary["picture"] as? UIImage else { return nil }
+        
+        self.username = username
+        self.email = email
+        self.profileImage = profileImage
+        self.appleUserRef = appleUserRef
+    }
 
     
     var imageData: Data? {
@@ -56,13 +67,12 @@ class User {
     
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, password: String?, facebookToken: FBSDKAccessToken?) {
+    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, accessToken: AccessToken?) {
         self.username = username
         self.profileImage = profileImage
         self.email = email
         self.appleUserRef = appleUserRef
-        self.password = password
-        self.facebookToken = facebookToken
+        self.accessToken = accessToken
     }
     
 
@@ -71,16 +81,14 @@ class User {
         guard let username = cloudKitRecord[User.usernameKey] as? String,
             let email = cloudKitRecord[User.emailKey] as? String,
             let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference,
-            let password = cloudKitRecord[User.passwordKey] as? String,
-            let facebookToken = cloudKitRecord[User.facebookTokenKey] as? FBSDKAccessToken
+            let accessToken = cloudKitRecord[User.facebookTokenKey] as? AccessToken
         else { return nil }
         
         self.username = username
         self.email = email
         self.appleUserRef = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
-        self.password = password
-        self.facebookToken = facebookToken
+        self.accessToken = accessToken
     }
 }
 
@@ -96,9 +104,7 @@ extension CKRecord {
         self.setValue(user.username, forKey: User.usernameKey)
         self.setValue(user.email, forKey: User.emailKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
-        self.setValue(user.password, forKey: User.passwordKey)
-        self.setValue(user.facebookToken, forKey: User.facebookTokenKey)
-        
+        self.setValue(user.accessToken, forKey: User.facebookTokenKey)
         guard user.profileImage != nil else { return }
         let imageAsset = CKAsset(fileURL: user.temporaryPhotoURL)
         self.setValue(imageAsset, forKey: User.imageKey)

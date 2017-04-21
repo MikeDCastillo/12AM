@@ -8,6 +8,8 @@
 
 import UIKit
 import FBSDKLoginKit
+import FacebookCore
+
 
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -23,6 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
     let imagePicker = UIImagePickerController()
+    let accessToken = AccessToken.current
     
     // TODO: - Password
     
@@ -38,10 +41,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         self.passwordTextField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
+        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if FBSDKAccessToken.current() != nil && !imagePickerWasDismissed {
+        if AccessToken.current != nil && !imagePickerWasDismissed {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
         }
     }
@@ -83,7 +88,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        userAdded()
+        userAddedWithLogIn()
         guard let email = emailTextField.text else { return }
         let isEmailAddressValid = UserController.shared.isValidEmailAddress(emailAddressString: email)
         
@@ -110,14 +115,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         
     }
     
-    func userAdded() {
-        guard let userName = userNameTextField.text, let email = emailTextField.text, let password = passwordTextField.text else { return }
+    func userAddedWithLogIn() {
+        guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
         
         let profileImage = profileImageView.image
         
         if UserController.shared.currentUser == nil {
             // Creat a new user
-            UserController.shared.createUserWith(userName: userName, email: email, profileImage: profileImage, password: password, completion: { (user) in
+            UserController.shared.createUserWithLogIn(userName: userName, email: email, profileImage: profileImage, accessToken: nil, completion: { (user) in
                 
                 if let user = user {
                     DispatchQueue.main.async {
@@ -134,6 +139,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             })
         }
     }
+    
+    func userAddedWithFacebook() {
+        
+    }
+    
     
     func updateViews() {
         guard let currentUser = UserController.shared.currentUser else { return }
@@ -223,7 +233,6 @@ extension LoginViewController  {
 extension LoginViewController {
     
     // MARK: - UI Style
-    
     func setupUi() {
         
         // TextFields
