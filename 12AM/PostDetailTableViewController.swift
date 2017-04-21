@@ -27,8 +27,18 @@ class PostDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.black
         tableView.reloadData()
         updateViews()
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clear
     }
     
     // MARK: -Table View Data Source
@@ -46,6 +56,7 @@ class PostDetailTableViewController: UITableViewController {
         
         let comment = post.comments[indexPath.row]
         cell.textLabel?.text = comment.text
+        
         cell.detailTextLabel?.text = comment.owner?.username
         
         return cell
