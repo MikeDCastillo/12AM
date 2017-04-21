@@ -6,11 +6,6 @@
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
-/* 
- Check for later use:
- 1. checkCloudKitAvailability
-*/
-
 import Foundation
 import UIKit
 import CloudKit
@@ -60,7 +55,7 @@ class PostController {
         
         // Sets image property of jpeg
         guard let data = UIImageJPEGRepresentation(image, 1.0), let currentUser = UserController.shared.currentUser else { return }
-        let post = Post(photoData: data, text: "", owner: currentUser)
+        let post = Post(photoData: data, text: caption, owner: currentUser)
         
         // Adds post to first cell
         posts.insert(post, at: 0)
@@ -138,10 +133,19 @@ class PostController {
         
         cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: { (record) in
             switch type {
-            case Post.typeKey:
-                if let post = Post(record: record) {
-                    self.posts.append(post)
+            case User.typeKey:
+                if let user = User(cloudKitRecord: record) {
+                    UserController.shared.users.append(user)
                 }
+            case Post.typeKey:
+                    guard let userReference = record[Post.ownerReferenceKey] as? CKReference,
+                        let post = Post(record: record)
+                        else { return }
+                    let matchingUser = UserController.shared.users.filter ( { $0.cloudKitRecordID == userReference.recordID } ).first
+                    post.owner = matchingUser
+                    matchingUser?.posts.append(post)
+                    self.posts.append(post)
+                
             case Comment.typeKey:
                 guard let postReference = record[Comment.postKey] as? CKReference,
                     let comment = Comment(record: record) else { return }
@@ -169,10 +173,18 @@ class PostController {
         
         isSyncing = true
         
-        self.fetchNewRecords(ofType: Post.typeKey) {
-                self.isSyncing = false
-                completion()
+        self.fetchNewRecords(ofType: User.typeKey) { 
+
+            self.fetchNewRecords(ofType: Post.typeKey) {
+                
+                self.fetchNewRecords(ofType: Comment.typeKey) {
+                    
+                    self.isSyncing = false
+                    completion()
+                }
+                
             }
+        }
         
     }
     

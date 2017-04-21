@@ -28,7 +28,7 @@ class PostTableViewCell: UITableViewCell {
     private func updateViews() {
         
         guard let postPhoto = post?.photo else { return }
-        imageButton?.imageView?.image = postPhoto
+        imageButton?.setImage(postPhoto, for: .normal)
         
         guard let caption = post?.text else { return }
         //this lets the captionLabel just display the first 25 chars of the caption

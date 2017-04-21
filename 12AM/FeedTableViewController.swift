@@ -16,6 +16,10 @@ class FeedTableViewController: UITableViewController {
         PostController.sharedController.performFullSync()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
         handleRefresh(sender)
         PostController.sharedController.requestFullSync {
@@ -48,12 +52,18 @@ class FeedTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
-            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailFromFeedViewController else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
             let post = PostController.sharedController.posts[indexPath.row]
             detailVC.post = post
         }
     }
 }
 
+//potential feature: replace login button with a Map button that shows where in the world is currently active

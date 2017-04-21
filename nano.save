@@ -1,4 +1,0 @@
-git config --global core.editor "nano"
-git commit
-w:
-
