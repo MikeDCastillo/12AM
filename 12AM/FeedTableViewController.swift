@@ -12,12 +12,14 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor.black
         self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
-        PostController.sharedController.performFullSync()
+        PostController.sharedController.requestFullSync()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        PostController.sharedController.performFullSync()
     }
     
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
@@ -55,6 +57,25 @@ class FeedTableViewController: UITableViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
+    }
+
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.black
+    }
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+    addPicButtonTapped()
+    }
+    
+    func addPicButtonTapped() {
+        let alertController = UIAlertController(title: "Add Photo", message: "Select Camera or Gallery", preferredStyle: .alert)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
+            self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self)
+        }
+        let galleryAction = UIAlertAction(title: "Gallery???", style: .cancel, handler: nil)
+        alertController.addAction(cameraAction)
+        alertController.addAction(galleryAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
