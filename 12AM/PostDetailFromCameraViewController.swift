@@ -14,7 +14,6 @@ class PostDetailFromCameraViewController: UIViewController {
         super.viewDidLoad()
         
         self.imageView.image = self.image
-        
         captionTextField.resignFirstResponder()
     }
     
@@ -24,10 +23,7 @@ class PostDetailFromCameraViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        
         self.dismiss(animated: true, completion: nil)
-        
-        
     }
     
     @IBOutlet weak var imageView: UIImageView!
@@ -45,13 +41,9 @@ class PostDetailFromCameraViewController: UIViewController {
     @IBAction func unwind(segue ofType: UIStoryboardSegue) {
     }
     
-    
     func saveImage() {
-         guard let caption = captionTextField?.text,
+        guard let caption = captionTextField?.text,
             let image = imageView?.image else { return }
-        
-        
-        // TODO: - This might be creating a new post rather tahn updating the existing one, need to check that. possibly need to have a updatePost function in the PostController
         PostController.sharedController.createPost(image: image, caption: caption) { (post) in
             guard let post = post else { return }
         }
