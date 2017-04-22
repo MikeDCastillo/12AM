@@ -25,16 +25,9 @@ class UserController {
     
     var dict : [String : AnyObject]?
     let currentUserWasSentNotification = Notification.Name("currentUserWasSet")
-    
-    
-    
-    
+
     // More efficient when you want to find a user
-    var currentUser: User? {
-        didSet {
-            NotificationCenter.default.post(name: currentUserWasSentNotification, object: self)
-        }
-    }
+    var currentUser: User?
     
     // MARK: - CRUD
     
@@ -50,7 +43,7 @@ class UserController {
             
             self.publicDB.save(userRecord) { (record, error) in
                 if let record = record, error == nil {
-                    guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user"); return }
+                    let currentUser = User(cloudKitRecord: record)
                     self.currentUser = currentUser
                     completion(currentUser)
                     
@@ -74,7 +67,7 @@ class UserController {
             
             self.publicDB.save(userRecord) { (record, error) in
                 if let record = record, error == nil {
-                    guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user"); return }
+                    guard let currentUser = User(cloudKitRecord: record) else { print("Error parsing record into user with facebook"); return }
                     self.currentUser = currentUser
                     completion(currentUser)
                     print("Success")

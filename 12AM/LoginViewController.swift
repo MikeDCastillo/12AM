@@ -18,7 +18,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-   
+    
+
     var imagePickerWasDismissed = false
     
     let emailLine = UIView()
@@ -28,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     let imagePicker = UIImagePickerController()
     let accessToken = AccessToken.current
     
-    
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -88,12 +89,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         let isEmailAddressValid = UserController.shared.isValidEmailAddress(emailAddressString: email)
         
         if isEmailAddressValid {
+            CloudKitManager.shared.fetchCurrentUser(completion: { (user) in
+                guard let user = user else { return }
+                UserController.shared.currentUser = user
+        
+            })
+            
             print("Email address is valid")
             self.performSegue(withIdentifier: "toFeedTVC", sender: self)
         } else {
             print("Invalid Email")
             invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
         }
+        
     }
     
     // MARK: - Main
@@ -146,6 +154,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             self.userNameTextField.text = currentUser.username
             self.emailTextField.text = currentUser.email
             self.profileImageView.image = currentUser.profileImage
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if userNameTextField.isFirstResponder == true {
+            userNameTextField.placeholder = ""
+        }
+        if emailTextField.isFirstResponder == true {
+            emailTextField.placeholder = ""
         }
     }
     
@@ -247,15 +264,11 @@ extension LoginViewController {
         let backgroundColor12am = UIColor(red: 50/255, green: 45/255, blue: 58/255, alpha: 1)
 
         // TextFields
-        userNameTextField.textColor = UIColor.white
         userNameTextField.backgroundColor = backgroundColor12am
         userNameTextField.layer.borderColor = backgroundColor12am.cgColor
-        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username", attributes:[NSForegroundColorAttributeName: UIColor.white])
-
-        emailTextField.textColor = UIColor.white
         emailTextField.backgroundColor = backgroundColor12am
         emailTextField.layer.borderColor = backgroundColor12am.cgColor
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "email@me.com", attributes:[NSForegroundColorAttributeName: UIColor.white])
+    
        
         // Line Holders 
         usernameLine.frame = CGRect(x: 20, y: 305, width: 330, height: 1)
@@ -296,6 +309,59 @@ extension LoginViewController {
 
     }
 }
+
+// Custom TextFiels 
+
+@IBDesignable
+class DesignableTextField: UITextField {
+    
+    @IBInspectable var cornerRadius: CGFloat = 0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+        }
+    }
+    
+    // Properties to hold the image
+    // We will see a properti in our atributes inspcetor
+    @IBInspectable var leftImage: UIImage? {
+        didSet {
+            updateTexField()
+        }
+    }
+    
+    @IBInspectable var leftPadding: CGFloat = 0 {
+        didSet {
+            updateTexField()
+        }
+    }
+    
+    func updateTexField() {
+        
+        if let image = leftImage {
+            leftViewMode = .always
+            
+            let imageView = UIImageView(frame: CGRect(x: leftPadding, y: 0, width: 20, height: 20))
+            imageView.image = image
+            imageView.tintColor = tintColor
+            
+            var width = leftPadding + 20
+            
+            if borderStyle == UITextBorderStyle.none || borderStyle == UITextBorderStyle.line {
+                width = width + 5
+            }
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 20))
+            view.addSubview(imageView)
+            leftView = view
+            
+        } else {
+            // Image is nil
+            leftViewMode = .never
+        }
+        
+        attributedPlaceholder = NSAttributedString(string: placeholder != nil ? placeholder! : "", attributes: [NSForegroundColorAttributeName: tintColor])
+    }
+}
+
 
 
 

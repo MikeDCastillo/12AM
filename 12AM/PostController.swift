@@ -30,9 +30,10 @@ class PostController {
         }
     }
     
-    var comments: [Comment] {
-        return posts.flatMap { $0.comments }
-    }
+    var comments = [Comment]()
+    //   {
+    //        return posts.flatMap { $0.comments }
+    //    }
     
     var sortedPost: [Post] {
         return posts.sorted(by: { return $0.timestamp.compare($1.timestamp) == .orderedDescending })
@@ -100,10 +101,10 @@ class PostController {
     // Check for specified post and comments
     private func recordsOf(type: String) -> [CloudKitSyncable] {
         switch type {
-            case "Post":
-                return posts.flatMap { $0 as CloudKitSyncable }
-            case "Comment":
-                return comments.flatMap { $0 as CloudKitSyncable }
+        case "Post":
+            return posts.flatMap { $0 as CloudKitSyncable }
+        case "Comment":
+            return comments.flatMap { $0 as CloudKitSyncable }
         default:
             return []
         }
@@ -131,38 +132,38 @@ class PostController {
             predicate = NSPredicate(value: true)
         }
         
-        cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: { (record) in
+        cloudKitManager.fetchRecordsWithType(type, recordFetchedBlock: nil) { (records, error) in
+            guard let records = records else { return }
             switch type {
             case User.typeKey:
-                if let user = User(cloudKitRecord: record) {
-                    UserController.shared.users.append(user)
-                }
+                let users = records.flatMap { User(cloudKitRecord: $0) }
+                UserController.shared.users = users
             case Post.typeKey:
-                    guard let userReference = record[Post.ownerReferenceKey] as? CKReference,
-                        let post = Post(record: record)
-                        else { return }
-                    let matchingUser = UserController.shared.users.filter ( { $0.cloudKitRecordID == userReference.recordID } ).first
-                    post.owner = matchingUser
-                    matchingUser?.posts.append(post)
-                    self.posts.append(post)
+                let posts = records.flatMap { Post(record: $0) }
+                //                for post in posts {
+                //                guard let userReference = post.ownerReference else { return }
+                //                let matchingUser = UserController.shared.users.filter ( { $0.cloudKitRecordID == userReference.recordID } ).first
+                //                post.owner = matchingUser
+                //                matchingUser?.posts.append(post)
+                self.posts = posts
+                
                 
             case Comment.typeKey:
-                guard let postReference = record[Comment.postKey] as? CKReference,
-                    let comment = Comment(record: record) else { return }
-                let matchingPost = PostController.sharedController.posts.filter({$0.cloudKitRecordID == postReference.recordID}).first
-                matchingPost?.comments.append(comment)
+                let comments = records.flatMap { Comment(record: $0) }
+                //                guard let postReference = record[Comment.postKey] as? CKReference,
+                //                    let comment = Comment(record: record) else { return }
+                //                let matchingPost = PostController.sharedController.posts.filter({$0.cloudKitRecordID == postReference.recordID}).first
+                //                matchingPost?.comments.append(comment)
+                self.comments = comments
+                
             default:
                 return
             }
-            
-        }) { (records, error) in
-            if let error = error {
-                print("Error fetching CloudKit records \(error.localizedDescription)")
-            }
-            completion()
         }
-        
     }
+    
+    
+    
     
     func performFullSync(completion: @escaping (() -> Void) = { _ in }) {
         
@@ -173,8 +174,8 @@ class PostController {
         
         isSyncing = true
         
-        self.fetchNewRecords(ofType: User.typeKey) { 
-
+        self.fetchNewRecords(ofType: User.typeKey) {
+            
             self.fetchNewRecords(ofType: Post.typeKey) {
                 
                 self.fetchNewRecords(ofType: Comment.typeKey) {

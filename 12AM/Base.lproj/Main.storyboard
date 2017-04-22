@@ -114,18 +114,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" background="EmailLine" translatesAutoresizingMaskIntoConstraints="NO" id="Atf-5l-PGl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" background="EmailLine" translatesAutoresizingMaskIntoConstraints="NO" id="Atf-5l-PGl" customClass="DesignableTextField" customModule="_2AM" customModuleProvider="target">
                                 <rect key="frame" x="16" y="273" width="343" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="juI-oZ-alb"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="user"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2d-tk-XDD">
                                 <rect key="frame" x="65" y="430" width="245" height="37"/>
-                                <color key="backgroundColor" red="0.81798183840000005" green="1" blue="0.1040408201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96045920553288233" green="1" blue="0.99095393278319666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="acU-hC-MEY"/>
                                 </constraints>
@@ -143,14 +153,25 @@
                                     <constraint firstAttribute="width" constant="115" id="uZO-uY-Jjs"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email@me.com" textAlignment="natural" minimumFontSize="17" background="EmailLine" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-6v-M7g">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email@me.com" textAlignment="natural" minimumFontSize="17" background="EmailLine" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-6v-M7g" customClass="DesignableTextField" customModule="_2AM" customModuleProvider="target">
                                 <rect key="frame" x="16" y="327" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.93533932743766757" green="0.97384597081218272" blue="0.96503649470140263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MP9-AY-dv5"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="email"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-Fk-k5t">
                                 <rect key="frame" x="130" y="86" width="115" height="115"/>
@@ -206,5 +227,7 @@
     <resources>
         <image name="EmailLine" width="115" height="1"/>
         <image name="ProfileImage" width="156" height="157"/>
+        <image name="email" width="64" height="64"/>
+        <image name="user" width="64" height="64"/>
     </resources>
 </document>
