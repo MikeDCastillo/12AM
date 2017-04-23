@@ -99,8 +99,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         view.addConstraint(fbLoginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60))
         view.addConstraint(fbLoginButton.heightAnchor.constraint(equalToConstant: 44))
     }
-    
-    
 
     
     // MARK: - Main
@@ -114,7 +112,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             UIActivityIndicatorViewStyle.whiteLarge
         uiView.addSubview(actInd)
         activityIndicaor.startAnimating()
-        
     }
     
     func userAddedWithLogIn() {
@@ -143,7 +140,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     func userAddedWithFacebook() {
         // TODO:
     }
-    
     
     func updateViews() {
         guard let currentUser = UserController.shared.currentUser else { return }
@@ -246,16 +242,13 @@ extension LoginViewController  {
 extension LoginViewController {
     
     func setUpUI() {
+        let backgroundColor12am = UIColor.midnight
         
-        // Most Used Colors
-        let backgroundColor12am = UIColor(red: 50/255, green: 45/255, blue: 58/255, alpha: 1)
-
         // TextFields
         userNameTextField.backgroundColor = backgroundColor12am
         userNameTextField.layer.borderColor = backgroundColor12am.cgColor
         emailTextField.backgroundColor = backgroundColor12am
         emailTextField.layer.borderColor = backgroundColor12am.cgColor
-    
        
         // Line Holders 
         usernameLine.frame = CGRect(x: 20, y: 305, width: 330, height: 1)
