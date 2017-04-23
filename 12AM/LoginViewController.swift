@@ -298,72 +298,13 @@ extension LoginViewController {
         profileImageView.clipsToBounds = true
         
         // Background
-        self.view.backgroundColor = backgroundColor12am
+        view.backgroundColor = backgroundColor12am
         
         // Login Button 
-        
         loginButton.backgroundColor = UIColor.white
         loginButton.layer.cornerRadius = 20.0
         loginButton.frame = CGRect(x: 40, y: 400, width: 280, height: 40)
-        self.view.addSubview(loginButton)
-
+        view.addSubview(loginButton)
     }
+    
 }
-
-// Custom TextFiels 
-
-@IBDesignable
-class DesignableTextField: UITextField {
-    
-    @IBInspectable var cornerRadius: CGFloat = 0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    // Properties to hold the image
-    // We will see a properti in our atributes inspcetor
-    @IBInspectable var leftImage: UIImage? {
-        didSet {
-            updateTexField()
-        }
-    }
-    
-    @IBInspectable var leftPadding: CGFloat = 0 {
-        didSet {
-            updateTexField()
-        }
-    }
-    
-    func updateTexField() {
-        
-        if let image = leftImage {
-            leftViewMode = .always
-            
-            let imageView = UIImageView(frame: CGRect(x: leftPadding, y: 0, width: 20, height: 20))
-            imageView.image = image
-            imageView.tintColor = tintColor
-            
-            var width = leftPadding + 20
-            
-            if borderStyle == UITextBorderStyle.none || borderStyle == UITextBorderStyle.line {
-                width = width + 5
-            }
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 20))
-            view.addSubview(imageView)
-            leftView = view
-            
-        } else {
-            // Image is nil
-            leftViewMode = .never
-        }
-        
-        attributedPlaceholder = NSAttributedString(string: placeholder != nil ? placeholder! : "", attributes: [NSForegroundColorAttributeName: tintColor])
-    }
-}
-
-
-
-
-
-
