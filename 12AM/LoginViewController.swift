@@ -41,6 +41,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         self.userNameTextField.delegate = self
 
         
+//        setUpFacebookLogInButton()
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
     }
     
