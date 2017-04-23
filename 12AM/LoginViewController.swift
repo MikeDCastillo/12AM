@@ -65,17 +65,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        userAddedWithLogIn()
-        guard let email = emailTextField.text else { return }
-        
-        if email.isValidEmailAddress {
-            performSegue(withIdentifier: "toFeedTVC", sender: self)
+        if let existingUser = UserController.shared.currentUser {
+            updateCurrentUser()
         } else {
-            print("Invalid Email")
-            invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
+            saveNewUser()
         }
     }
-    
     
     // MARK: - Facebook Button
     
@@ -106,27 +101,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         activityIndicaor.startAnimating()
     }
     
-    func userAddedWithLogIn() {
+    func saveNewUser() {
         guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
-        
         let profileImage = profileImageView.image
         
-        if UserController.shared.currentUser == nil {
-            // Creat a new user
-            UserController.shared.createUserWithLogIn(userName: userName, email: email, profileImage: profileImage, accessToken: nil, completion: { (user) in
-                
-                guard let user = user else { return }
+        UserController.shared.createUser(with: userName, email: email, profileImage: profileImage, completion: { user in
+            
+            if let _ = user {
                 DispatchQueue.main.async {
-                    self.userNameTextField.text = user.username
-                    self.emailTextField.text = user.email
-                    self.profileImageView.image = user.profileImage
+                    self.dismiss(animated: true, completion: nil)
                 }
-            })
-        } else {
-            UserController.shared.updateCurrentUser(username: userName, email: email, profileImage: profileImage, completion: { (user) in
-                self.updateViews()
-            })
-        }
+            } else {
+                print("SOMETHING WENT TERRIBLY WRONG")
+            }
+        })
+    }
+    
+    func updateCurrentUser() {
+        
     }
     
     func userAddedWithFacebook() {

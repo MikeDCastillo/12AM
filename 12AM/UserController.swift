@@ -51,7 +51,7 @@ class UserController {
         }
     }
     
-    func createUserWithLogIn(userName: String, email: String, profileImage: UIImage?, accessToken:AccessToken?, completion: @escaping (User?) -> Void) {
+    func createUser(with userName: String, email: String, profileImage: UIImage?, accessToken:AccessToken? = nil, completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
