@@ -12,98 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Mock View Controller-->
-        <scene sceneID="UFF-OD-4fW">
-            <objects>
-                <viewController id="4aL-rn-iAA" customClass="MockViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eaK-ap-irx"/>
-                        <viewControllerLayoutGuide type="bottom" id="FBc-xE-G0o"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uCe-5e-zNT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5wh-Mp-psa">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="wKY-wc-tX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JR4-rt-iAr">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="eOz-g8-TaS">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="light"/>
-                                            </vibrancyEffect>
-                                        </visualEffectView>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inx-1l-HNp">
-                                <rect key="frame" x="164" y="460" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="fbLoginButtonTapped:" destination="4aL-rn-iAA" eventType="touchUpInside" id="rq9-az-BQ9"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Yeo-Ma-HjG"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="loginView" destination="hg3-9K-NNd" id="lvw-KP-rsX"/>
-                        <outlet property="visualEffectView" destination="5wh-Mp-psa" id="vyQ-9m-hQH"/>
-                    </connections>
-                </viewController>
-                <view contentMode="scaleToFill" id="fzf-G5-XXv">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8d-ib-kgM">
-                            <rect key="frame" x="49" y="20" width="123" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lNT-Ka-JHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="hg3-9K-NNd">
-                    <rect key="frame" x="0.0" y="0.0" width="363" height="238"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-            </objects>
-            <point key="canvasLocation" x="2688.8000000000002" y="678.71064467766121"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="03e-m1-ZZY">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gVl-6a-qGX" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ke6-Uq-Zyo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="4aL-rn-iAA" kind="relationship" relationship="rootViewController" id="Fic-kk-snB"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dap-9x-caW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1749.5999999999999" y="678.71064467766121"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="S22-Wy-kyl">
             <objects>
@@ -240,20 +148,11 @@
                         <outlet property="profileImageView" destination="6F7-x5-b0W" id="Fa7-Ao-bMC"/>
                         <outlet property="signUpButton" destination="H2d-tk-XDD" id="Q8f-t1-1C2"/>
                         <outlet property="userNameTextField" destination="Atf-5l-PGl" id="Rza-36-8rb"/>
-                        <segue destination="1PB-68-Ho0" kind="presentation" identifier="toFeedTVC" id="7CO-V8-Sda"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YG3-6Y-fie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="477.60000000000002" y="658.92053973013503"/>
-        </scene>
-        <!--Feed-->
-        <scene sceneID="Plp-tF-U2H">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Feed" id="1PB-68-Ho0" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C7m-2l-BBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1179" y="647"/>
         </scene>
     </scenes>
     <resources>

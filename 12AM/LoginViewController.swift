@@ -19,7 +19,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-
     fileprivate var imagePickerWasDismissed = false
     fileprivate var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -68,15 +67,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBAction func saveButtonTapped(_ sender: Any) {
         userAddedWithLogIn()
         guard let email = emailTextField.text else { return }
-        let isEmailAddressValid = UserController.shared.isValidEmailAddress(emailAddressString: email)
         
-        if isEmailAddressValid {
-            CloudKitManager.shared.fetchCurrentUser() { user in
-                guard let user = user else { return } // FIXME: error handle for non logged in icloud user
-                UserController.shared.currentUser = user
-            }
-            
-            print("Email address is valid")
+        if email.isValidEmailAddress {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
         } else {
             print("Invalid Email")

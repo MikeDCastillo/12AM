@@ -12,6 +12,8 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        performInitialAppLogic()
         self.tableView.backgroundColor = UIColor.black
         self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
@@ -63,7 +65,7 @@ class FeedTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    @IBAction func loginButtonTapped(_ sender: Any) {
+    @IBAction func settingsButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
     }
@@ -73,7 +75,25 @@ class FeedTableViewController: UITableViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
-    addPicButtonTapped()
+        addPicButtonTapped()
+    }
+    
+    func performInitialAppLogic() {
+        UserController.shared.fetchCurrentUser { user in
+            if let _ = user {
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.presentLogin()
+                }
+            }
+        }
+    }
+    
+    func presentLogin() {
+        let loginSB = UIStoryboard.init(name: String(describing: LoginViewController.self), bundle: nil)
+        guard let loginVC = loginSB.instantiateInitialViewController() else { return }
+        present(loginVC, animated: true, completion: nil)
     }
     
     func addPicButtonTapped() {
