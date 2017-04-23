@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var profileImageButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
     
 
     fileprivate var imagePickerWasDismissed = false
@@ -242,49 +242,10 @@ extension LoginViewController  {
 extension LoginViewController {
     
     func setUpUI() {
-        let backgroundColor12am = UIColor.midnight
-        
-        // TextFields
-        userNameTextField.backgroundColor = backgroundColor12am
-        userNameTextField.layer.borderColor = backgroundColor12am.cgColor
-        emailTextField.backgroundColor = backgroundColor12am
-        emailTextField.layer.borderColor = backgroundColor12am.cgColor
-       
-        // Line Holders 
-        usernameLine.frame = CGRect(x: 20, y: 305, width: 330, height: 1)
-        usernameLine.backgroundColor = UIColor.white
-        usernameLine.layer.cornerRadius = usernameLine.frame.size.height / 2
-        view.addSubview(usernameLine)
-        
-        emailLine.frame = CGRect(x: 20, y: 360, width: 330, height: 1)
-        emailLine.backgroundColor = UIColor.white
-        emailLine.layer.cornerRadius = emailLine.frame.size.height / 2
-        view.addSubview(emailLine)
-        
-        // Constraints
-        NSLayoutConstraint.activate([
-            usernameLine.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -40),
-            usernameLine.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: view.bounds.height * -0.28),
-            usernameLine.heightAnchor.constraint(equalToConstant: 1),
-            usernameLine.widthAnchor.constraint(equalToConstant: 70),
-            emailLine.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -40),
-            emailLine.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: view.bounds.height * -0.28),
-            emailLine.heightAnchor.constraint(equalToConstant: 1),
-            emailLine.widthAnchor.constraint(equalToConstant: 70)
-            ])
-
-        // Profile Image
+//        userNameTextField.backgroundColor = .midnight
+//        emailTextField.backgroundColor = .midnight
         profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
-        profileImageView.clipsToBounds = true
-        
-        // Background
-        view.backgroundColor = backgroundColor12am
-        
-        // Login Button 
-        loginButton.backgroundColor = UIColor.white
-        loginButton.layer.cornerRadius = 20.0
-        loginButton.frame = CGRect(x: 40, y: 400, width: 280, height: 40)
-        view.addSubview(loginButton)
+        signUpButton.layer.cornerRadius = 20.0
     }
     
 }

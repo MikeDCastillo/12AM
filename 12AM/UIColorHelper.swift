@@ -13,3 +13,9 @@ extension UIColor {
     static let midnight = #colorLiteral(red: 0.256510973, green: 0.2349787056, blue: 0.2926091254, alpha: 1)
     
 }
+
+extension CGColor {
+    
+    static let midnight = #colorLiteral(red: 0.256510973, green: 0.2349787056, blue: 0.2926091254, alpha: 1)
+    
+}
