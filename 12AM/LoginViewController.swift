@@ -20,41 +20,74 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var loginButton: UIButton!
     
 
-    var imagePickerWasDismissed = false
+    fileprivate var imagePickerWasDismissed = false
+    fileprivate var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    let emailLine = UIView()
-    let usernameLine = UIView()
-    
-    var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
-    let imagePicker = UIImagePickerController()
-    let accessToken = AccessToken.current
+    fileprivate let emailLine = UIView()
+    fileprivate let usernameLine = UIView()
+    fileprivate let imagePicker = UIImagePickerController()
+    fileprivate let accessToken = AccessToken.current
     
 
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateViews()
-        facebookLogIn()
-        setupUi()
-        self.emailTextField.delegate = self
-        self.userNameTextField.delegate = self
-
         
+        updateViews()
 //        setUpFacebookLogInButton()
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupUi()
+        super.viewWillAppear(animated)
+        
+        setUpUI()
         if AccessToken.current != nil && !imagePickerWasDismissed {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
         }
     }
     
+    
+    // MARK: - Actions
+    
+    @IBAction func profileImageButtonTapped(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = .photo
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.delegate = self
+            present(imagePicker, animated:  true, completion: nil)
+            
+        } else {
+            noCameraOnDevice()
+        }
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        userAddedWithLogIn()
+        guard let email = emailTextField.text else { return }
+        let isEmailAddressValid = UserController.shared.isValidEmailAddress(emailAddressString: email)
+        
+        if isEmailAddressValid {
+            CloudKitManager.shared.fetchCurrentUser() { user in
+                guard let user = user else { return } // FIXME: error handle for non logged in icloud user
+                UserController.shared.currentUser = user
+            }
+            
+            print("Email address is valid")
+            performSegue(withIdentifier: "toFeedTVC", sender: self)
+        } else {
+            print("Invalid Email")
+            invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
+        }
+    }
+    
+    
     // MARK: - Facebook Button
     
-    func facebookLogIn() {
+    func setUpFacebookLogInButton() {
         let fbLoginButton = FBSDKLoginButton()
         
         view.addSubview(fbLoginButton)
@@ -68,42 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     
-    
-    // MARK: - Actions
-    @IBAction func profileImageButtonTapped(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .camera
-            imagePicker.cameraCaptureMode = .photo
-            imagePicker.modalPresentationStyle = .popover
-            imagePicker.delegate = self
-            present(imagePicker, animated:  true, completion: nil)
-        
-        } else {
-            noCameraOnDevice()
-        }
-    }
-    
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        userAddedWithLogIn()
-        guard let email = emailTextField.text else { return }
-        let isEmailAddressValid = UserController.shared.isValidEmailAddress(emailAddressString: email)
-        
-        if isEmailAddressValid {
-            CloudKitManager.shared.fetchCurrentUser(completion: { (user) in
-                guard let user = user else { return }
-                UserController.shared.currentUser = user
-        
-            })
-            
-            print("Email address is valid")
-            self.performSegue(withIdentifier: "toFeedTVC", sender: self)
-        } else {
-            print("Invalid Email")
-            invalidEmailAlerMessage(messageToDisplay: "Email address is not valid")
-        }
-        
-    }
+
     
     // MARK: - Main
     
@@ -128,14 +126,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             // Creat a new user
             UserController.shared.createUserWithLogIn(userName: userName, email: email, profileImage: profileImage, accessToken: nil, completion: { (user) in
                 
-                if let user = user {
-                    DispatchQueue.main.async {
-                        self.userNameTextField.text = user.username
-                        self.emailTextField.text = user.email
-                        self.profileImageView.image = user.profileImage
-                    }
+                guard let user = user else { return }
+                DispatchQueue.main.async {
+                    self.userNameTextField.text = user.username
+                    self.emailTextField.text = user.email
+                    self.profileImageView.image = user.profileImage
                 }
-                else { return }
             })
         } else {
             UserController.shared.updateCurrentUser(username: userName, email: email, profileImage: profileImage, completion: { (user) in
@@ -145,7 +141,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     func userAddedWithFacebook() {
-        
+        // TODO:
     }
     
     
@@ -227,31 +223,21 @@ extension LoginViewController {
 extension LoginViewController  {
     
     func noCameraOnDevice() {
-        let alertVC = UIAlertController(
-            title: "No Camera",
-            message: "Sorry, this device has no camera",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "OK",
-            style:.default,
-            handler: nil)
+        let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
         alertVC.addAction(okAction)
-        present(
-            alertVC,
-            animated: true,
-            completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
     func invalidEmailAlerMessage(messageToDisplay: String ) {
         let alertController = UIAlertController(title: "Invalid Email", message: messageToDisplay, preferredStyle: .alert)
         
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-            
+        let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
             // Code in this block will trigger when Save button tapped.
             print("Save button tapped");
         }
         alertController.addAction(OKAction)
-        self.present(alertController, animated: true, completion:nil)
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -259,7 +245,7 @@ extension LoginViewController  {
 
 extension LoginViewController {
     
-    func setupUi() {
+    func setUpUI() {
         
         // Most Used Colors
         let backgroundColor12am = UIColor(red: 50/255, green: 45/255, blue: 58/255, alpha: 1)
@@ -275,12 +261,12 @@ extension LoginViewController {
         usernameLine.frame = CGRect(x: 20, y: 305, width: 330, height: 1)
         usernameLine.backgroundColor = UIColor.white
         usernameLine.layer.cornerRadius = usernameLine.frame.size.height / 2
-        self.view.addSubview(usernameLine)
+        view.addSubview(usernameLine)
         
         emailLine.frame = CGRect(x: 20, y: 360, width: 330, height: 1)
         emailLine.backgroundColor = UIColor.white
         emailLine.layer.cornerRadius = emailLine.frame.size.height / 2
-        self.view.addSubview(emailLine)
+        view.addSubview(emailLine)
         
         // Constraints
         NSLayoutConstraint.activate([
