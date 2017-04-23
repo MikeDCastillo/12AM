@@ -162,11 +162,13 @@ class PostController {
         }
     }
     
-    
-    
+    func fetchAllPosts(completion: @escaping (() -> Void)) {
+        self.fetchNewRecords(ofType: Post.typeKey) {
+            completion()
+        }
+    }
     
     func performFullSync(completion: @escaping (() -> Void) = { _ in }) {
-        
         guard !isSyncing else {
             completion()
             return

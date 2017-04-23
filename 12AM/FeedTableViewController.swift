@@ -17,13 +17,19 @@ class FeedTableViewController: UITableViewController {
         self.tableView.backgroundColor = UIColor.black
         self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(tableView.reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
         PostController.sharedController.requestFullSync()
     }
     
+    func reloadData() {
+        tableView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.tableView.reloadData()
-        PostController.sharedController.performFullSync {
+        PostController.sharedController.fetchAllPosts() {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
