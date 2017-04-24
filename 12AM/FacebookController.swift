@@ -28,7 +28,7 @@ class FacebookAPIController {
     }
 
     
-    func requestFacebookUser(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, facebookToken: AccessToken, completion: @escaping (_ facebookUser: User) -> Void) {
+    func requestFacebookUser(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, facebookToken: AccessToken, blockUserRef: CKReference? = nil, completion: @escaping (_ facebookUser: User) -> Void) {
         let graphRequest = GraphRequest(graphPath: kGraphPathMe, parameters: ["fields":"id,email,name,picture?type=large"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
         graphRequest.start { (response, result) in
             
@@ -36,12 +36,13 @@ class FacebookAPIController {
             case .success:
                 
                 // initalize a user and complete with it
+                guard let blockUserRef = blockUserRef else { return }
                 
-                let user = User(username: username, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: self.accessToken)
+                let user = User(username: username, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: self.accessToken, blockUserRefs: [blockUserRef])
                 
                 self.user = user 
                 completion(user)
-                print(response)
+                
                 print(result)
                 
                 // TODO - Fix facebook connection with CloudKit 

@@ -116,7 +116,7 @@ class CloudKitManager {
         }
     } // Get all the records that were created between a start and end date (if you want the old stormtrooper helmet records, you might use this)
     
-    // MARK: - Save
+    // MARK: - Save and Modify
     
     func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?) {
         
@@ -125,6 +125,25 @@ class CloudKitManager {
             completion?(record, error)
         })
     }
+    
+    func modifyRecords(_ records: [CKRecord], perRecordCompletion: ((_ record: CKRecord?, _ error: Error?) -> Void)?, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?) {
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.queuePriority = .high
+        operation.qualityOfService = .userInteractive
+        
+        operation.perRecordCompletionBlock = perRecordCompletion
+        
+        operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
+            guard let error = error else { return }
+            (completion?(records, error))
+        }
+        
+        publicDatabase.add(operation)
+    }
+    
+    
     
     // MARK: - Delete 
     

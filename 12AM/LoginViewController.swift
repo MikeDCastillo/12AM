@@ -195,7 +195,6 @@ extension LoginViewController {
         profileImageView.clipsToBounds = true
         
     }
-    
 }
 
 // MARK: Alerts
