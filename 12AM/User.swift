@@ -6,7 +6,6 @@
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //  Update? ???
 
-import Foundation
 import UIKit
 import CloudKit
 import FBSDKLoginKit
