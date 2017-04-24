@@ -6,7 +6,6 @@
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //  Update? ???
 
-import Foundation
 import UIKit
 import CloudKit
 import FBSDKLoginKit
@@ -19,16 +18,20 @@ class User {
     static let appleUserRefKey = "appleUserRef"
     static let recordTypeKey = "User"
     static let imageKey = "image"
-    static let typeKey = "Photo"
+    static let typeKey = "User"
     static let facebookTokenKey = "facebookAccessToken"
+    static let blockUserRefKey = "blockUserRef"
     
     var username: String
     var email: String
     var profileImage: UIImage?
     var currentTimeZone: String { return TimeZone.current.identifier }
     var accessToken: AccessToken?
-    
+    var blockUsersRefs: [CKReference]? = []
+    var blocUsersArray: [User] = []
+    var users: [User] = []
     var posts: [Post] = []
+    
 
     // This is the reference to the default Apple 'Users' record ID
     var appleUserRef: CKReference
@@ -37,7 +40,7 @@ class User {
     var cloudKitRecordID: CKRecordID?
     
     // Facebook
-    init?(dictionary: [String: Any], appleUserRef: CKReference) {
+    init?(dictionary: [String: Any], appleUserRef: CKReference, blockUserRef: CKReference?) {
         //FIXME: - add imageURL
         guard let username = dictionary["name"] as? String,
         let email = dictionary["email"] as? String,
@@ -49,7 +52,6 @@ class User {
         self.appleUserRef = appleUserRef
     }
 
-    
     var imageData: Data? {
         guard let image = profileImage, let imageData = UIImageJPEGRepresentation(image, 1.0) else { return nil }
         return imageData
@@ -69,7 +71,7 @@ class User {
     
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, accessToken: AccessToken?) {
+    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, accessToken: AccessToken?, blockUserRefs: [CKReference?] = []) {
         self.username = username
         self.profileImage = profileImage
         self.email = email
@@ -82,13 +84,16 @@ class User {
     init?(cloudKitRecord: CKRecord) {
         guard let username = cloudKitRecord[User.usernameKey] as? String,
             let email = cloudKitRecord[User.emailKey] as? String,
-            let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference else { return nil }
+            let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference,
+            let blockedUserRefs = cloudKitRecord[User.blockUserRefKey] as? [CKReference]
+            else { return nil }
         
         self.username = username
         self.email = email
         self.appleUserRef = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
         self.accessToken = nil // FIXME:
+        self.blockUsersRefs = blockedUserRefs
     }
 }
 

@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Error requesting authorization for notifications: \(error)")
                 return
             }
+            TimeTracker.shared.startTimer()
         }
         UIApplication.shared.registerForRemoteNotifications()
         UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 95/255, green: 95/255, blue: 90/255, alpha: 1.0)
