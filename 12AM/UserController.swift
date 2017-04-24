@@ -31,7 +31,27 @@ class UserController {
     
     // MARK: - CRUD
     
-    func createUserWithLogIn(userName: String, email: String, profileImage: UIImage?, accessToken:AccessToken?, completion: @escaping (User?) -> Void) {
+    func fetchCurrentUser(completion: @escaping (User?) -> Void) {
+        CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
+            if let error = error { NSLog(error.localizedDescription) }
+            guard let appleUserRecordID = appleUserRecordID else { return }
+            let appleUserRef = CKReference(recordID: appleUserRecordID, action: .none)
+            let predicate = NSPredicate(format: "appleUserRef == %@", appleUserRef)
+            let query = CKQuery(recordType: "User", predicate: predicate)
+            
+            CloudKitManager.shared.publicDatabase.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error { print(error.localizedDescription) }
+                
+                guard let records = records else { return }
+                let users = records.flatMap { User(cloudKitRecord: $0) }
+                let user = users.first
+                self.currentUser = user
+                completion(user)
+            })
+        }
+    }
+    
+    func createUser(with userName: String, email: String, profileImage: UIImage?, accessToken:AccessToken? = nil, completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
@@ -105,32 +125,6 @@ class UserController {
         }
     }
     
-    // MARK: - Validate Email Address
-    
-    func isValidEmailAddress(emailAddressString: String) -> Bool {
-        
-        var returnValue = true
-        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
-        
-        do {
-            let regex = try NSRegularExpression(pattern: emailRegEx)
-            let nsString = emailAddressString as NSString
-            let results = regex.matches(in: emailAddressString, range: NSRange(location: 0, length: nsString.length))
-            
-            if results.count == 0
-            {
-                returnValue = false
-            }
-            
-        } catch let error as NSError {
-            print("invalid regex: \(error.localizedDescription)")
-            returnValue = false
-        }
-        return  returnValue
-    }
-    
-    // MARK: - Networking
-
 }
 
 

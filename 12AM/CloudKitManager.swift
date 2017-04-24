@@ -69,43 +69,15 @@ class CloudKitManager {
     // MARK: - User Info Discovery
     
     func fetchLoggedInUserRecord(_ completion: ((_ record: CKRecord?, _ error: Error? ) -> Void)?) {
-        
         CKContainer.default().fetchUserRecordID { (recordID, error) in
             
-            if let error = error,
-                let completion = completion {
+            if let error = error, let completion = completion {
                 completion(nil, error)
             }
             
-            if let recordID = recordID,
-                let completion = completion {
-                
+            if let recordID = recordID, let completion = completion {
                 self.fetchRecord(withID: recordID, completion: completion)
             }
-        }
-    }
-    
-    func fetchCurrentUser(completion: @escaping(User?) -> Void) {
-        
-        CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
-            if let error = error { NSLog(error.localizedDescription) }
-            
-            guard let appleUserRecordID = appleUserRecordID else { return }
-            
-            let appleUserRef = CKReference(recordID: appleUserRecordID, action: .none)
-            
-            let preditcate = NSPredicate(format: "appleUserRef == %@", appleUserRef)
-            
-            let query = CKQuery(recordType: "User", predicate: preditcate)
-            
-            self.publicDatabase.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                if let error = error { print(error.localizedDescription) }
-                
-                guard let records = records else { return }
-                let users = records.flatMap { User(cloudKitRecord: $0) }
-                let user = users.first
-                completion(user)
-            })
         }
     }
     

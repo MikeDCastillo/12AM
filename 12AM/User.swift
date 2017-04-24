@@ -82,15 +82,13 @@ class User {
     init?(cloudKitRecord: CKRecord) {
         guard let username = cloudKitRecord[User.usernameKey] as? String,
             let email = cloudKitRecord[User.emailKey] as? String,
-            let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference,
-            let accessToken = cloudKitRecord[User.facebookTokenKey] as? AccessToken
-        else { return nil }
+            let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference else { return nil }
         
         self.username = username
         self.email = email
         self.appleUserRef = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
-        self.accessToken = accessToken
+        self.accessToken = nil // FIXME:
     }
 }
 

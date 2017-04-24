@@ -12,6 +12,9 @@
 		013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */; };
 		0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0165FEB41E9EEC6300A4F2A1 /* UserController.swift */; };
 		28BA3B7FC383D19FB8F72BB6 /* Pods_12AM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */; };
+		7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD71EAC4D61006E304A /* ImageTextField.swift */; };
+		7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD91EAC53E2006E304A /* UIColorHelper.swift */; };
+		7334ADDC1EAC63D4006E304A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADDB1EAC63D4006E304A /* StringExtensions.swift */; };
 		7348C6C61E9B2D2400D54ABB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C21E9B2D2400D54ABB /* Bolts.framework */; };
 		7348C6C71E9B2D2400D54ABB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C31E9B2D2400D54ABB /* FBSDKCoreKit.framework */; };
 		7348C6C81E9B2D2400D54ABB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C41E9B2D2400D54ABB /* FBSDKLoginKit.framework */; };
@@ -28,9 +31,8 @@
 		73D3966A1EA847F800D488A1 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D396621EA847F800D488A1 /* Camera.storyboard */; };
 		73D3966B1EA847F800D488A1 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D396641EA847F800D488A1 /* Feed.storyboard */; };
 		73D3966C1EA847F800D488A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D396661EA847F800D488A1 /* LaunchScreen.storyboard */; };
-		73D3966D1EA847F800D488A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D396681EA847F800D488A1 /* Main.storyboard */; };
+		73D3966D1EA847F800D488A1 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D396681EA847F800D488A1 /* LoginViewController.storyboard */; };
 		73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E901B31E9B55C500EA7E0A /* LoginViewController.swift */; };
-		73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E901B51E9B5BA600EA7E0A /* MockViewController.swift */; };
 		C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */; };
 		C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47D1E9C41B400185BB9 /* CameraViewController.swift */; };
 		C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */; };
@@ -43,6 +45,9 @@
 		0165FEB41E9EEC6300A4F2A1 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12AM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5FC89D0967B4E10736ED7F /* Pods-12AM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.debug.xcconfig"; sourceTree = "<group>"; };
+		7334ADD71EAC4D61006E304A /* ImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextField.swift; sourceTree = "<group>"; };
+		7334ADD91EAC53E2006E304A /* UIColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
+		7334ADDB1EAC63D4006E304A /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		7348C6C21E9B2D2400D54ABB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-4.21.0/Bolts.framework"; sourceTree = "<group>"; };
 		7348C6C31E9B2D2400D54ABB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		7348C6C41E9B2D2400D54ABB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -62,9 +67,8 @@
 		73D396631EA847F800D488A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Camera.storyboard; sourceTree = "<group>"; };
 		73D396651EA847F800D488A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Feed.storyboard; sourceTree = "<group>"; };
 		73D396671EA847F800D488A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		73D396691EA847F800D488A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		73D396691EA847F800D488A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		73E901B31E9B55C500EA7E0A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		73E901B51E9B5BA600EA7E0A /* MockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockViewController.swift; sourceTree = "<group>"; };
 		91455D1C35EE249F4F19FF5E /* Pods-12AM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.release.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.release.xcconfig"; sourceTree = "<group>"; };
 		C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewController.swift; sourceTree = "<group>"; };
 		C893C47D1E9C41B400185BB9 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +150,6 @@
 				73E901BD1E9B683300EA7E0A /* Controllers */,
 				73E901BA1E9B67F300EA7E0A /* Resources */,
 				738E79021E9D46EF0072CE95 /* CloudKitManager */,
-				73E901B71E9B67B400EA7E0A /* TrialAndError */,
 			);
 			path = 12AM;
 			sourceTree = "<group>";
@@ -165,17 +168,9 @@
 				73D396621EA847F800D488A1 /* Camera.storyboard */,
 				73D396641EA847F800D488A1 /* Feed.storyboard */,
 				73D396661EA847F800D488A1 /* LaunchScreen.storyboard */,
-				73D396681EA847F800D488A1 /* Main.storyboard */,
+				73D396681EA847F800D488A1 /* LoginViewController.storyboard */,
 			);
 			path = Base.lproj;
-			sourceTree = "<group>";
-		};
-		73E901B71E9B67B400EA7E0A /* TrialAndError */ = {
-			isa = PBXGroup;
-			children = (
-				73E901B51E9B5BA600EA7E0A /* MockViewController.swift */,
-			);
-			name = TrialAndError;
 			sourceTree = "<group>";
 		};
 		73E901B81E9B67CE00EA7E0A /* ViewController */ = {
@@ -196,6 +191,9 @@
 			children = (
 				737E794E1E9B180200172355 /* Assets.xcassets */,
 				737E79531E9B180200172355 /* Info.plist */,
+				7334ADD71EAC4D61006E304A /* ImageTextField.swift */,
+				7334ADD91EAC53E2006E304A /* UIColorHelper.swift */,
+				7334ADDB1EAC63D4006E304A /* StringExtensions.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -302,7 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				737E794F1E9B180200172355 /* Assets.xcassets in Resources */,
-				73D3966D1EA847F800D488A1 /* Main.storyboard in Resources */,
+				73D3966D1EA847F800D488A1 /* LoginViewController.storyboard in Resources */,
 				73D3966C1EA847F800D488A1 /* LaunchScreen.storyboard in Resources */,
 				73D3966A1EA847F800D488A1 /* Camera.storyboard in Resources */,
 				73D3966B1EA847F800D488A1 /* Feed.storyboard in Resources */,
@@ -354,7 +352,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -369,17 +367,19 @@
 				738E79011E9D30220072CE95 /* Comment.swift in Sources */,
 				73D396591EA845FC00D488A1 /* PostTableViewCell.swift in Sources */,
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
-				73E901B61E9B5BA600EA7E0A /* MockViewController.swift in Sources */,
 				737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */,
 				C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */,
+				7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */,
 				73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */,
 				737E79481E9B180200172355 /* AppDelegate.swift in Sources */,
 				738E78FF1E9D2D630072CE95 /* Post.swift in Sources */,
 				C893C4801E9C423B00185BB9 /* PostDetailFromCameraViewController.swift in Sources */,
 				73A5381A1E9EB97C0013A5CE /* PostController.swift in Sources */,
+				7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */,
 				0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */,
 				C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */,
 				013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */,
+				7334ADDC1EAC63D4006E304A /* StringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,12 +410,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		73D396681EA847F800D488A1 /* Main.storyboard */ = {
+		73D396681EA847F800D488A1 /* LoginViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				73D396691EA847F800D488A1 /* Base */,
 			);
-			name = Main.storyboard;
+			name = LoginViewController.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
