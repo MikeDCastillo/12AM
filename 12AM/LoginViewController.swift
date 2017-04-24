@@ -34,8 +34,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         super.viewDidLoad()
         
         updateViews()
+        // TODO: - add me back int
 //        setUpFacebookLogInButton()
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterMidnight), name: Notification.Name.didEnterMidnightHour, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didExitMidnight), name: Notification.Name.didExitMidnightHour, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -219,6 +222,15 @@ extension LoginViewController  {
         alertController.addAction(OKAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    func didEnterMidnight() {
+        print("ITS GO TIME!!")
+    }
+    
+    func didExitMidnight() {
+        print("AINT NOBODY GOT TIME FOR DAT")
+    }
+    
 }
 
  // MARK: - UI Style

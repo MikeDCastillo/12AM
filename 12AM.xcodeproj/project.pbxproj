@@ -21,7 +21,7 @@
 		7348C6C91E9B2D2400D54ABB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C51E9B2D2400D54ABB /* FBSDKShareKit.framework */; };
 		7366ADAA1EAE58E600E070E8 /* TimerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADA91EAE58E600E070E8 /* TimerExtension.swift */; };
 		7366ADAC1EAE591100E070E8 /* RotationGestureRecgonizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADAB1EAE591100E070E8 /* RotationGestureRecgonizer.swift */; };
-		7366ADAE1EAE597A00E070E8 /* MidnightTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADAD1EAE597A00E070E8 /* MidnightTimer.swift */; };
+		7366ADAE1EAE597A00E070E8 /* TimeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */; };
 		737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */; };
 		737E79481E9B180200172355 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E79471E9B180200172355 /* AppDelegate.swift */; };
 		737E794F1E9B180200172355 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 737E794E1E9B180200172355 /* Contents.json */; };
@@ -57,7 +57,7 @@
 		7348C6C51E9B2D2400D54ABB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		7366ADA91EAE58E600E070E8 /* TimerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerExtension.swift; sourceTree = "<group>"; };
 		7366ADAB1EAE591100E070E8 /* RotationGestureRecgonizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationGestureRecgonizer.swift; sourceTree = "<group>"; };
-		7366ADAD1EAE597A00E070E8 /* MidnightTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MidnightTimer.swift; sourceTree = "<group>"; };
+		7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTracker.swift; sourceTree = "<group>"; };
 		737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		737E79441E9B180200172355 /* 12AM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 12AM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		737E79471E9B180200172355 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				737E794E1E9B180200172355 /* Contents.json */,
 				737E79531E9B180200172355 /* Info.plist */,
 				7366ADA91EAE58E600E070E8 /* TimerExtension.swift */,
-				7366ADAD1EAE597A00E070E8 /* MidnightTimer.swift */,
+				7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */,
 				7366ADAB1EAE591100E070E8 /* RotationGestureRecgonizer.swift */,
 				7334ADD71EAC4D61006E304A /* ImageTextField.swift */,
 				7334ADD91EAC53E2006E304A /* UIColorHelper.swift */,
@@ -390,7 +390,7 @@
 				0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */,
 				C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */,
 				013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */,
-				7366ADAE1EAE597A00E070E8 /* MidnightTimer.swift in Sources */,
+				7366ADAE1EAE597A00E070E8 /* TimeTracker.swift in Sources */,
 				7334ADDC1EAC63D4006E304A /* StringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
