@@ -21,19 +21,14 @@ class PostController {
     
     static let sharedController = PostController()
     
-    var posts = [Post]() {
-        didSet {
-            DispatchQueue.main.async {
-                let nc = NotificationCenter.default
-                nc.post(name: PostController.PostCommentsChangedNotification, object: self)
-            }
-        }
+    var posts = [Post]()
+    
+    var filteredPosts: [Post] {
+        
+        return self.posts.sorted(by: { $0.0.timestamp > $0.1.timestamp } )
     }
     
     var comments = [Comment]()
-    //   {
-    //        return posts.flatMap { $0.comments }
-    //    }
     
     var sortedPost: [Post] {
         return posts.sorted(by: { return $0.timestamp.compare($1.timestamp) == .orderedDescending })
@@ -43,19 +38,13 @@ class PostController {
     
     var isSyncing: Bool = false
     
-    init() {
-        cloudKitManager = CloudKitManager()
-        performFullSync()
-    }
-    
-    
     //MARK: - CRUD
     
     // Create Post Function
     func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
         
         // Sets image property of jpeg
-        guard let data = UIImageJPEGRepresentation(image, 1.0), let currentUser = UserController.shared.currentUser else { return }
+        guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
         let post = Post(photoData: data, text: caption, owner: currentUser)
         
         // Adds post to first cell
@@ -65,12 +54,15 @@ class PostController {
         
         // Saves post to CloudKit or gives error
         cloudKitManager.saveRecord(record) { (record, error) in
-            guard let record = record
-                else { return }
-            post.cloudKitRecordID = record.recordID
+            
             if let error = error {
                 print("Error saving new post to CloudKit: \(error)")
             }
+            
+            guard let record = record
+                else { return }
+            
+            post.cloudKitRecordID = record.recordID
             completion(post)
         }
         
@@ -138,6 +130,7 @@ class PostController {
             case User.typeKey:
                 let users = records.flatMap { User(cloudKitRecord: $0) }
                 UserController.shared.users = users
+                completion()
             case Post.typeKey:
                 let posts = records.flatMap { Post(record: $0) }
                 //                for post in posts {
@@ -146,7 +139,7 @@ class PostController {
                 //                post.owner = matchingUser
                 //                matchingUser?.posts.append(post)
                 self.posts = posts
-                
+                completion()
                 
             case Comment.typeKey:
                 let comments = records.flatMap { Comment(record: $0) }
@@ -155,7 +148,7 @@ class PostController {
                 //                let matchingPost = PostController.sharedController.posts.filter({$0.cloudKitRecordID == postReference.recordID}).first
                 //                matchingPost?.comments.append(comment)
                 self.comments = comments
-                
+                completion()
             default:
                 return
             }
@@ -169,8 +162,8 @@ class PostController {
     }
     
     func performFullSync(completion: @escaping (() -> Void) = { _ in }) {
-        guard !isSyncing else {
-            completion()
+        guard !isSyncing
+            else { completion()
             return
         }
         

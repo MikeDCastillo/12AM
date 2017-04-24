@@ -15,10 +15,15 @@ class FeedTableViewController: UITableViewController {
         
         performInitialAppLogic()
         self.tableView.backgroundColor = UIColor.black
-        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        //        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
-        PostController.sharedController.requestFullSync()
+        
+        PostController.sharedController.requestFullSync {
+            DispatchQueue.main.async {
+                self.reloadData()
+            }
+        }
     }
     
     func reloadData() {
@@ -28,42 +33,39 @@ class FeedTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.reloadData()
-        PostController.sharedController.fetchAllPosts() {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
-        handleRefresh(sender)
-        PostController.sharedController.requestFullSync {
+//        handleRefresh(sender)
+        PostController.sharedController.requestFullSync { 
             DispatchQueue.main.async {
-                self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
             }
         }
     }
     
-    func handleRefresh(_ refreshControl: UIRefreshControl) {
-        PostController.sharedController.requestFullSync()
-        PostController.sharedController.performFullSync()
-        self.tableView.reloadData()
-        refreshControl.endRefreshing()
-    }
+//    func handleRefresh(_ refreshControl: UIRefreshControl) {
+//        PostController.sharedController.requestFullSync()
+////        PostController.sharedController.performFullSync()
+//        self.tableView.reloadData()
+//        refreshControl.endRefreshing()
+//    }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PostController.sharedController.posts.count
+        return PostController.sharedController.filteredPosts.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
         
-        let post = PostController.sharedController.posts[indexPath.row]
+        let post = PostController.sharedController.filteredPosts[indexPath.row]
         cell.post = post
         
         return cell
@@ -116,7 +118,7 @@ class FeedTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
-            let post = PostController.sharedController.posts[indexPath.row]
+            let post = PostController.sharedController.filteredPosts[indexPath.row]
             detailVC.post = post
         }
     }
