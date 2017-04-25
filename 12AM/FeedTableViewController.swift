@@ -122,4 +122,6 @@ class FeedTableViewController: UITableViewController {
     }
 }
 
+
+
 //potential feature: replace login button with a Map button that shows where in the world is currently active

@@ -9,15 +9,12 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-
-
-    @IBAction func imageButtonTapped(_ sender: Any) {
-    }
+    
     
     @IBOutlet weak var captionLabel: UILabel! // until we get the ratings worked out
     @IBOutlet weak var imageButton: UIButton!
- 
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var blockUserButton: UIButton!
     
     var post: Post? {
         didSet {
@@ -26,10 +23,9 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func updateViews() {
-        
         guard let postPhoto = post?.photo else { return }
-        imageButton?.setImage(postPhoto, for: .normal)
         
+        imageButton?.setImage(postPhoto, for: .normal)
         guard let caption = post?.text else { return }
         //this lets the captionLabel just display the first 25 chars of the caption
         let captionLede = String(caption.characters.prefix(25))
@@ -41,5 +37,35 @@ class PostTableViewCell: UITableViewCell {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.black
     }
-
+    
+    // MARK: - Action
+    
+    @IBAction func imageButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func blockUserButtonTapped(_ sender: Any) {
+        
+    }
+    
+    func blockUser() {
+        guard let post = post, let ownerReference = post.ownerReference else { return }
+        UserController.shared.blockUser(userToBlock: ownerReference) { user in
+            if let _ = user {
+                DispatchQueue.main.async {
+                    
+                }
+            } else {
+                print("SOMETHING WENT TERRIBLY WRONG")
+            }
+        }
+    }
 }
+
+protocol isBlockedUserButtonTappedTableViewCellDelegate: class {
+    func isCompleteButtonTapped(sender: PostTableViewCell)
+}
+
+protocol isLikedButtonTappedTableViewCellDelegate: class {
+    func isLikedButtonTapped(sender: PostTableViewCell)
+}
+
