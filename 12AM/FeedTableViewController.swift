@@ -39,8 +39,8 @@ class FeedTableViewController: UITableViewController {
     }
     
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
-//        handleRefresh(sender)
-        PostController.sharedController.requestFullSync { 
+        //        handleRefresh(sender)
+        PostController.sharedController.requestFullSync {
             DispatchQueue.main.async {
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
@@ -48,12 +48,12 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-//    func handleRefresh(_ refreshControl: UIRefreshControl) {
-//        PostController.sharedController.requestFullSync()
-////        PostController.sharedController.performFullSync()
-//        self.tableView.reloadData()
-//        refreshControl.endRefreshing()
-//    }
+    //    func handleRefresh(_ refreshControl: UIRefreshControl) {
+    //        PostController.sharedController.requestFullSync()
+    ////        PostController.sharedController.performFullSync()
+    //        self.tableView.reloadData()
+    //        refreshControl.endRefreshing()
+    //    }
     
     // MARK: - Table view data source
     
@@ -77,7 +77,7 @@ class FeedTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
         // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
     }
-
+    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.black
     }
@@ -85,6 +85,9 @@ class FeedTableViewController: UITableViewController {
     @IBAction func addButtonTapped(_ sender: Any) {
         addPicButtonTapped()
     }
+    
+    // to here to test photo posting at whatever time
+    
     
     func performInitialAppLogic() {
         UserController.shared.fetchCurrentUser { user in
@@ -105,14 +108,25 @@ class FeedTableViewController: UITableViewController {
     }
     
     func addPicButtonTapped() {
-        let alertController = UIAlertController(title: "Add Photo", message: "Select Camera or Gallery", preferredStyle: .alert)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-            self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self)
+        
+        let isMidnight = TimeTracker.shared.isMidnight!
+        if !isMidnight {
+            let alertController = UIAlertController(title: "Can't Post photos until midnight", message: "Come back between 12AM and 1AM to post", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alertController.addAction(dismissAction)
+            present(alertController, animated: true, completion: nil) ; return
         }
-        let galleryAction = UIAlertAction(title: "Gallery???", style: .cancel, handler: nil)
-        alertController.addAction(cameraAction)
-        alertController.addAction(galleryAction)
-        present(alertController, animated: true, completion: nil)
+        
+        if isMidnight {
+            let alertController = UIAlertController(title: "Add Photo", message: "Select Camera or Gallery", preferredStyle: .alert)
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
+                self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self)
+            }
+            let galleryAction = UIAlertAction(title: "Gallery???", style: .cancel, handler: nil)
+            alertController.addAction(cameraAction)
+            alertController.addAction(galleryAction)
+            present(alertController, animated: true, completion: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

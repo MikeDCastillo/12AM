@@ -45,40 +45,30 @@ class PostController {
     // Create Post Function
     func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
         
-        //comment out this line to enable posting whenever, and 23 lines down...
-        if TimeTracker.shared.isMidnight {
-            
-            // Sets image property of jpeg
-            guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
-            let post = Post(photoData: data, text: caption, owner: currentUser)
-            
-            // Adds post to first cell
-            posts.insert(post, at: 0)
-            
-            let record = CKRecord(post)
-            
-            // Saves post to CloudKit or gives error
-            cloudKitManager.saveRecord(record) { (record, error) in
-                
-                if let error = error {
-                    print("Error saving new post to CloudKit: \(error)")
-                }
-                
-                guard let record = record
-                    else { return }
-                
-                post.cloudKitRecordID = record.recordID
-                completion(post)
-            }
-        } else // delete from here... (5 lines down)
-        { let alertController = UIAlertController(title: "Can't Post photos until midnight", message: "Come back between 12AM and 1AM to comment and post", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
-            alertController.addAction(dismissAction)
-            present(alertController, animated: true, completion: nil)
-        }
-        // to here to test photo posting at whatever time
+        // Sets image property of jpeg
+        guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
+        let post = Post(photoData: data, text: caption, owner: currentUser)
         
+        // Adds post to first cell
+        posts.insert(post, at: 0)
+        
+        let record = CKRecord(post)
+        
+        // Saves post to CloudKit or gives error
+        cloudKitManager.saveRecord(record) { (record, error) in
+            
+            if let error = error {
+                print("Error saving new post to CloudKit: \(error)")
+            }
+            
+            guard let record = record
+                else { return }
+            
+            post.cloudKitRecordID = record.recordID
+            completion(post)
+        }
     }
+    
     
     // Add Comments to posts function
     func addComment(post: Post, commentText: String, completion: @escaping ((Comment) -> Void) = { _ in }) -> Comment {
@@ -128,14 +118,13 @@ class PostController {
     func fetchNewRecords(ofType type: String, completion: @escaping (() -> Void) = { _ in }) {
         
         var referencesToExclude = [CKReference]()
-        var predicate: NSPredicate
-        var midnight = TimeTracker.shared.midnight.timeIntervalSince1970
-        var oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
+        let midnight = TimeTracker.shared.midnight.timeIntervalSince1970
+        let oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
-        predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
+        var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         if referencesToExclude.isEmpty {
-            predicate = NSPredicate(format: "timestamp BETWEEN {%d, %d}, midnight, oneAM")
+            predicate = NSPredicate(format: "timestamp BETWEEN {%d, %d}", midnight, oneAM)
         }
         
         cloudKitManager.fetchRecordsWithType(type, recordFetchedBlock: nil) { (records, error) in

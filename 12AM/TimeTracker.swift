@@ -18,7 +18,9 @@ class TimeTracker {
         return oneAM.timeIntervalSince(originalNow) - 10
     }
     
-    var isMidnight: Bool? {
+    // for testing make this next line ... var isMidnight: Bool? = false
+    var isMidnight: Bool? = false
+    {
         didSet {
             guard let isMidnight = isMidnight, isMidnight != oldValue else { return }
             let notificationName: Notification.Name = isMidnight ? .didEnterMidnightHour : .didExitMidnightHour
