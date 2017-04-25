@@ -20,7 +20,7 @@ class Post: CloudKitSyncable {
     static let ownerReferenceKey = "ownerRef"
     
     let photoData: Data?
-    let timestamp: String
+    let timestamp: Date
     var comments: [Comment]
     let text: String
     var owner: User?
@@ -31,7 +31,7 @@ class Post: CloudKitSyncable {
         return UIImage(data: photoData)
     }
     
-    init(photoData: Data?, timestamp: String = Date().description(with: Locale.current), text: String, comments: [Comment] = [], owner: User) {
+    init(photoData: Data?, timestamp: Date = Date(), text: String, comments: [Comment] = [], owner: User) {
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
@@ -48,13 +48,13 @@ class Post: CloudKitSyncable {
     var cloudKitRecordID: CKRecordID?
     
     init?(record: CKRecord) {
-        guard let timestamp = record.creationDate?.description(with: Locale.current),
+        guard let timestamp = record[Post.timestampKey] as? Date,
             let text = record[Post.textKey] as? String,
             let photoAsset = record[Post.photoDataKey] as? CKAsset,
             let photoData = try? Data(contentsOf: photoAsset.fileURL),
             let ownerReference = record[Post.ownerReferenceKey] as? CKReference else { return nil }
         
-        
+
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
@@ -84,8 +84,8 @@ extension CKRecord {
     convenience init(_ post: Post) {
         let recordID = CKRecordID(recordName: UUID().uuidString)
         self.init(recordType: post.recordType, recordID: recordID)
-        self[Post.textKey] = post.text as CKRecordValue?
-        self[Post.timestampKey] = post.timestamp as CKRecordValue?
+        self[Post.textKey] = post.text as CKRecordValue
+        self[Post.timestampKey] = post.timestamp as CKRecordValue
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
         guard
             let owner = post.owner,
