@@ -184,9 +184,9 @@
 			children = (
 				73E901B31E9B55C500EA7E0A /* LoginViewController.swift */,
 				C893C47B1E9C40D700185BB9 /* FeedTableViewController.swift */,
+				73D396581EA845FC00D488A1 /* PostTableViewCell.swift */,
 				C893C47D1E9C41B400185BB9 /* CameraViewController.swift */,
 				C893C47F1E9C423B00185BB9 /* PostDetailFromCameraViewController.swift */,
-				73D396581EA845FC00D488A1 /* PostTableViewCell.swift */,
 				737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */,
 			);
 			name = ViewController;

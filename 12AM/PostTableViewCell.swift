@@ -16,6 +16,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var blockUserButton: UIButton!
     
+    weak var delegate: isBlockedUserButtonTappedTableViewCellDelegate?
+    
     var post: Post? {
         didSet {
             updateViews()
@@ -43,16 +45,22 @@ class PostTableViewCell: UITableViewCell {
     @IBAction func imageButtonTapped(_ sender: Any) {
         
     }
-    @IBAction func blockUserButtonTapped(_ sender: Any) {
+    @IBAction func blockUserButtonTapped(_ sender: UIButton) {
+        delegate?.isCompleteButtonTapped(sender: self)
+        blockUser()
+    }
+    
+    // MARK: - Alert 
+    func blockUserActionSheet() {
         
     }
     
     func blockUser() {
         guard let post = post, let ownerReference = post.ownerReference else { return }
         UserController.shared.blockUser(userToBlock: ownerReference) { user in
-            if let _ = user {
+            if let user = user {
                 DispatchQueue.main.async {
-                    
+                 
                 }
             } else {
                 print("SOMETHING WENT TERRIBLY WRONG")
@@ -60,6 +68,8 @@ class PostTableViewCell: UITableViewCell {
         }
     }
 }
+
+// MARK: - Delegates
 
 protocol isBlockedUserButtonTappedTableViewCellDelegate: class {
     func isCompleteButtonTapped(sender: PostTableViewCell)
