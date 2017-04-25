@@ -86,17 +86,17 @@ class User {
     init?(cloudKitRecord: CKRecord) {
         guard let username = cloudKitRecord[User.usernameKey] as? String,
             let email = cloudKitRecord[User.emailKey] as? String,
-            let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference,
-            let blockedUserRefs = cloudKitRecord[User.blockUserRefKey] as? [CKReference],
-            let accessToken = cloudKitRecord[User.accessTokenKey] as? AccessToken
+            let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference
             else { return nil }
+        
+        self.blockUserRefs = cloudKitRecord[User.blockUserRefKey] as? [CKReference] ?? []
+        self.accessToken = cloudKitRecord[User.accessTokenKey] as? AccessToken ?? nil
         
         self.username = username
         self.email = email
         self.appleUserRef = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
-        self.accessToken = accessToken
-        self.blockUserRefs = blockedUserRefs
+        
     }
 }
 

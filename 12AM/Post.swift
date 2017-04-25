@@ -85,7 +85,7 @@ extension CKRecord {
         let recordID = CKRecordID(recordName: UUID().uuidString)
         self.init(recordType: post.recordType, recordID: recordID)
         self[Post.textKey] = post.text as CKRecordValue
-        self[Post.timestampKey] = post.timestamp as CKRecordValue
+        self[Post.timestampKey] = post.timestamp as NSDate
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
         guard
             let owner = post.owner,
