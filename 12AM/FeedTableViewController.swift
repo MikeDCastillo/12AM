@@ -95,12 +95,12 @@ class FeedTableViewController: UITableViewController {
                 return
             } else {
                 DispatchQueue.main.async {
-                   // self.presentLogin()
+                  //  self.presentLogin()
                 }
             }
         }
     }
-    
+
     func presentLogin() {
         let loginSB = UIStoryboard.init(name: String(describing: LoginViewController.self), bundle: nil)
         guard let loginVC = loginSB.instantiateInitialViewController() else { return }
@@ -137,7 +137,5 @@ class FeedTableViewController: UITableViewController {
         }
     }
 }
-
-
 
 //potential feature: replace login button with a Map button that shows where in the world is currently active

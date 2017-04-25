@@ -4,7 +4,7 @@
 //
 //  Created by Nick Reichard on 4/11/17.
 //  Copyright © 2017 Michael Castillo. All rights reserved.
-//  Update? ???
+
 
 import UIKit
 import CloudKit
@@ -19,15 +19,15 @@ class User {
     static let recordTypeKey = "User"
     static let imageKey = "image"
     static let typeKey = "User"
-    static let facebookTokenKey = "facebookAccessToken"
     static let blockUserRefKey = "blockUserRef"
+    static let accessTokenKey = "acessToken"
     
     var username: String
     var email: String
     var profileImage: UIImage?
     var currentTimeZone: String { return TimeZone.current.identifier }
     var accessToken: AccessToken?
-    var blockUsersRefs: [CKReference]? = []
+    var blockUserRefs: [CKReference]? = []
     var blocUsersArray: [User] = []
     var users: [User] = []
     var posts: [Post] = []
@@ -40,7 +40,7 @@ class User {
     var cloudKitRecordID: CKRecordID?
     
     // Facebook
-    init?(dictionary: [String: Any], appleUserRef: CKReference, blockUserRef: CKReference?) {
+    init?(dictionary: [String: Any], appleUserRef: CKReference, blockUserRefs: [CKReference]? = []) {
         //FIXME: - add imageURL
         guard let username = dictionary["name"] as? String,
         let email = dictionary["email"] as? String,
@@ -50,6 +50,7 @@ class User {
         self.email = email
         self.profileImage = profileImage
         self.appleUserRef = appleUserRef
+        self.blockUserRefs = blockUserRefs
     }
 
     var imageData: Data? {
@@ -71,12 +72,13 @@ class User {
     
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, accessToken: AccessToken?, blockUserRefs: [CKReference?] = []) {
+    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, accessToken: AccessToken?, blockUserRefs: [CKReference]? = []) {
         self.username = username
         self.profileImage = profileImage
         self.email = email
         self.appleUserRef = appleUserRef
         self.accessToken = accessToken
+        self.blockUserRefs = blockUserRefs
     }
     
 
@@ -85,15 +87,16 @@ class User {
         guard let username = cloudKitRecord[User.usernameKey] as? String,
             let email = cloudKitRecord[User.emailKey] as? String,
             let appleUserRef = cloudKitRecord[User.appleUserRefKey] as? CKReference,
-            let blockedUserRefs = cloudKitRecord[User.blockUserRefKey] as? [CKReference]
+            let blockedUserRefs = cloudKitRecord[User.blockUserRefKey] as? [CKReference],
+            let accessToken = cloudKitRecord[User.accessTokenKey] as? AccessToken
             else { return nil }
         
         self.username = username
         self.email = email
         self.appleUserRef = appleUserRef
         self.cloudKitRecordID = cloudKitRecord.recordID
-        self.accessToken = nil // FIXME:
-        self.blockUsersRefs = blockedUserRefs
+        self.accessToken = accessToken
+        self.blockUserRefs = blockedUserRefs
     }
 }
 
@@ -109,10 +112,11 @@ extension CKRecord {
         self.setValue(user.username, forKey: User.usernameKey)
         self.setValue(user.email, forKey: User.emailKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
-        self.setValue(user.accessToken, forKey: User.facebookTokenKey)
+        self.setValue(user.accessToken, forKey: User.accessTokenKey)
         guard user.profileImage != nil else { return }
         let imageAsset = CKAsset(fileURL: user.temporaryPhotoURL)
         self.setValue(imageAsset, forKey: User.imageKey)
+        self.setValue(user.blockUserRefs, forKey: User.blockUserRefKey)
     }
 }
 
