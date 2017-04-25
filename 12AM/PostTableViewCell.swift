@@ -18,6 +18,7 @@ class PostTableViewCell: UITableViewCell {
     
     weak var delegate: isBlockedUserButtonTappedTableViewCellDelegate?
     
+    
     var post: Post? {
         didSet {
             updateViews()
@@ -60,6 +61,8 @@ class PostTableViewCell: UITableViewCell {
         UserController.shared.blockUser(userToBlock: ownerReference) {
             print("Sucessfull blocked user")
         }
+        guard let blockedUsers = UserController.shared.blockUserRef else { return }
+        
     }
 }
 
