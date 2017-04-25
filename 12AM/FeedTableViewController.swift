@@ -95,7 +95,7 @@ class FeedTableViewController: UITableViewController {
                 return
             } else {
                 DispatchQueue.main.async {
-                    self.presentLogin()
+                   // self.presentLogin()
                 }
             }
         }
