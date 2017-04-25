@@ -12,6 +12,7 @@ class TimeTracker {
     
     static let shared = TimeTracker()
     let oneAM = Calendar.current.date(bySetting: .hour, value: 1, of: Date())!
+    let midnight = Calendar.current.date(bySetting: .hour, value: 0, of: Date())!
     let originalNow = Date()
     var secondsTillOne: TimeInterval {
         return oneAM.timeIntervalSince(originalNow) - 10

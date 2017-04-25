@@ -15,6 +15,8 @@ extension PostController {
     static let PostCommentsChangedNotification = Notification.Name("PostCommentsChangedNotification")
 }
 
+// Could post equal everything posted between current.timeintervalsince1970 rounded down to the nearest hour andcurrent.timeintervalsince1970 rounded up to the nearest hour?
+
 class PostController {
     
     //MARK: - Variables
@@ -43,28 +45,38 @@ class PostController {
     // Create Post Function
     func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
         
-        // Sets image property of jpeg
-        guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
-        let post = Post(photoData: data, text: caption, owner: currentUser)
-        
-        // Adds post to first cell
-        posts.insert(post, at: 0)
-        
-        let record = CKRecord(post)
-        
-        // Saves post to CloudKit or gives error
-        cloudKitManager.saveRecord(record) { (record, error) in
+        //comment out this line to enable posting whenever, and 23 lines down...
+        if TimeTracker.shared.isMidnight {
             
-            if let error = error {
-                print("Error saving new post to CloudKit: \(error)")
+            // Sets image property of jpeg
+            guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
+            let post = Post(photoData: data, text: caption, owner: currentUser)
+            
+            // Adds post to first cell
+            posts.insert(post, at: 0)
+            
+            let record = CKRecord(post)
+            
+            // Saves post to CloudKit or gives error
+            cloudKitManager.saveRecord(record) { (record, error) in
+                
+                if let error = error {
+                    print("Error saving new post to CloudKit: \(error)")
+                }
+                
+                guard let record = record
+                    else { return }
+                
+                post.cloudKitRecordID = record.recordID
+                completion(post)
             }
-            
-            guard let record = record
-                else { return }
-            
-            post.cloudKitRecordID = record.recordID
-            completion(post)
+        } else // delete from here... (5 lines down)
+        { let alertController = UIAlertController(title: "Can't Post photos until midnight", message: "Come back between 12AM and 1AM to comment and post", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alertController.addAction(dismissAction)
+            present(alertController, animated: true, completion: nil)
         }
+        // to here to test photo posting at whatever time
         
     }
     
@@ -117,11 +129,13 @@ class PostController {
         
         var referencesToExclude = [CKReference]()
         var predicate: NSPredicate
+        var midnight = TimeTracker.shared.midnight.timeIntervalSince1970
+        var oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
         predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         if referencesToExclude.isEmpty {
-            predicate = NSPredicate(value: true)
+            predicate = NSPredicate(format: "timestamp BETWEEN {%d, %d}, midnight, oneAM")
         }
         
         cloudKitManager.fetchRecordsWithType(type, recordFetchedBlock: nil) { (records, error) in
@@ -164,7 +178,7 @@ class PostController {
     func performFullSync(completion: @escaping (() -> Void) = { _ in }) {
         guard !isSyncing
             else { completion()
-            return
+                return
         }
         
         isSyncing = true
@@ -178,10 +192,8 @@ class PostController {
                     self.isSyncing = false
                     completion()
                 }
-                
             }
         }
-        
     }
     
     func requestFullSync(_ completion: (() -> Void)? = nil) {
@@ -196,4 +208,15 @@ class PostController {
         }
     }
     
+    // this is if we decide to delete all records at 1AM, even from cloudKit, call this in the TimeTracker.didExitMidnightHour
+    //    func deleteAllPostsAt1AM() {
+    //        cloudKitManager.deleteRecordsWithID(posts) { (posts, _: [CKRecord], error) in
+    //            if error = error {
+    //                print("Error Deleting all posts at 1AM \(#file) \(#function)")
+    //            }
+    //            if posts = posts {
+    //                posts.removeAll()
+    //            }
+    //        }
+    //    }
 }
