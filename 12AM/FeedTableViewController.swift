@@ -86,6 +86,9 @@ class FeedTableViewController: UITableViewController {
         addPicButtonTapped()
     }
     
+    // to here to test photo posting at whatever time
+    
+    
     func performInitialAppLogic() {
         UserController.shared.fetchCurrentUser { user in
             if let _ = user {
@@ -105,14 +108,25 @@ class FeedTableViewController: UITableViewController {
     }
     
     func addPicButtonTapped() {
-        let alertController = UIAlertController(title: "Add Photo", message: "Select Camera or Gallery", preferredStyle: .alert)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-            self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self)
+        
+        let isMidnight = TimeTracker.shared.isMidnight!
+        if !isMidnight {
+            let alertController = UIAlertController(title: "Can't Post photos until midnight", message: "Come back between 12AM and 1AM to post", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            alertController.addAction(dismissAction)
+            present(alertController, animated: true, completion: nil) ; return
         }
-        let galleryAction = UIAlertAction(title: "Gallery???", style: .cancel, handler: nil)
-        alertController.addAction(cameraAction)
-        alertController.addAction(galleryAction)
-        present(alertController, animated: true, completion: nil)
+        
+        if isMidnight {
+            let alertController = UIAlertController(title: "Add Photo", message: "Select Camera or Gallery", preferredStyle: .alert)
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
+                self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self)
+            }
+            let galleryAction = UIAlertAction(title: "Gallery???", style: .cancel, handler: nil)
+            alertController.addAction(cameraAction)
+            alertController.addAction(galleryAction)
+            present(alertController, animated: true, completion: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
