@@ -57,14 +57,8 @@ class PostTableViewCell: UITableViewCell {
     
     func blockUser() {
         guard let post = post, let ownerReference = post.ownerReference else { return }
-        UserController.shared.blockUser(userToBlock: ownerReference) { user in
-            if let user = user {
-                DispatchQueue.main.async {
-                 
-                }
-            } else {
-                print("SOMETHING WENT TERRIBLY WRONG")
-            }
+        UserController.shared.blockUser(userToBlock: ownerReference) {
+            print("Sucessfull blocked user")
         }
     }
 }
@@ -75,6 +69,7 @@ protocol isBlockedUserButtonTappedTableViewCellDelegate: class {
     func isCompleteButtonTapped(sender: PostTableViewCell)
 }
 
+// TODO: = Add a liking feature 
 protocol isLikedButtonTappedTableViewCellDelegate: class {
     func isLikedButtonTapped(sender: PostTableViewCell)
 }

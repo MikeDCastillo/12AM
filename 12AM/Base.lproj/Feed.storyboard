@@ -10,6 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--LoginViewController-->
+        <scene sceneID="ug9-ag-tSf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LoginViewController" id="DGI-Be-4mv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hab-Ev-aa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1335" y="-843"/>
+        </scene>
         <!--Time to Midnight: <time>-->
         <scene sceneID="W5A-Yd-lkj">
             <objects>
@@ -83,6 +91,7 @@
                         <barButtonItem key="leftBarButtonItem" title="⚙" id="SIg-Ef-4tj">
                             <connections>
                                 <action selector="settingsButtonPressed:" destination="vDB-Xm-Gx6" id="QMg-s3-tYf"/>
+                                <segue destination="DGI-Be-4mv" kind="show" identifier="toLoginVC" id="aYA-ZI-Oar"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qAe-rx-Qjn">
@@ -104,7 +113,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKy-z7-nw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690.4000000000001" y="-374.66266866566718"/>
+            <point key="canvasLocation" x="1710" y="-376"/>
         </scene>
         <!--Camera-->
         <scene sceneID="qbD-i5-4Ok">

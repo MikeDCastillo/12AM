@@ -100,8 +100,8 @@ class UserController {
         }
     }
     
-    func blockUser(userToBlock: CKReference, completion: @escaping (User?) -> Void) {
-        self.currentUser?.blockUsersRefs?.append(userToBlock)
+    func blockUser(userToBlock: CKReference, completion: @escaping () -> Void) {
+        self.currentUser?.blockUserRefs?.append(userToBlock)
         guard let currentUser = currentUser else { return }
         let record = CKRecord(user: currentUser)
         
@@ -109,7 +109,7 @@ class UserController {
             if let error = error {
                 print("Error modifying record \(error.localizedDescription)")
             } else {
-                completion(currentUser)
+                completion()
             }
         }
     }

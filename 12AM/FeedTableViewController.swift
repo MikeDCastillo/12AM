@@ -39,8 +39,8 @@ class FeedTableViewController: UITableViewController {
     }
     
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
-//        handleRefresh(sender)
-        PostController.sharedController.requestFullSync { 
+        //        handleRefresh(sender)
+        PostController.sharedController.requestFullSync {
             DispatchQueue.main.async {
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
@@ -48,12 +48,12 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-//    func handleRefresh(_ refreshControl: UIRefreshControl) {
-//        PostController.sharedController.requestFullSync()
-////        PostController.sharedController.performFullSync()
-//        self.tableView.reloadData()
-//        refreshControl.endRefreshing()
-//    }
+    //    func handleRefresh(_ refreshControl: UIRefreshControl) {
+    //        PostController.sharedController.requestFullSync()
+    ////        PostController.sharedController.performFullSync()
+    //        self.tableView.reloadData()
+    //        refreshControl.endRefreshing()
+    //    }
     
     // MARK: - Table view data source
     
@@ -77,7 +77,7 @@ class FeedTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
         // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
     }
-
+    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = UIColor.black
     }
@@ -92,12 +92,12 @@ class FeedTableViewController: UITableViewController {
                 return
             } else {
                 DispatchQueue.main.async {
-                    self.presentLogin()
+                  //  self.presentLogin()
                 }
             }
         }
     }
-    
+
     func presentLogin() {
         let loginSB = UIStoryboard.init(name: String(describing: LoginViewController.self), bundle: nil)
         guard let loginVC = loginSB.instantiateInitialViewController() else { return }
@@ -123,7 +123,5 @@ class FeedTableViewController: UITableViewController {
         }
     }
 }
-
-
 
 //potential feature: replace login button with a Map button that shows where in the world is currently active

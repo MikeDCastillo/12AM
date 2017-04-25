@@ -27,6 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate let accessToken = AccessToken.current
     
+    
 
     // MARK: - Life Cycle
     
@@ -142,8 +143,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             userNameTextField.placeholder = ""
         }
         if emailTextField.isFirstResponder == true {
-            emailTextField.placeholder = ""
             emailTextField.keyboardType = .emailAddress
+            emailTextField.placeholder = ""
         }
     }
     
