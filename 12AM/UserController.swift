@@ -12,7 +12,6 @@ import CloudKit
 import FBSDKLoginKit
 import FacebookCore
 
-
 class UserController {
     
     static let shared = UserController()
@@ -20,16 +19,15 @@ class UserController {
     let publicDB = CKContainer.default().publicCloudDatabase
     let privateDB = CKContainer.default().privateCloudDatabase
     
-    
     var appleUserRecordID: CKRecordID?
     var blockUserRef: [CKReference]? = []
     var users: [User] = []
-    
     var dict : [String : AnyObject]?
-    let currentUserWasSentNotification = Notification.Name("currentUserWasSet")
-    
     // More efficient when you want to find a user
     var currentUser: User?
+    
+    let currentUserWasSentNotification = Notification.Name("currentUserWasSet")
+
     
     // MARK: - CRUD
     
@@ -104,11 +102,19 @@ class UserController {
     
     func blockUser(userToBlock: CKReference, completion: @escaping (User?) -> Void) {
         self.currentUser?.blockUsersRefs?.append(userToBlock)
+        guard let currentUser = currentUser else { return }
+        let record = CKRecord(user: currentUser)
         
-        
+        CloudKitManager.shared.modifyRecords([record], perRecordCompletion: nil) { (records, error) in
+            if let error = error {
+                print("Error modifying record \(error.localizedDescription)")
+            } else {
+                completion(currentUser)
+            }
+        }
     }
     
-    
+    // MARK: - TODO: - Set up private DB for blocked users 
     func saveUserToPrivateDatabase(userRecord: CKRecord, password: String, completion: () -> Void) {
         
     }
