@@ -68,7 +68,7 @@ class UserController {
                     self.currentUser = currentUser
                     completion(currentUser)
                     
-                    print("Success")
+                    print("Success creating user")
                 } else {
                     print( "Error saving user record:\(String(describing: error?.localizedDescription))")
                 }

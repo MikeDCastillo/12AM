@@ -116,7 +116,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
                     self.dismiss(animated: true, completion: nil)
                 }
             } else {
-                print("SOMETHING WENT TERRIBLY WRONG")
+                print("SOMETHING WENT TERRIBLY WRONG \(#file) \(#function)")
             }
         })
     }

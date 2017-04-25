@@ -119,15 +119,25 @@ class PostController {
         
         var referencesToExclude = [CKReference]()
         let midnight = TimeTracker.shared.midnight.timeIntervalSince1970
+        let midnightDate = NSDate(timeIntervalSince1970: midnight)
         let oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
+        let oneAMDate = NSDate(timeIntervalSince1970: oneAM)
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
         var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         if referencesToExclude.isEmpty {
-            predicate = NSPredicate(format: "@timestamp BETWEEN {%d, %d}", midnight, oneAM)
+            if type == "Post" {                
+                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
+                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
+                
+                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
+            } else {
+                predicate = NSPredicate(value: true)
+            }
+            
         }
         
-        cloudKitManager.fetchRecordsWithType(type, recordFetchedBlock: nil) { (records, error) in
+        cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
             guard let records = records else { return }
             switch type {
             case User.typeKey:
