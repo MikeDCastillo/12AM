@@ -21,7 +21,7 @@ class PostDetailTableViewController: UITableViewController {
         guard let post = post, isViewLoaded else { return }
         let date = post.timestamp.timeIntervalSince1970
         imageView.image = post.photo
-        timeLabel.text = String(date.divided(by: date))
+        timeLabel.text = String(date)
         captionLabel.text = post.text
     }
     
