@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,8 +33,8 @@
                                             <color key="textColor" red="0.69613629669999999" green="1" blue="0.93562097499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDa-dN-dTj">
-                                            <rect key="frame" x="166" y="8" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDa-dN-dTj">
+                                            <rect key="frame" x="166" y="8" width="86" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,10 +48,25 @@
                                                 <action selector="imageButtonTapped:" destination="kkh-UU-IVS" eventType="touchUpInside" id="xYm-UT-0Hd"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqp-Cl-rhn">
+                                            <rect key="frame" x="317" y="14" width="31" height="58"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <state key="normal" title="...">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="blockUserButtonTapped:" destination="kkh-UU-IVS" eventType="touchUpInside" id="SLW-Ix-wkF"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Dqp-Cl-rhn" secondAttribute="trailing" constant="19" id="ceP-Xp-I4c"/>
+                                        <constraint firstItem="Dqp-Cl-rhn" firstAttribute="top" secondItem="OQe-vc-DPp" secondAttribute="topMargin" constant="6" id="nzR-0F-c5p"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="blockUserButton" destination="Dqp-Cl-rhn" id="7IG-wU-f5m"/>
                                     <outlet property="captionLabel" destination="DCL-4o-oFc" id="i3B-11-AA1"/>
                                     <outlet property="imageButton" destination="gIE-K5-wnp" id="5Nr-jt-gGO"/>
                                     <outlet property="userNameLabel" destination="EDa-dN-dTj" id="tGE-uD-6bn"/>

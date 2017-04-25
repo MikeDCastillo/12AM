@@ -66,6 +66,7 @@
                                 </state>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="TFR-wv-aBC"/>
+                                    <segue destination="iOS-t5-ZD9" kind="show" id="qmQ-k0-t0H"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6F7-x5-b0W">
@@ -153,6 +154,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YG3-6Y-fie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="477.60000000000002" y="658.92053973013503"/>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="tEd-yj-tsx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Feed" id="iOS-t5-ZD9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7kN-cI-f8j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047" y="372"/>
         </scene>
     </scenes>
     <resources>

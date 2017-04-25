@@ -143,6 +143,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         }
         if emailTextField.isFirstResponder == true {
             emailTextField.placeholder = ""
+            emailTextField.keyboardType = .emailAddress
         }
     }
     
@@ -237,8 +238,6 @@ extension LoginViewController  {
 extension LoginViewController {
     
     func setUpUI() {
-//        userNameTextField.backgroundColor = .midnight
-//        emailTextField.backgroundColor = .midnight
         profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
         signUpButton.layer.cornerRadius = 20.0
     }
