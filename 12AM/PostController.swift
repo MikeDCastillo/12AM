@@ -149,20 +149,10 @@ class PostController {
                 completion()
             case Post.typeKey:
                 let posts = records.flatMap { Post(record: $0) }
-                //                for post in posts {
-                //                guard let userReference = post.ownerReference else { return }
-                //                let matchingUser = UserController.shared.users.filter ( { $0.cloudKitRecordID == userReference.recordID } ).first
-                //                post.owner = matchingUser
-                //                matchingUser?.posts.append(post)
                 self.posts = posts
                 completion()
-                
             case Comment.typeKey:
                 let comments = records.flatMap { Comment(record: $0) }
-                //                guard let postReference = record[Comment.postKey] as? CKReference,
-                //                    let comment = Comment(record: record) else { return }
-                //                let matchingPost = PostController.sharedController.posts.filter({$0.cloudKitRecordID == postReference.recordID}).first
-                //                matchingPost?.comments.append(comment)
                 self.comments = comments
                 completion()
             default:
