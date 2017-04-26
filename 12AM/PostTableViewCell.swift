@@ -18,6 +18,7 @@ class PostTableViewCell: UITableViewCell {
     
     weak var delegate: isBlockedUserButtonTappedTableViewCellDelegate?
     
+    
     var post: Post? {
         didSet {
             updateViews()
@@ -32,6 +33,7 @@ class PostTableViewCell: UITableViewCell {
         //this lets the captionLabel just display the first 25 chars of the caption
         let captionLede = String(caption.characters.prefix(25))
         captionLabel.text = captionLede
+        
         
         // TODO: - userNameLabel.text = username from login
     }
@@ -56,7 +58,8 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func blockUser() {
-        guard let post = post, let ownerReference = post.ownerReference else { return }
+        guard let post = post, let ownerReference = post.ownerReference
+            else { return }
         UserController.shared.blockUser(userToBlock: ownerReference) {
             print("Sucessfull blocked user")
         }

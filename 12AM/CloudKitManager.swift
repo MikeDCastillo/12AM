@@ -109,7 +109,6 @@ class CloudKitManager {
         let endDatePredicate = NSPredicate(format: "%K < %@", argumentArray: [CreationDateKey, toDate])
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startDatePredicate, endDatePredicate])
         
-        
         self.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
             
             completion?(records, error)
@@ -136,10 +135,10 @@ class CloudKitManager {
         operation.perRecordCompletionBlock = perRecordCompletion
         
         operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
-            guard let error = error else { return }
-            (completion?(records, error))
+            if let error = error { print(error.localizedDescription) }
+            (completion?(records, error))!
         }
-        
+
         publicDatabase.add(operation)
     }
     

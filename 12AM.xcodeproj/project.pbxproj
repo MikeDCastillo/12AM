@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0119C62C1EB03E880006863A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0119C62B1EB03E880006863A /* Assets.xcassets */; };
 		013F3A5C1EA93CC2004BCEBE /* FacebookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F3A5B1EA93CC2004BCEBE /* FacebookController.swift */; };
 		013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57E91E9D51A900AA9CA4 /* User.swift */; };
 		013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0119C62B1EB03E880006863A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		013F3A5B1EA93CC2004BCEBE /* FacebookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookController.swift; sourceTree = "<group>"; };
 		013F57E91E9D51A900AA9CA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				737E794E1E9B180200172355 /* Contents.json */,
+				0119C62B1EB03E880006863A /* Assets.xcassets */,
 				737E79531E9B180200172355 /* Info.plist */,
 				7366ADA91EAE58E600E070E8 /* TimerExtension.swift */,
 				7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */,
@@ -312,6 +315,7 @@
 				73D3966D1EA847F800D488A1 /* LoginViewController.storyboard in Resources */,
 				73D3966C1EA847F800D488A1 /* LaunchScreen.storyboard in Resources */,
 				73D3966A1EA847F800D488A1 /* Camera.storyboard in Resources */,
+				0119C62C1EB03E880006863A /* Assets.xcassets in Resources */,
 				73D3966B1EA847F800D488A1 /* Feed.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

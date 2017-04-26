@@ -91,7 +91,6 @@
                         <barButtonItem key="leftBarButtonItem" title="⚙" id="SIg-Ef-4tj">
                             <connections>
                                 <action selector="settingsButtonPressed:" destination="vDB-Xm-Gx6" id="QMg-s3-tYf"/>
-                                <segue destination="DGI-Be-4mv" kind="show" identifier="toLoginVC" id="aYA-ZI-Oar"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qAe-rx-Qjn">
@@ -109,6 +108,8 @@
                     </refreshControl>
                     <connections>
                         <segue destination="BU3-kI-xAn" kind="show" identifier="addPhotoButtonTappedToCamera" id="2XV-LW-rKv"/>
+                        <segue destination="DGI-Be-4mv" kind="show" identifier="editProfile" id="iJ8-my-oJz"/>
+                        <segue destination="DGI-Be-4mv" kind="presentation" identifier="presentSignUp" id="Kbc-Lf-vZM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKy-z7-nw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -240,4 +241,7 @@
             <point key="canvasLocation" x="868" y="-375"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iJ8-my-oJz"/>
+    </inferredMetricsTieBreakers>
 </document>

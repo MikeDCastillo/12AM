@@ -46,7 +46,9 @@ class PostController {
     func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
         
         // Sets image property of jpeg
-        guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
+        guard let data = UIImageJPEGRepresentation(image, 0.5),
+            let currentUser = UserController.shared.currentUser
+            else { return }
         let post = Post(photoData: data, text: caption, owner: currentUser)
         
         // Adds post to first cell
@@ -65,6 +67,7 @@ class PostController {
                 else { return }
             
             post.cloudKitRecordID = record.recordID
+            post.ownerReference = record["ownerRef"] as? CKReference
             completion(post)
         }
     }
@@ -125,17 +128,17 @@ class PostController {
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
         var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
-        if referencesToExclude.isEmpty {
-            if type == "Post" {                
-                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
-                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
-                
-                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
-            } else {
+//        if referencesToExclude.isEmpty {
+//            if type == "Post" {
+//                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
+//                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
+//                
+//                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
+//            } else {
                 predicate = NSPredicate(value: true)
-            }
-            
-        }
+//            }
+        
+//        }
         
         cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
             guard let records = records else { return }
@@ -146,20 +149,10 @@ class PostController {
                 completion()
             case Post.typeKey:
                 let posts = records.flatMap { Post(record: $0) }
-                //                for post in posts {
-                //                guard let userReference = post.ownerReference else { return }
-                //                let matchingUser = UserController.shared.users.filter ( { $0.cloudKitRecordID == userReference.recordID } ).first
-                //                post.owner = matchingUser
-                //                matchingUser?.posts.append(post)
                 self.posts = posts
                 completion()
-                
             case Comment.typeKey:
                 let comments = records.flatMap { Comment(record: $0) }
-                //                guard let postReference = record[Comment.postKey] as? CKReference,
-                //                    let comment = Comment(record: record) else { return }
-                //                let matchingPost = PostController.sharedController.posts.filter({$0.cloudKitRecordID == postReference.recordID}).first
-                //                matchingPost?.comments.append(comment)
                 self.comments = comments
                 completion()
             default:
