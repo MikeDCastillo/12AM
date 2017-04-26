@@ -28,7 +28,6 @@ class UserController {
     
     let currentUserWasSentNotification = Notification.Name("currentUserWasSet")
 
-    
     // MARK: - CRUD
     
     func fetchCurrentUser(completion: @escaping (User?) -> Void) {

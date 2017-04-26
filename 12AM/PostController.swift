@@ -128,17 +128,17 @@ class PostController {
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
         var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
-        if referencesToExclude.isEmpty {
-            if type == "Post" {                
-                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
-                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
-                
-                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
-            } else {
+//        if referencesToExclude.isEmpty {
+//            if type == "Post" {
+//                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
+//                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
+//                
+//                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
+//            } else {
                 predicate = NSPredicate(value: true)
-            }
-            
-        }
+//            }
+        
+//        }
         
         cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
             guard let records = records else { return }
