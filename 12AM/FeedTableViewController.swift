@@ -10,9 +10,13 @@ import UIKit
 
 class FeedTableViewController: UITableViewController {
     
+    fileprivate let presentSignUpSegue =  "presentSignUp"
+    fileprivate let showEditProfileSegue = "editProfile"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpTimer()
         performInitialAppLogic()
         self.tableView.backgroundColor = UIColor.black
         //        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
@@ -22,6 +26,14 @@ class FeedTableViewController: UITableViewController {
         PostController.sharedController.requestFullSync {
             DispatchQueue.main.async {
                 self.reloadData()
+            }
+        }
+    }
+    
+    func setUpTimer() {
+        Timer.every(1.second) {
+            DispatchQueue.main.async {
+                self.title = Date().timeTillString
             }
         }
     }
@@ -74,8 +86,11 @@ class FeedTableViewController: UITableViewController {
     // MARK: - Navigation
     
     @IBAction func settingsButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        // TODO: - check if this still works once the login screen is bypassed by saving a user in userDefaults
+        if let _ = UserController.shared.currentUser {
+            performSegue(withIdentifier: showEditProfileSegue, sender: self)
+        } else {
+            performSegue(withIdentifier: presentSignUpSegue, sender: self)
+        }
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -95,20 +110,13 @@ class FeedTableViewController: UITableViewController {
                 return
             } else {
                 DispatchQueue.main.async {
-                  //  self.presentLogin()
+                  self.performSegue(withIdentifier: self.presentSignUpSegue, sender: self)
                 }
             }
         }
     }
-
-    func presentLogin() {
-        let loginSB = UIStoryboard.init(name: String(describing: LoginViewController.self), bundle: nil)
-        guard let loginVC = loginSB.instantiateInitialViewController() else { return }
-        present(loginVC, animated: true, completion: nil)
-    }
     
     func addPicButtonTapped() {
-        
         let isMidnight = TimeTracker.shared.isMidnight!
         if !isMidnight {
             let alertController = UIAlertController(title: "Can't Post photos until midnight", message: "Come back between 12AM and 1AM to post", preferredStyle: .alert)

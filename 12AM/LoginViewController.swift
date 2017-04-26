@@ -27,6 +27,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate let accessToken = AccessToken.current
     
+    fileprivate var currentUser: User? {
+        return UserController.shared.currentUser
+    }
     
 
     // MARK: - Life Cycle
@@ -37,6 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         updateViews()
         // TODO: - add me back int
 //        setUpFacebookLogInButton()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterMidnight), name: Notification.Name.didEnterMidnightHour, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitMidnight), name: Notification.Name.didExitMidnightHour, object: nil)
@@ -69,7 +73,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        if let existingUser = UserController.shared.currentUser {
+        if let existingUser = currentUser {
             updateCurrentUser()
         } else {
             saveNewUser()
@@ -122,7 +126,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     func updateCurrentUser() {
-        
+        // TODO: Implement this:
+        navigationController?.popViewController(animated: true)
     }
     
     func userAddedWithFacebook() {
@@ -130,11 +135,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     func updateViews() {
-        guard let currentUser = UserController.shared.currentUser else { return }
-        DispatchQueue.main.async {
-            self.userNameTextField.text = currentUser.username
-            self.emailTextField.text = currentUser.email
-            self.profileImageView.image = currentUser.profileImage
+        if let currentUser = currentUser {
+            title = "Edit Profile"
+            signUpButton.setTitle("Save", for: .normal)
+            userNameTextField.text = currentUser.username
+            emailTextField.text = currentUser.email
+            profileImageView.image = currentUser.profileImage
+        } else {
+            title = "Sign up"
+            signUpButton.setTitle("Sign up", for: .normal)
         }
     }
     
