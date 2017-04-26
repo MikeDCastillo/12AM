@@ -34,6 +34,7 @@ class PostTableViewCell: UITableViewCell {
         let captionLede = String(caption.characters.prefix(25))
         captionLabel.text = captionLede
         
+        
         // TODO: - userNameLabel.text = username from login
     }
     
@@ -57,12 +58,11 @@ class PostTableViewCell: UITableViewCell {
     }
     
     func blockUser() {
-        guard let post = post, let ownerReference = post.ownerReference else { return }
+        guard let post = post, let ownerReference = post.ownerReference
+            else { return }
         UserController.shared.blockUser(userToBlock: ownerReference) {
             print("Sucessfull blocked user")
         }
-        guard let blockedUsers = UserController.shared.blockUserRef else { return }
-        
     }
 }
 

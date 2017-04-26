@@ -19,7 +19,7 @@ class TimeTracker {
     }
     
     // for testing make this next line ... var isMidnight: Bool? = false
-    var isMidnight: Bool? = true 
+    var isMidnight: Bool? = true
     {
         didSet {
             guard let isMidnight = isMidnight, isMidnight != oldValue else { return }

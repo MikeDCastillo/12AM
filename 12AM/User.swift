@@ -112,11 +112,11 @@ extension CKRecord {
         self.setValue(user.username, forKey: User.usernameKey)
         self.setValue(user.email, forKey: User.emailKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
+        self.setValue(user.blockUserRefs, forKey: User.blockUserRefKey)
         self.setValue(user.accessToken, forKey: User.accessTokenKey)
-        guard user.profileImage != nil else { return }
         let imageAsset = CKAsset(fileURL: user.temporaryPhotoURL)
         self.setValue(imageAsset, forKey: User.imageKey)
-        self.setValue(user.blockUserRefs, forKey: User.blockUserRefKey)
+        guard user.profileImage != nil else { return }
     }
 }
 

@@ -46,7 +46,9 @@ class PostController {
     func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
         
         // Sets image property of jpeg
-        guard let data = UIImageJPEGRepresentation(image, 0.5), let currentUser = UserController.shared.currentUser else { return }
+        guard let data = UIImageJPEGRepresentation(image, 0.5),
+            let currentUser = UserController.shared.currentUser
+            else { return }
         let post = Post(photoData: data, text: caption, owner: currentUser)
         
         // Adds post to first cell
@@ -65,6 +67,7 @@ class PostController {
                 else { return }
             
             post.cloudKitRecordID = record.recordID
+            post.ownerReference = record["ownerRef"] as? CKReference
             completion(post)
         }
     }
