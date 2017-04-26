@@ -17,5 +17,8 @@ profile
 *.moved-aside
 *.orig
 
+# CocoaPods
+Pods/
+Podfile.lock
 build
 .DS_Store

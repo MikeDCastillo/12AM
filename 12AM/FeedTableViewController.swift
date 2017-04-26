@@ -109,23 +109,33 @@ class FeedTableViewController: UITableViewController {
     
     func addPicButtonTapped() {
         
-        let isMidnight = TimeTracker.shared.isMidnight!
-        if !isMidnight {
-            let alertController = UIAlertController(title: "Can't Post photos until midnight", message: "Come back between 12AM and 1AM to post", preferredStyle: .alert)
-            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
-            alertController.addAction(dismissAction)
-            present(alertController, animated: true, completion: nil) ; return
-        }
+        guard let isMidnight = TimeTracker.shared.isMidnight else { return }
         
         if isMidnight {
-            let alertController = UIAlertController(title: "Add Photo", message: "Select Camera or Gallery", preferredStyle: .alert)
-            let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-                self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self)
+            
+            if UserController.shared.currentUser != nil {
+                
+                let cameraOrCancelAlertController = UIAlertController(title: "Add Photo", message: "Take a photo to post", preferredStyle: .alert)
+                let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
+                    self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self) }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                cameraOrCancelAlertController.addAction(cameraAction)
+                cameraOrCancelAlertController.addAction(cancelAction)
+                present(cameraOrCancelAlertController, animated: true, completion: nil)
+            
+            } else {
+                let noUserAlertController = UIAlertController(title: "User needed", message: "In order to post photos, please log in", preferredStyle: .alert)
+                let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+                noUserAlertController.addAction(dismissAction)
+                present(noUserAlertController, animated: true, completion: nil)
             }
-            let galleryAction = UIAlertAction(title: "Gallery???", style: .cancel, handler: nil)
-            alertController.addAction(cameraAction)
-            alertController.addAction(galleryAction)
-            present(alertController, animated: true, completion: nil)
+        
+        } else {
+            
+            let notMidnightAlertController = UIAlertController(title: "Can't Post photos until midnight", message: "Post photos between 12AM and 1AM", preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+            notMidnightAlertController.addAction(dismissAction)
+            present(notMidnightAlertController, animated: true, completion: nil) ; return
         }
     }
     
@@ -139,3 +149,4 @@ class FeedTableViewController: UITableViewController {
 }
 
 //potential feature: replace login button with a Map button that shows where in the world is currently active
+

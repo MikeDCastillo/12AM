@@ -19,7 +19,7 @@ class TimeTracker {
     }
     
     // for testing make this next line ... var isMidnight: Bool? = false
-    var isMidnight: Bool? = true 
+    var isMidnight: Bool? 
     {
         didSet {
             guard let isMidnight = isMidnight, isMidnight != oldValue else { return }
@@ -28,9 +28,9 @@ class TimeTracker {
         }
     }
     
-    init() {
-        startTimer()
-    }
+//    init() {
+//        startTimer()
+//    }
     
     func startTimer() {
         Timer.every(1.second) {
@@ -46,7 +46,6 @@ extension Date {
     var isInMidnightHour: Bool {
         return Calendar.current.component(Calendar.Component.hour, from: self) == 0
     }
-    
 }
 
 extension NSNotification.Name {
