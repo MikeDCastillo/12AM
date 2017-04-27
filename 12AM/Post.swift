@@ -48,6 +48,13 @@ class Post: CloudKitSyncable {
     
     var cloudKitRecordID: CKRecordID?
     
+    var cloudKitReference: CKReference? {
+        
+        guard let cloudKitRecordID = self.cloudKitRecordID else { return nil }
+        
+        return CKReference(recordID: cloudKitRecordID, action: .none)
+    }
+    
     init?(record: CKRecord) {
         guard let timestamp = record[Post.timestampKey] as? Date,
             let text = record[Post.textKey] as? String,
@@ -75,13 +82,12 @@ class Post: CloudKitSyncable {
         
         return fileURL
     }
-    var cloudKitReference: CKReference?
 }
 
 extension CKRecord {
     
     convenience init(_ post: Post) {
-        let recordID = CKRecordID(recordName: UUID().uuidString)
+        let recordID = post.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
         self.init(recordType: post.recordType, recordID: recordID)
         self[Post.textKey] = post.text as CKRecordValue
         self[Post.timestampKey] = post.timestamp as NSDate
@@ -89,7 +95,7 @@ extension CKRecord {
         guard let owner = post.owner,
             let ownerRecordID = owner.cloudKitRecordID
             else { return }
-        self[Post.ownerReferenceKey] = CKReference(recordID: ownerRecordID, action: .none)
+        self[Post.ownerReferenceKey] = CKReference(recordID: ownerRecordID, action: .deleteSelf)
     }
 }
 

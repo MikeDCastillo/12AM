@@ -62,34 +62,34 @@ class PostController {
             if let error = error {
                 print("Error saving new post to CloudKit: \(error.localizedDescription)")
             }
-            
-            guard let record = record
-                else { return }
-            
-            post.cloudKitRecordID = record.recordID
+        
             completion(post)
         }
     }
     
     
     // Add Comments to posts function
-    func addComment(post: Post, commentText: String, completion: @escaping ((Comment) -> Void) = { _ in }) -> Comment {
-        let comment = Comment(text: commentText, post: post)
+    func addComment(post: Post, commentText: String, completion: @escaping (() -> Void) = { _ in }) {
+//        let comment = Comment(text: commentText, post: post)
+        guard let cloudKitRef = post.cloudKitReference
+        else { return }
+        let comment = Comment(text: commentText, post: post, postReference: cloudKitRef, ownerReference: post.ownerReference )
         post.comments.append(comment)
         
         cloudKitManager.saveRecord(CKRecord(comment)) { (record, error) in
             if let error = error {
                 print("Error saving new comment in CloudKit: \(error)")
+                completion()
+                return
             }
             comment.cloudKitRecordID = record?.recordID
-            completion(comment)
+            completion()
         }
         
         DispatchQueue.main.async {
             let nc = NotificationCenter.default
             nc.post(name: PostController.PostCommentsChangedNotification, object: post)
         }
-        return comment
     }
     
     //MARK: -Synced functions that will help grab records synced in CloudKit. Saves on data and time.
@@ -125,21 +125,30 @@ class PostController {
         let oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
         let oneAMDate = NSDate(timeIntervalSince1970: oneAM)
         
+        guard let user = UserController.shared.currentUser,
+            let blockUserRefs = user.blockUserRefs else { return }
+        var predicates: [NSPredicate] = []
+        var blockPredicate = NSPredicate(format: "NOT(ownerRef IN %@)", blockUserRefs)
+        
+        
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
         var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
-//        if referencesToExclude.isEmpty {
-//            if type == "Post" {
-//                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
-//                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
-//                
-//                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
-//            } else {
-                predicate = NSPredicate(value: true)
-//            }
+        //        if referencesToExclude.isEmpty {
+        //            if type == "Post" {
+        //                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
+        //                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
+        //
+        //                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
+        //            } else {
+        let allPredicate = NSPredicate(value: true)
+        //            }
         
-//        }
+        //        }
+        predicates.append(blockPredicate)
+        predicates.append(allPredicate)
+        let predicateArr = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         
-        cloudKitManager.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
+        cloudKitManager.fetchRecordsWithType(type, predicate: predicateArr, recordFetchedBlock: nil) { (records, error) in
             guard let records = records else { return }
             switch type {
             case User.typeKey:
@@ -152,6 +161,13 @@ class PostController {
                 completion()
             case Comment.typeKey:
                 let comments = records.flatMap { Comment(record: $0) }
+                for comment in comments {
+                    let postRef = comment.postReference
+                    guard let postIndex = self.posts.index(where: {$0.cloudKitRecordID == postRef.recordID } ) else { return }
+                    let post = self.posts[postIndex]
+                    post.comments.append(comment)
+                    comment.post = post
+                }
                 self.comments = comments
                 completion()
             default:
