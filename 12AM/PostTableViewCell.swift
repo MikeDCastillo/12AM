@@ -15,6 +15,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
+    
     weak var delegate: isBlockedUserButtonTappedTableViewCellDelegate?
     
     var post: Post? {
@@ -32,8 +33,8 @@ class PostTableViewCell: UITableViewCell {
         //this lets the captionLabel just display the first 25 chars of the caption
         let captionLede = String(caption.characters.prefix(25))
         captionLabel.text = captionLede
-        userNameLabel.text = username
-        profileImageView.image = post?.owner?.profileImage
+        userNameLabel.text = post?.owner?.username
+        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
