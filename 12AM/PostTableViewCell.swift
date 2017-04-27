@@ -15,7 +15,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var blockUserButton: UIButton!
-    @IBOutlet weak var porfileAvatar: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
     weak var delegate: isBlockedUserButtonTappedTableViewCellDelegate?
     
     
@@ -34,6 +35,7 @@ class PostTableViewCell: UITableViewCell {
         let captionLede = String(caption.characters.prefix(25))
         captionLabel.text = captionLede
         userNameLabel.text = post?.owner?.username
+        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

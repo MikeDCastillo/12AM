@@ -99,6 +99,7 @@ class FeedTableViewController: UITableViewController {
     
     @IBAction func addButtonTapped(_ sender: Any) {
         addPicButtonTapped()
+        print("Josh is sexy")
     }
     
     // to here to test photo posting at whatever time
