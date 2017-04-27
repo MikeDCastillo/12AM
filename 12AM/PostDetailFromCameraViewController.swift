@@ -17,6 +17,20 @@ class PostDetailFromCameraViewController: UIViewController {
         captionTextField.resignFirstResponder()
     }
     
+    var image: UIImage? {
+        didSet {
+            if isViewLoaded {
+                imageView.image = image
+            }
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func unwind(segue ofType: UIStoryboardSegue) {
+        // TODO: - update
+    }
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
         saveImage()
         self.dismiss(animated: true, completion: nil)
@@ -26,26 +40,16 @@ class PostDetailFromCameraViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var captionTextField: UITextField!
-    
-    var image: UIImage? {
-        didSet {
-            if isViewLoaded {
-                imageView.image = image
-            }
-        }
-    }
-    
-    @IBAction func unwind(segue ofType: UIStoryboardSegue) {
-    }
-    
     func saveImage() {
         guard let caption = captionTextField?.text,
             let image = imageView?.image else { return }
         PostController.sharedController.createPost(image: image, caption: caption) { (post) in
+            // TODO: - update post
             guard let post = post else { return }
         }
     }
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var captionTextField: UITextField!
 }

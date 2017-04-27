@@ -44,12 +44,12 @@ class PostController {
     
     // Create Post Function
     func createPost(image: UIImage, caption: String, completion: @escaping ((Post?) -> Void)) {
-        
         // Sets image property of jpeg
-        guard let data = UIImageJPEGRepresentation(image, 0.5),
-            let currentUser = UserController.shared.currentUser
+        guard let data = UIImageJPEGRepresentation(image, 1),
+            let currentUser = UserController.shared.currentUser, let currentUserRecordID = currentUser.cloudKitRecordID
             else { return }
-        let post = Post(photoData: data, text: caption, owner: currentUser)
+        let ownerReference = CKReference(recordID: currentUserRecordID, action: .none)
+        let post = Post(photoData: data, text: caption, owner: currentUser, ownerReference: ownerReference)
         
         // Adds post to first cell
         posts.insert(post, at: 0)
@@ -60,14 +60,13 @@ class PostController {
         cloudKitManager.saveRecord(record) { (record, error) in
             
             if let error = error {
-                print("Error saving new post to CloudKit: \(error)")
+                print("Error saving new post to CloudKit: \(error.localizedDescription)")
             }
             
             guard let record = record
                 else { return }
             
             post.cloudKitRecordID = record.recordID
-            post.ownerReference = record["ownerRef"] as? CKReference
             completion(post)
         }
     }

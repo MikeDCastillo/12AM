@@ -24,19 +24,20 @@ class Post: CloudKitSyncable {
     var comments: [Comment]
     let text: String
     var owner: User?
-    var ownerReference: CKReference?
+    var ownerReference: CKReference
     
     var photo: UIImage? {
         guard let photoData = self.photoData else { return nil }
         return UIImage(data: photoData)
     }
     
-    init(photoData: Data?, timestamp: Date = Date(), text: String, comments: [Comment] = [], owner: User) {
+    init(photoData: Data?, timestamp: Date = Date(), text: String, comments: [Comment] = [], owner: User, ownerReference: CKReference) {
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
         self.comments = comments.sorted(by: { $0.timestamp > $1.timestamp })
         self.owner = owner
+        self.ownerReference = ownerReference
     }
     
     //MARK: - CloudKit
@@ -54,7 +55,6 @@ class Post: CloudKitSyncable {
             let photoData = try? Data(contentsOf: photoAsset.fileURL),
             let ownerReference = record[Post.ownerReferenceKey] as? CKReference else { return nil }
         
-
         self.photoData = photoData
         self.timestamp = timestamp
         self.text = text
@@ -62,7 +62,6 @@ class Post: CloudKitSyncable {
         self.cloudKitRecordID = record.recordID
         self.comments = []
     }
-    
     
     //MARK: - Photo computed property
     
@@ -76,7 +75,7 @@ class Post: CloudKitSyncable {
         
         return fileURL
     }
-    
+    var cloudKitReference: CKReference?
 }
 
 extension CKRecord {
@@ -87,8 +86,7 @@ extension CKRecord {
         self[Post.textKey] = post.text as CKRecordValue
         self[Post.timestampKey] = post.timestamp as NSDate
         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
-        guard
-            let owner = post.owner,
+        guard let owner = post.owner,
             let ownerRecordID = owner.cloudKitRecordID
             else { return }
         self[Post.ownerReferenceKey] = CKReference(recordID: ownerRecordID, action: .none)
