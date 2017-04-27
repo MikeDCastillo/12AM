@@ -46,6 +46,7 @@ class PostDetailFromCameraViewController: UIViewController {
         PostController.sharedController.createPost(image: image, caption: caption) { (post) in
             // TODO: - update post
             guard let post = post else { return }
+            // TODO - update post completion
         }
     }
     

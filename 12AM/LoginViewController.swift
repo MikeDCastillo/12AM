@@ -126,9 +126,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     func updateCurrentUser() {
-        // TODO: Implement this:
         navigationController?.popViewController(animated: true)
+        guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
+        let profileImage = profileImageView.image
+        UserController.shared.updateCurrentUser(username: userName, email: email, profileImage: profileImage, completion: { user in
+            if let _ = user {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            } else {
+                print("SOMETHING WENT TERRIBLY WRONG updating the currentUser\(#file) \(#function)")
+            }
+        })
     }
+    
     
     func userAddedWithFacebook() {
         // TODO:
@@ -251,5 +262,4 @@ extension LoginViewController {
         profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
         signUpButton.layer.cornerRadius = 20.0
     }
-    
 }
