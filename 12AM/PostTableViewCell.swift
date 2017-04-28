@@ -32,9 +32,13 @@ class PostTableViewCell: UITableViewCell {
         guard let username = post.owner?.username else { return }
         //this lets the captionLabel just display the first 25 chars of the caption
         let captionLede = String(post.text.characters.prefix(25))
-        captionLabel.text = captionLede
+        if captionLede.characters.count > 24 {
+            captionLabel.text = "\(captionLede)..."
+        } else {
+            captionLabel.text = captionLede
+        }
         userNameLabel.text = username
-       
+        profileImageView.image = post.owner?.profileImage
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -43,24 +47,31 @@ class PostTableViewCell: UITableViewCell {
     
     // MARK: - Action
     
-    @IBAction func imageButtonTapped(_ sender: Any) {
-        
+    @IBAction func imageButtonTapped(_ sender: Any) { // Do stuff to make the imageButtonTapped segue to the detailVC
+      
+
     }
     @IBAction func blockUserButtonTapped(_ sender: UIButton) {
-        delegate?.isCompleteButtonTapped(sender: self)
-        blockUser()
+        blockUserActionSheet()
     }
     
-    // MARK: - Alert 
     func blockUserActionSheet() {
-        
+        let blockUserAlertController = UIAlertController(title: "Block User", message: "Would you like to block this user? \nYou will no longer be able to \nsee their posts or comments", preferredStyle: .actionSheet)
+        let blockUserAction = UIAlertAction(title: "Block", style: .default) { (_) in
+            self.blockUser()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        blockUserAlertController.addAction(blockUserAction)
+        blockUserAlertController.addAction(cancelAction)
+        UIApplication.shared.keyWindow?.rootViewController?.present(blockUserAlertController, animated: true, completion: nil)
+
     }
     
     func blockUser() {
         guard let post = post else { return }
         let ownerReference = post.ownerReference
         UserController.shared.blockUser(userToBlock: ownerReference) {
-            print("Sucessfull blocked user")
+            print("Sucessfully blocked user from the Cell")
         }
     }
 }
@@ -71,6 +82,7 @@ extension PostTableViewCell {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
     }
 }
+
 
 // MARK: - Delegates - TODO: - Change out the ... (block user button) for a flag image like Instagram
 protocol isBlockedUserButtonTappedTableViewCellDelegate: class {

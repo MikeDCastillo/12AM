@@ -141,7 +141,6 @@ class FeedTableViewController: UITableViewController {
             }
         
         } else {
-            
             let notMidnightAlertController = UIAlertController(title: "Can't Post photos until midnight", message: "Post photos between 12AM and 1AM", preferredStyle: .alert)
             let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
             notMidnightAlertController.addAction(dismissAction)
@@ -154,6 +153,9 @@ class FeedTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
             let post = PostController.sharedController.filteredPosts[indexPath.row]
             detailVC.post = post
+        }
+        if segue.identifier == "toDetailTVC" {
+           // TODO: Fix the seque to the detail from selecting the image. 
         }
     }
 }

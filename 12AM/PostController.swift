@@ -125,12 +125,12 @@ class PostController {
         let oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
         let oneAMDate = NSDate(timeIntervalSince1970: oneAM)
         
-        guard let user = UserController.shared.currentUser,
-            let blockUserRefs = user.blockUserRefs else { return }
         var predicate: NSPredicate?
         if type == "User"{
             predicate = NSPredicate(value: true)
         } else if type == "Post" {
+            guard let user = UserController.shared.currentUser,
+                let blockUserRefs = user.blockUserRefs, type != "User" else { return }
             predicate = NSPredicate(format: "NOT(ownerRef IN %@)", blockUserRefs)
         } else if type == "Comment" {
             predicate = NSPredicate(value: true)
@@ -180,6 +180,10 @@ class PostController {
                     let post = self.posts[postIndex]
                     post.comments.append(comment)
                     comment.post = post
+                    guard let ownerIndex = UserController.shared.users.index(where: { $0.cloudKitRecordID == comment.ownerReference.recordID  })
+                        else { break }
+                    let user = UserController.shared.users[ownerIndex]
+                    comment.owner = user
                 }
                 self.comments = comments
                 completion()

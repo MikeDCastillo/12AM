@@ -50,14 +50,12 @@ class PostDetailTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as? CommentTableViewCell else { return UITableViewCell() }
         
         guard let post = post else { return UITableViewCell() }
         
         let comment = post.comments[indexPath.row]
-        cell.textLabel?.text = comment.text
-        
-        cell.detailTextLabel?.text = comment.owner?.username
+        cell.comment = comment
         
         return cell
     }
