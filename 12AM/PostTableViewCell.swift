@@ -26,15 +26,15 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func updateViews() {
-        guard let postPhoto = post?.photo else { return }
-        
-        imageButton?.setImage(postPhoto, for: .normal)
-        guard let caption = post?.text, let username = post?.owner?.username else { return }
+        guard let post = self.post else { return }
+       
+        imageButton?.setImage(post.photo, for: .normal)
+        guard let username = post.owner?.username else { return }
         //this lets the captionLabel just display the first 25 chars of the caption
-        let captionLede = String(caption.characters.prefix(25))
+        let captionLede = String(post.text.characters.prefix(25))
         captionLabel.text = captionLede
-        userNameLabel.text = post?.owner?.username
-        
+        userNameLabel.text = username
+       
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

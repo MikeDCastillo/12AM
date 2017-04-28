@@ -62,7 +62,7 @@ class PostController {
             if let error = error {
                 print("Error saving new post to CloudKit: \(error.localizedDescription)")
             }
-        
+            
             completion(post)
         }
     }
@@ -70,9 +70,9 @@ class PostController {
     
     // Add Comments to posts function
     func addComment(post: Post, commentText: String, completion: @escaping (() -> Void) = { _ in }) {
-//        let comment = Comment(text: commentText, post: post)
+        //        let comment = Comment(text: commentText, post: post)
         guard let cloudKitRef = post.cloudKitReference
-        else { return }
+            else { return }
         let comment = Comment(text: commentText, post: post, postReference: cloudKitRef, ownerReference: post.ownerReference )
         post.comments.append(comment)
         
@@ -127,7 +127,14 @@ class PostController {
         
         guard let user = UserController.shared.currentUser,
             let blockUserRefs = user.blockUserRefs else { return }
-        let blockPredicate = NSPredicate(format: "NOT(ownerRef IN %@)", blockUserRefs)
+        var predicate: NSPredicate?
+        if type == "User"{
+            predicate = NSPredicate(value: true)
+        } else if type == "Post" {
+            predicate = NSPredicate(format: "NOT(ownerRef IN %@)", blockUserRefs)
+        } else if type == "Comment" {
+            predicate = NSPredicate(value: true)
+        }
         
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
@@ -144,8 +151,10 @@ class PostController {
         
         //        }
         
-        cloudKitManager.fetchRecordsWithType(type, predicate: blockPredicate, recordFetchedBlock: nil) { (records, error) in
-            guard let records = records else { return }
+        guard let predicate2 = predicate else { return }
+        
+        cloudKitManager.fetchRecordsWithType(type, predicate: predicate2, recordFetchedBlock: nil) { (records, error) in
+            guard let records = records else { completion(); return }
             switch type {
             case User.typeKey:
                 let users = records.flatMap { User(cloudKitRecord: $0) }
@@ -154,12 +163,20 @@ class PostController {
             case Post.typeKey:
                 let posts = records.flatMap { Post(record: $0) }
                 self.posts = posts
+
+                for post in self.posts {
+                    let users = UserController.shared.users
+                    guard let postOwner = users.filter({$0.cloudKitRecordID == post.ownerReference.recordID}).first else { break }
+                    
+                    post.owner = postOwner
+                    
+                }
                 completion()
             case Comment.typeKey:
                 let comments = records.flatMap { Comment(record: $0) }
                 for comment in comments {
                     let postRef = comment.postReference
-                    guard let postIndex = self.posts.index(where: {$0.cloudKitRecordID == postRef.recordID } ) else { return }
+                    guard let postIndex = self.posts.index(where: {$0.cloudKitRecordID == postRef.recordID } ) else { completion(); return }
                     let post = self.posts[postIndex]
                     post.comments.append(comment)
                     comment.post = post
@@ -179,10 +196,10 @@ class PostController {
     }
     
     func performFullSync(completion: @escaping (() -> Void) = { _ in }) {
-        guard !isSyncing
-            else { completion()
-                return
-        }
+        //        guard !isSyncing
+        //            else { completion()
+        //                return
+        //        }
         
         isSyncing = true
         
