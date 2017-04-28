@@ -6,4 +6,9 @@
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+
+struct AnimatedLabel {
+    
+    
+}

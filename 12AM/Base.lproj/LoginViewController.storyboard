@@ -146,8 +146,10 @@
                         <outlet property="emailTextField" destination="Q43-6v-M7g" id="C6x-lC-ugh"/>
                         <outlet property="loginView" destination="Mnt-wo-Ctx" id="1RR-5C-x58"/>
                         <outlet property="profileImageButton" destination="TMA-Fk-k5t" id="ONz-gK-l5q"/>
+                        <outlet property="profileImageCenterConstraint" destination="sEQ-QJ-nKT" id="BMR-Z6-1DA"/>
                         <outlet property="profileImageView" destination="6F7-x5-b0W" id="Fa7-Ao-bMC"/>
                         <outlet property="signUpButton" destination="H2d-tk-XDD" id="Q8f-t1-1C2"/>
+                        <outlet property="signUpButtonCenterXContstraint" destination="s6Y-Rs-Arb" id="fe9-22-ke3"/>
                         <outlet property="userNameTextField" destination="Atf-5l-PGl" id="Rza-36-8rb"/>
                     </connections>
                 </viewController>

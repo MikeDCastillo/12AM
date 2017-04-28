@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import SpriteKit
 
 
 extension UITableViewController {
+    
+    var FadeInOutAnimationSequence: SKAction {
+        return SKAction.sequence([SKAction.fadeOut(withDuration: 1.5), SKAction.wait(forDuration: 2.0), SKAction.fadeIn(withDuration: 1.5)])
+    }
     
     func animateTableFromBottom() {
         tableView.reloadData()
@@ -30,4 +35,13 @@ extension UITableViewController {
         }
     }
     
+    func animate(desiredLabelToAnimate: UILabel) {
+    
+        let label = desiredLabelToAnimate
+        
+    }
+    
 }
+
+
+

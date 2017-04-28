@@ -18,10 +18,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signUpButtonCenterXContstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileImageCenterConstraint: NSLayoutConstraint!
     
+    fileprivate var animationPerformedOnce = false
     fileprivate var imagePickerWasDismissed = false
     fileprivate var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
-    
     fileprivate let emailLine = UIView()
     fileprivate let usernameLine = UIView()
     fileprivate let imagePicker = UIImagePickerController()
@@ -48,9 +50,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
+        signUpButtonCenterXContstraint.constant += view.bounds.width
+        profileImageCenterConstraint.constant -= view.bounds.width
+        
+        setUpUI()
         if AccessToken.current != nil && !imagePickerWasDismissed {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //calls both profile img and sign in button to slide in from R side. Runs once
+        if !animationPerformedOnce {
+        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+            self.profileImageCenterConstraint.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.signUpButtonCenterXContstraint.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+        animationPerformedOnce = true
         }
     }
     
@@ -100,7 +123,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     func saveNewUser() {
         guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
         let profileImage = profileImageView.image
-       
         UserController.shared.createUser(with: userName, email: email, profileImage: profileImage, completion: { user in
             
             if let _ = user {
@@ -195,7 +217,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
 }
 
-// MARK: - FBSDK Delegate protocols
+    // MARK: - FBSDK Delegate protocols
 
 extension LoginViewController: FBSDKLoginButtonDelegate {
     
@@ -208,11 +230,12 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             print("error")
             return
         }
+        FacebookAPIController.fetchFacebookUserInfo()
         print("Succesfully logged into Facebook")
     }
 }
 
-// MARK: UI
+    // MARK: UI
 
 extension LoginViewController {
     
@@ -223,7 +246,7 @@ extension LoginViewController {
     }
 }
 
-// MARK: Alerts
+    // MARK: Alerts
 
 extension LoginViewController  {
     

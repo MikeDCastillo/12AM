@@ -31,16 +31,13 @@ class User {
     var blocUsersArray: [User] = []
     var users: [User] = []
     var posts: [Post] = []
-    
-
-    // This is the reference to the default Apple 'Users' record ID
-    var appleUserRef: CKReference
+    var appleUserRef: CKReference?
     
     // This is your CUSTOM user record's ID
     var cloudKitRecordID: CKRecordID?
     
     // Facebook
-    init?(dictionary: [String: Any], appleUserRef: CKReference, blockUserRefs: [CKReference]? = []) {
+    init?(dictionary: [String: Any], blockUserRefs: [CKReference]? = []) {
         //FIXME: - add imageURL
         guard let username = dictionary["name"] as? String,
         let email = dictionary["email"] as? String,
@@ -49,7 +46,6 @@ class User {
         self.username = username
         self.email = email
         self.profileImage = profileImage
-        self.appleUserRef = appleUserRef
         self.blockUserRefs = blockUserRefs
     }
 

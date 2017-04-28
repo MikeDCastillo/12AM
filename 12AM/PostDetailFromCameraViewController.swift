@@ -17,6 +17,28 @@ class PostDetailFromCameraViewController: UIViewController {
         captionTextField.resignFirstResponder()
     }
     
+<<<<<<< HEAD
+=======
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ///FIXME: - put timer til midnight here
+        timeLabel.text = "\(Date())"
+    }
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        saveImage()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var captionTextField: UITextField!
+    
+>>>>>>> added helper files
     var image: UIImage? {
         didSet {
             if isViewLoaded {
