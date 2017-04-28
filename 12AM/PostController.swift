@@ -127,12 +127,11 @@ class PostController {
         
         guard let user = UserController.shared.currentUser,
             let blockUserRefs = user.blockUserRefs else { return }
-        var predicates: [NSPredicate] = []
-        var blockPredicate = NSPredicate(format: "NOT(ownerRef IN %@)", blockUserRefs)
+        let blockPredicate = NSPredicate(format: "NOT(ownerRef IN %@)", blockUserRefs)
         
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
-        var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
+        // var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
         //        if referencesToExclude.isEmpty {
         //            if type == "Post" {
         //                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
@@ -140,15 +139,12 @@ class PostController {
         //
         //                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
         //            } else {
-        let allPredicate = NSPredicate(value: true)
+        
         //            }
         
         //        }
-        predicates.append(blockPredicate)
-        predicates.append(allPredicate)
-        let predicateArr = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         
-        cloudKitManager.fetchRecordsWithType(type, predicate: predicateArr, recordFetchedBlock: nil) { (records, error) in
+        cloudKitManager.fetchRecordsWithType(type, predicate: blockPredicate, recordFetchedBlock: nil) { (records, error) in
             guard let records = records else { return }
             switch type {
             case User.typeKey:
