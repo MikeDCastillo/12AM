@@ -70,10 +70,10 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6F7-x5-b0W">
-                                <rect key="frame" x="130" y="86" width="115" height="115"/>
+                                <rect key="frame" x="122" y="78" width="131" height="132"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="6F7-x5-b0W" secondAttribute="height" multiplier="1:1" id="6Z6-Hb-Cub"/>
-                                    <constraint firstAttribute="width" constant="115" id="uZO-uY-Jjs"/>
+                                    <constraint firstAttribute="width" secondItem="6F7-x5-b0W" secondAttribute="height" multiplier="1:1" constant="-1" id="6Z6-Hb-Cub"/>
+                                    <constraint firstAttribute="width" constant="131" id="uZO-uY-Jjs"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email@me.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q43-6v-M7g" customClass="ImageTextField" customModule="_2AM" customModuleProvider="target">
@@ -107,11 +107,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMA-Fk-k5t">
-                                <rect key="frame" x="130" y="86" width="115" height="115"/>
+                                <rect key="frame" x="117" y="74" width="140" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TMA-Fk-k5t" secondAttribute="height" multiplier="1:1" id="YjS-UN-vDN"/>
                                 </constraints>
-                                <state key="normal" image="ProfileImage"/>
+                                <state key="normal" image="addPhoto"/>
                                 <connections>
                                     <action selector="profileImageButtonTapped:" destination="RN0-Wz-fSJ" eventType="touchUpInside" id="9rD-FG-ias"/>
                                 </connections>
@@ -119,15 +119,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.12088216145833333" green="0.13635493259803921" blue="0.17497383067810457" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Atf-5l-PGl" firstAttribute="top" secondItem="6F7-x5-b0W" secondAttribute="bottom" constant="72" id="4MP-fF-pOp"/>
+                            <constraint firstItem="Atf-5l-PGl" firstAttribute="top" secondItem="6F7-x5-b0W" secondAttribute="bottom" constant="63" id="4MP-fF-pOp"/>
                             <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Mnt-wo-Ctx" secondAttribute="leadingMargin" id="7Tq-ZA-ixa"/>
                             <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Q43-6v-M7g" secondAttribute="trailing" id="8ds-Y9-jeb"/>
-                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="bottom" secondItem="6F7-x5-b0W" secondAttribute="bottom" id="CoY-QI-Qvh"/>
+                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="bottom" secondItem="6F7-x5-b0W" secondAttribute="bottom" constant="4" id="CoY-QI-Qvh"/>
                             <constraint firstItem="EeX-v6-6RF" firstAttribute="top" secondItem="Atf-5l-PGl" secondAttribute="bottom" id="H3B-lD-NNK"/>
                             <constraint firstItem="H2d-tk-XDD" firstAttribute="width" secondItem="Mnt-wo-Ctx" secondAttribute="width" multiplier="0.6" id="KtH-OY-tta"/>
                             <constraint firstItem="EeX-v6-6RF" firstAttribute="leading" secondItem="Atf-5l-PGl" secondAttribute="leading" id="M30-20-X80"/>
-                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="top" secondItem="6F7-x5-b0W" secondAttribute="top" id="N5q-At-1Ah"/>
-                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="top" secondItem="DzU-r3-QTQ" secondAttribute="bottom" constant="66" id="Nfs-ZK-rZe"/>
+                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="top" secondItem="6F7-x5-b0W" secondAttribute="top" constant="-4" id="N5q-At-1Ah"/>
+                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="top" secondItem="DzU-r3-QTQ" secondAttribute="bottom" constant="54" id="Nfs-ZK-rZe"/>
                             <constraint firstItem="Q43-6v-M7g" firstAttribute="top" secondItem="Atf-5l-PGl" secondAttribute="bottom" constant="24" id="Prt-wv-BIn"/>
                             <constraint firstItem="Atf-5l-PGl" firstAttribute="trailing" secondItem="Mnt-wo-Ctx" secondAttribute="trailingMargin" id="e7c-SQ-8Dn"/>
                             <constraint firstItem="C2n-r8-LaK" firstAttribute="trailing" secondItem="Q43-6v-M7g" secondAttribute="trailing" id="efc-i5-r6R"/>
@@ -137,9 +137,9 @@
                             <constraint firstItem="H2d-tk-XDD" firstAttribute="centerX" secondItem="Mnt-wo-Ctx" secondAttribute="centerX" id="s6Y-Rs-Arb"/>
                             <constraint firstItem="6F7-x5-b0W" firstAttribute="centerX" secondItem="Atf-5l-PGl" secondAttribute="centerX" id="sEQ-QJ-nKT"/>
                             <constraint firstItem="C2n-r8-LaK" firstAttribute="leading" secondItem="Q43-6v-M7g" secondAttribute="leading" id="tB1-9s-JNr"/>
-                            <constraint firstItem="6F7-x5-b0W" firstAttribute="trailing" secondItem="TMA-Fk-k5t" secondAttribute="trailing" id="uzW-Eu-xCc"/>
+                            <constraint firstItem="6F7-x5-b0W" firstAttribute="trailing" secondItem="TMA-Fk-k5t" secondAttribute="trailing" constant="-4" id="uzW-Eu-xCc"/>
                             <constraint firstItem="Atf-5l-PGl" firstAttribute="leading" secondItem="Q43-6v-M7g" secondAttribute="leading" id="wcr-DZ-37u"/>
-                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="leading" secondItem="6F7-x5-b0W" secondAttribute="leading" id="xuK-JI-Iqw"/>
+                            <constraint firstItem="TMA-Fk-k5t" firstAttribute="leading" secondItem="6F7-x5-b0W" secondAttribute="leading" constant="-5" id="xuK-JI-Iqw"/>
                         </constraints>
                     </view>
                     <connections>
@@ -165,7 +165,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ProfileImage" width="156" height="157"/>
+        <image name="addPhoto" width="131" height="131"/>
         <image name="email" width="64" height="64"/>
         <image name="user" width="64" height="64"/>
     </resources>

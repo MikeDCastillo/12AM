@@ -140,18 +140,18 @@ class PostController {
         
         
         referencesToExclude = self.syncedRecords(ofType: type).flatMap {$0.cloudKitReference}
-        // var predicate = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
-        //        if referencesToExclude.isEmpty {
-        //            if type == "Post" {
-        //                let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
-        //                let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
-        //
-        //                predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
-        //            } else {
-        
-        //            }
-        
-        //        }
+//         var predicateB = NSPredicate(format: "NOT(recordID IN %@)", argumentArray: [referencesToExclude])
+//                if referencesToExclude.isEmpty {
+//                    if type == "Post" {
+//                        let startingTimePredicate = NSPredicate(format: "timestamp > %@", midnightDate)
+//                        let endingTimePredicate = NSPredicate(format: "timestamp < %@", oneAMDate)
+//        
+//                        predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startingTimePredicate, endingTimePredicate])
+//                    } else {
+//        
+//                    }
+//        
+//                }
         
         guard let predicate2 = predicate else { return }
         

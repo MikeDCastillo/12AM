@@ -31,13 +31,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         return UserController.shared.currentUser
     }
     
-
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateViews()
+        userInterface()
         // TODO: - add me back int
 //        setUpFacebookLogInButton()
         
@@ -48,28 +48,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setUpUI()
+    
         if AccessToken.current != nil && !imagePickerWasDismissed {
             performSegue(withIdentifier: "toFeedTVC", sender: self)
         }
     }
     
-    
     // MARK: - Actions
     
     @IBAction func profileImageButtonTapped(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .camera
-            imagePicker.cameraCaptureMode = .photo
-            imagePicker.modalPresentationStyle = .popover
-            imagePicker.delegate = self
-            present(imagePicker, animated:  true, completion: nil)
-            
-        } else {
-            noCameraOnDevice()
-        }
+        addedProfileImage()
+
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -95,7 +84,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         view.addConstraint(fbLoginButton.heightAnchor.constraint(equalToConstant: 44))
     }
 
-    
     // MARK: - Main
     
     func showActivityIndicatory(uiView: UIView) {
@@ -112,7 +100,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     func saveNewUser() {
         guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
         let profileImage = profileImageView.image
-        
+       
         UserController.shared.createUser(with: userName, email: email, profileImage: profileImage, completion: { user in
             
             if let _ = user {
@@ -140,9 +128,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         })
     }
     
+    func addedProfileImage() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = .photo
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.delegate = self
+            present(imagePicker, animated:  true, completion: nil)
+            
+        } else {
+            noCameraOnDevice()
+        }
+    }
     
     func userAddedWithFacebook() {
-        // TODO:
+        // TODO: add facebook log in
     }
     
     func updateViews() {
@@ -218,7 +219,7 @@ extension LoginViewController {
     func userInterface() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        
+        signUpButton.layer.cornerRadius = 20.0
     }
 }
 
@@ -254,12 +255,3 @@ extension LoginViewController  {
     
 }
 
- // MARK: - UI Style
-
-extension LoginViewController {
-    
-    func setUpUI() {
-        profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
-        signUpButton.layer.cornerRadius = 20.0
-    }
-}
