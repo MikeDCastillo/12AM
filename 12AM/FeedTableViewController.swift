@@ -15,7 +15,7 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setUpTimer()
         performInitialAppLogic()
         self.tableView.backgroundColor = UIColor.black
@@ -159,5 +159,14 @@ class FeedTableViewController: UITableViewController {
         }
     }
 }
+
+//extension FeedTableViewController {
+//    
+//    func setUpNavBar() {
+//        self.navigationController?.navigationBar. = #imageLiteral(resourceName: "userIcon2")
+//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "userIcon2")
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+//    }
+//}
 
 //potential feature: replace login button with a Map button that shows where in the world is currently active

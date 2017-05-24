@@ -6,6 +6,8 @@
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
+// Reviewing as of 5/5/17 - 
+
 import Foundation
 import UIKit
 import CloudKit
@@ -163,7 +165,7 @@ class PostController {
             case Post.typeKey:
                 let posts = records.flatMap { Post(record: $0) }
                 self.posts = posts
-
+                // Spencer helped make the user have a stronger relationship with post 
                 for post in self.posts {
                     let users = UserController.shared.users
                     guard let postOwner = users.filter({$0.cloudKitRecordID == post.ownerReference.recordID}).first else { break }
