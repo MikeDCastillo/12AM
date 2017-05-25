@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 import FacebookCore
+import SceneKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -18,10 +19,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signUpButtonCenterXContstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileImageCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var particles: SCNView!
     
+    fileprivate var animationPerformedOnce = false
     fileprivate var imagePickerWasDismissed = false
     fileprivate var activityIndicaor: UIActivityIndicatorView = UIActivityIndicatorView()
-    
     fileprivate let emailLine = UIView()
     fileprivate let usernameLine = UIView()
     fileprivate let imagePicker = UIImagePickerController()
@@ -31,45 +35,56 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         return UserController.shared.currentUser
     }
     
-
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateViews()
+        userInterface()
         // TODO: - add me back int
-//        setUpFacebookLogInButton()
+        //        setUpFacebookLogInButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterMidnight), name: Notification.Name.didEnterMidnightHour, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitMidnight), name: Notification.Name.didExitMidnightHour, object: nil)
+        
+        animateWithParticles()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        signUpButtonCenterXContstraint.constant += view.bounds.width
+        profileImageCenterConstraint.constant += view.bounds.width
+        
         setUpUI()
-        if AccessToken.current != nil && !imagePickerWasDismissed {
-            performSegue(withIdentifier: "toFeedTVC", sender: self)
-        }
+        //        if AccessToken.current != nil && !imagePickerWasDismissed {
+        //            performSegue(withIdentifier: "presentSignUp", sender: self)
+        //        }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //calls both profile img and sign in button to slide in from R side. Runs once
+        if !animationPerformedOnce {
+            UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+                self.profileImageCenterConstraint.constant -= self.view.bounds.width
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+                self.signUpButtonCenterXContstraint.constant -= self.view.bounds.width
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            animationPerformedOnce = false
+        }
+    }
     
     // MARK: - Actions
     
     @IBAction func profileImageButtonTapped(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .camera
-            imagePicker.cameraCaptureMode = .photo
-            imagePicker.modalPresentationStyle = .popover
-            imagePicker.delegate = self
-            present(imagePicker, animated:  true, completion: nil)
-            
-        } else {
-            noCameraOnDevice()
-        }
+        addedProfileImage()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -84,7 +99,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     func setUpFacebookLogInButton() {
         let fbLoginButton = FBSDKLoginButton()
-        
+        fbLoginButton.readPermissions = ["email"]
         view.addSubview(fbLoginButton)
         
         fbLoginButton.delegate = self
@@ -94,7 +109,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         view.addConstraint(fbLoginButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60))
         view.addConstraint(fbLoginButton.heightAnchor.constraint(equalToConstant: 44))
     }
-
     
     // MARK: - Main
     
@@ -112,7 +126,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     func saveNewUser() {
         guard let userName = userNameTextField.text, let email = emailTextField.text else { return }
         let profileImage = profileImageView.image
-        
         UserController.shared.createUser(with: userName, email: email, profileImage: profileImage, completion: { user in
             
             if let _ = user {
@@ -140,9 +153,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         })
     }
     
+    func addedProfileImage() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = .photo
+            imagePicker.modalPresentationStyle = .popover
+            imagePicker.delegate = self
+            present(imagePicker, animated:  true, completion: nil)
+            
+        } else {
+            noCameraOnDevice()
+        }
+    }
+    
     
     func userAddedWithFacebook() {
-        // TODO:
+        // TODO: add facebook log in
     }
     
     func updateViews() {
@@ -207,6 +234,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             print("error")
             return
         }
+        FacebookAPIController.fetchFacebookUserInfo()
         print("Succesfully logged into Facebook")
     }
 }
@@ -218,7 +246,7 @@ extension LoginViewController {
     func userInterface() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        
+        signUpButton.layer.cornerRadius = 20.0
     }
 }
 
@@ -254,7 +282,7 @@ extension LoginViewController  {
     
 }
 
- // MARK: - UI Style
+// MARK: - UI Style
 
 extension LoginViewController {
     
@@ -262,4 +290,35 @@ extension LoginViewController {
         profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
         signUpButton.layer.cornerRadius = 20.0
     }
+}
+
+// MARK: - Background Animation Func
+
+extension LoginViewController {
+    // This is the func im calling in my viewWillAppear
+    //    5sq5h662s6mz57c7w5
+    func animateWithParticles() {
+        SCNTransaction.begin()
+        let scene = SCNScene()
+        let particlesNode = SCNNode()
+        guard let particleSystemq = SCNParticleSystem(named: "Bokeh", inDirectory: "") else { return }
+        particlesNode.addParticleSystem(particleSystemq)
+        scene.rootNode.addChildNode(particlesNode)
+        particles.scene = scene
+        
+        SCNTransaction.commit()
+    }
+    
+    //     This was for trying to bring in a custom image. ive been struggling to finish this function
+    
+    //    func animateWithParticlesAsLogo() {
+    //        let scene = SCNScene()
+    //        scene.background.contents = UIImage(named: "bokehClock")
+    //        let particleNode = SCNScene()
+    //        guard let particleSceneSystem = SCNParticleSystem(named: "Bokeh", inDirectory: "") else { return }
+    //        particleNode.addParticleSystem(particleSceneSystem, transform: <#SCNMatrix4#>)
+    //        scene.rootNode.addChildNode(particleSceneSystem)
+    //        particles.scene = scene
+    //
+    //    }
 }

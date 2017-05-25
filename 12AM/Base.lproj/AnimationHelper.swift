@@ -1,7 +1,11 @@
 //
-//  AnimationHelper.swift
+//  AnimationHelpers.swift
 //  12AM
 //
+//  Created by Michael Castillo on 4/28/17.
+//  Copyright © 2017 Michael Castillo. All rights reserved.
+//
+
 import UIKit
 import SceneKit
 import SpriteKit
@@ -21,5 +25,7 @@ struct AnimationHelper {
             myLabel.text = Date().timeTillString
             myLabel.fontSize = 20
         }
+        
     }
+    
 }

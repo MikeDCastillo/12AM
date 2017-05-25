@@ -22,13 +22,15 @@ class FeedTableViewController: UITableViewController {
         //        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
-        
+
         PostController.sharedController.requestFullSync {
             DispatchQueue.main.async {
                 self.reloadData()
             }
         }
     }
+    
+    
     
     func setUpTimer() {
         Timer.every(1.second) {
@@ -40,13 +42,14 @@ class FeedTableViewController: UITableViewController {
     
     func reloadData() {
         tableView.reloadData()
+        //FIXME: - do we need to call reload data multiple times? or can we use the animateTableFromBottom func since it has reload data?????
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.animateTableFromBottom()
         }
     }
     
@@ -72,7 +75,6 @@ class FeedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PostController.sharedController.filteredPosts.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
@@ -103,7 +105,6 @@ class FeedTableViewController: UITableViewController {
     }
     
     // to here to test photo posting at whatever time
-    
     
     func performInitialAppLogic() {
         UserController.shared.fetchCurrentUser { user in

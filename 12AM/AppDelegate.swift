@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
      
+        FacebookAPIController.fetchFacebookUserInfo()
+        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let nc = UNUserNotificationCenter.current()
         nc.requestAuthorization(options: [.alert, .badge, .sound]) { (success, error) in

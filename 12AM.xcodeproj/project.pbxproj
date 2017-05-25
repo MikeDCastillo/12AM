@@ -18,6 +18,7 @@
 		7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD71EAC4D61006E304A /* ImageTextField.swift */; };
 		7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD91EAC53E2006E304A /* UIColorHelper.swift */; };
 		7334ADDC1EAC63D4006E304A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADDB1EAC63D4006E304A /* StringExtensions.swift */; };
+		7336F7BB1EB2687C00CD1FBE /* UITableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7336F7BA1EB2687C00CD1FBE /* UITableViewControllerExtension.swift */; };
 		7348C6C61E9B2D2400D54ABB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C21E9B2D2400D54ABB /* Bolts.framework */; };
 		7348C6C71E9B2D2400D54ABB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C31E9B2D2400D54ABB /* FBSDKCoreKit.framework */; };
 		7348C6C81E9B2D2400D54ABB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7348C6C41E9B2D2400D54ABB /* FBSDKLoginKit.framework */; };
@@ -25,6 +26,11 @@
 		7366ADAA1EAE58E600E070E8 /* TimerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADA91EAE58E600E070E8 /* TimerExtension.swift */; };
 		7366ADAC1EAE591100E070E8 /* RotationGestureRecgonizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADAB1EAE591100E070E8 /* RotationGestureRecgonizer.swift */; };
 		7366ADAE1EAE597A00E070E8 /* TimeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */; };
+		7366ADB41EB1409600E070E8 /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADB31EB1409600E070E8 /* ImageController.swift */; };
+		7366ADB61EB140A900E070E8 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366ADB51EB140A900E070E8 /* NetworkController.swift */; };
+		7371FDF11EBBD08F0005AAD0 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7371FDF01EBBD08F0005AAD0 /* clock.png */; };
+		7371FDF41EBBDBC90005AAD0 /* Bokeh.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 7371FDF21EBBDBC90005AAD0 /* Bokeh.scnp */; };
+		7371FDF51EBBDBC90005AAD0 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 7371FDF31EBBDBC90005AAD0 /* bokeh.png */; };
 		737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */; };
 		737E79481E9B180200172355 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E79471E9B180200172355 /* AppDelegate.swift */; };
 		737E794F1E9B180200172355 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 737E794E1E9B180200172355 /* Contents.json */; };
@@ -57,6 +63,8 @@
 		7334ADD71EAC4D61006E304A /* ImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextField.swift; sourceTree = "<group>"; };
 		7334ADD91EAC53E2006E304A /* UIColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
 		7334ADDB1EAC63D4006E304A /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		7336F7BA1EB2687C00CD1FBE /* UITableViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewControllerExtension.swift; sourceTree = "<group>"; };
+		7338E1111EB3EEDB0087900E /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		7348C6C21E9B2D2400D54ABB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-4.21.0/Bolts.framework"; sourceTree = "<group>"; };
 		7348C6C31E9B2D2400D54ABB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		7348C6C41E9B2D2400D54ABB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -64,6 +72,11 @@
 		7366ADA91EAE58E600E070E8 /* TimerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerExtension.swift; sourceTree = "<group>"; };
 		7366ADAB1EAE591100E070E8 /* RotationGestureRecgonizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationGestureRecgonizer.swift; sourceTree = "<group>"; };
 		7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTracker.swift; sourceTree = "<group>"; };
+		7366ADB31EB1409600E070E8 /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
+		7366ADB51EB140A900E070E8 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		7371FDF01EBBD08F0005AAD0 /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		7371FDF21EBBDBC90005AAD0 /* Bokeh.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Bokeh.scnp; sourceTree = "<group>"; };
+		7371FDF31EBBDBC90005AAD0 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		737E36131EA9210A00D77825 /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		737E79441E9B180200172355 /* 12AM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 12AM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		737E79471E9B180200172355 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				013F3A5B1EA93CC2004BCEBE /* FacebookController.swift */,
+				7366ADB31EB1409600E070E8 /* ImageController.swift */,
+				7366ADB51EB140A900E070E8 /* NetworkController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -205,11 +220,16 @@
 				737E794E1E9B180200172355 /* Contents.json */,
 				0119C62B1EB03E880006863A /* Assets.xcassets */,
 				737E79531E9B180200172355 /* Info.plist */,
+				7338E1101EB3EEDB0087900E /* AnimationHelper.swift */,
+				7336F7BA1EB2687C00CD1FBE /* UITableViewControllerExtension.swift */,
 				7366ADA91EAE58E600E070E8 /* TimerExtension.swift */,
 				7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */,
 				7366ADAB1EAE591100E070E8 /* RotationGestureRecgonizer.swift */,
 				7334ADD71EAC4D61006E304A /* ImageTextField.swift */,
 				7334ADD91EAC53E2006E304A /* UIColorHelper.swift */,
+				7371FDF01EBBD08F0005AAD0 /* clock.png */,
+				7371FDF21EBBDBC90005AAD0 /* Bokeh.scnp */,
+				7371FDF31EBBDBC90005AAD0 /* bokeh.png */,
 				7334ADDB1EAC63D4006E304A /* StringExtensions.swift */,
 				016EB90A1ED6635000DFEA3F /* AnimationHelper.swift */,
 			);
@@ -319,10 +339,13 @@
 			files = (
 				737E794F1E9B180200172355 /* Contents.json in Resources */,
 				73D3966D1EA847F800D488A1 /* LoginViewController.storyboard in Resources */,
+				7371FDF41EBBDBC90005AAD0 /* Bokeh.scnp in Resources */,
 				73D3966C1EA847F800D488A1 /* LaunchScreen.storyboard in Resources */,
 				73D3966A1EA847F800D488A1 /* Camera.storyboard in Resources */,
 				0119C62C1EB03E880006863A /* Assets.xcassets in Resources */,
+				7371FDF11EBBD08F0005AAD0 /* clock.png in Resources */,
 				73D3966B1EA847F800D488A1 /* Feed.storyboard in Resources */,
+				7371FDF51EBBDBC90005AAD0 /* bokeh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +394,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -390,6 +413,7 @@
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				7366ADAA1EAE58E600E070E8 /* TimerExtension.swift in Sources */,
 				737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */,
+				7336F7BB1EB2687C00CD1FBE /* UITableViewControllerExtension.swift in Sources */,
 				C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */,
 				7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */,
 				73E901B41E9B55C500EA7E0A /* LoginViewController.swift in Sources */,
@@ -400,6 +424,8 @@
 				73A5381A1E9EB97C0013A5CE /* PostController.swift in Sources */,
 				7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */,
 				0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */,
+				7366ADB61EB140A900E070E8 /* NetworkController.swift in Sources */,
+				7366ADB41EB1409600E070E8 /* ImageController.swift in Sources */,
 				C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */,
 				013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */,
 				7366ADAE1EAE597A00E070E8 /* TimeTracker.swift in Sources */,
@@ -410,6 +436,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7338E1101EB3EEDB0087900E /* AnimationHelper.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7338E1111EB3EEDB0087900E /* Base */,
+			);
+			name = AnimationHelper.swift;
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
 		73D396621EA847F800D488A1 /* Camera.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

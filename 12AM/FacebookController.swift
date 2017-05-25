@@ -6,47 +6,40 @@
 //  Copyright © 2017 Michael Castillo. All rights reserved.
 //
 
-import Foundation
-import Foundation
 import UIKit
 import FacebookCore
 import FacebookLogin
 import CloudKit
 
-class FacebookAPIController {
+struct FacebookAPIController {
     
+    fileprivate static var accessToken: AccessToken? = AccessToken.current
+    fileprivate static var kGraphPathMe = "me"
+    fileprivate var user: User?
     
-    
-    let accessToken: AccessToken
-    let kGraphPathMe = "me"
-    
-    var user: User?
-    
-    init(accessToken: AccessToken) {
-        self.accessToken = accessToken
-    
-    }
-
-    
-    func requestFacebookUser(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, facebookToken: AccessToken, blockUserRef: CKReference? = nil, completion: @escaping (_ facebookUser: User) -> Void) {
-        let graphRequest = GraphRequest(graphPath: kGraphPathMe, parameters: ["fields":"id,email,name,picture?type=large"], accessToken: accessToken, httpMethod: .GET, apiVersion: .defaultVersion)
-        graphRequest.start { (response, result) in
+    static func fetchFacebookUserInfo() {
+        
+        let parameters = ["fields": "email, name, id, picture"]
+        let graphRequest = GraphRequest(graphPath: kGraphPathMe, parameters: parameters)
+            graphRequest.start { (urlResponse, requestResult) in
             
-            switch result {
-            case .success:
-                
-                // initalize a user and complete with it
-                guard let blockUserRef = blockUserRef else { return }
-                
-                let user = User(username: username, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: self.accessToken, blockUserRefs: [blockUserRef])
-                
-                self.user = user 
-                completion(user)
-                
-                print(result)
-                
-                // TODO - Fix facebook connection with CloudKit 
-                
+            switch requestResult {
+                case .failed(let error):
+                    
+                    print("error in graph request:", error)
+                    break
+                case .success(let graphResponse):
+                    
+                if let responseDictionary = graphResponse.dictionaryValue {
+                    print(responseDictionary)
+                    
+                    print(responseDictionary["name"])
+                    print(responseDictionary["email"])
+                }
+            }
+        }
+                // TODO - Fix facebook connection with CloudKit and put this in fetch FB user func
+    
                 //
                 //                if let dictionary = response.dictionaryValue {
                 //
@@ -61,26 +54,11 @@ class FacebookAPIController {
                 //                        let user = User(dictionary: dictionary, appleUserRef: reference)
                 //                        self.user = user
                 //                        completion(user)
-                //                        
+                //
                 //                    })
-                //                    
+                //
                 //                }
-                break
-            default:
-                print("Facebook request user error")
-            }
-        }
+
     }
     
-    func fbUserLogin(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference?) {
-        if let accessToken = AccessToken.current {
-            guard let appleUserRef = appleUserRef else { return }
-            let facebookAPIController = FacebookAPIController(accessToken: accessToken)
-            facebookAPIController.requestFacebookUser(username: username, email: email, profileImage: profileImage, appleUserRef: appleUserRef, facebookToken: accessToken, completion: { (user) in
-                
-                let info = "Name: \(user.username) \n \(user.email)"
-                print(info)
-            })
-        }
-    }
 }
