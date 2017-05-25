@@ -16,20 +16,14 @@ class PostDetailFromCameraViewController: UIViewController {
         self.imageView.image = self.image
         captionTextField.resignFirstResponder()
     }
-    
-<<<<<<< HEAD
-=======
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         ///FIXME: - put timer til midnight here
         timeLabel.text = "\(Date())"
     }
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        saveImage()
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+ 
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -38,7 +32,6 @@ class PostDetailFromCameraViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var captionTextField: UITextField!
     
->>>>>>> added helper files
     var image: UIImage? {
         didSet {
             if isViewLoaded {
@@ -58,10 +51,6 @@ class PostDetailFromCameraViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func saveImage() {
         guard let caption = captionTextField?.text,
             let image = imageView?.image else { return }
@@ -71,8 +60,5 @@ class PostDetailFromCameraViewController: UIViewController {
             // TODO - update post completion
         }
     }
-    
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var captionTextField: UITextField!
+
 }

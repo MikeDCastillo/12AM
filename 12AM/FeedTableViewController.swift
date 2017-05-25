@@ -22,13 +22,15 @@ class FeedTableViewController: UITableViewController {
         //        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
-        
+
         PostController.sharedController.requestFullSync {
             DispatchQueue.main.async {
                 self.reloadData()
             }
         }
     }
+    
+    
     
     func setUpTimer() {
         Timer.every(1.second) {

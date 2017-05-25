@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 import FacebookCore
+import SceneKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -20,6 +21,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signUpButtonCenterXContstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var particles: SCNView!
+
     
     fileprivate var animationPerformedOnce = false
     fileprivate var imagePickerWasDismissed = false
@@ -34,7 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     // MARK: - Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,18 +49,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: UserController.shared.currentUserWasSentNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterMidnight), name: Notification.Name.didEnterMidnightHour, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didExitMidnight), name: Notification.Name.didExitMidnightHour, object: nil)
+        
+        animateWithParticles()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         signUpButtonCenterXContstraint.constant += view.bounds.width
-        profileImageCenterConstraint.constant -= view.bounds.width
+        profileImageCenterConstraint.constant += view.bounds.width
         
         setUpUI()
-        if AccessToken.current != nil && !imagePickerWasDismissed {
-            performSegue(withIdentifier: "toFeedTVC", sender: self)
-        }
+//        if AccessToken.current != nil && !imagePickerWasDismissed {
+//            performSegue(withIdentifier: "presentSignUp", sender: self)
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     func setUpFacebookLogInButton() {
         let fbLoginButton = FBSDKLoginButton()
-        
+        fbLoginButton.readPermissions = ["email"]
         view.addSubview(fbLoginButton)
         
         fbLoginButton.delegate = self
@@ -150,19 +155,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         })
     }
     
-    func addedProfileImage() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera)  {
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = .camera
-            imagePicker.cameraCaptureMode = .photo
-            imagePicker.modalPresentationStyle = .popover
-            imagePicker.delegate = self
-            present(imagePicker, animated:  true, completion: nil)
-            
-        } else {
-            noCameraOnDevice()
-        }
-    }
     
     func userAddedWithFacebook() {
         // TODO: add facebook log in
@@ -278,3 +270,43 @@ extension LoginViewController  {
     
 }
 
+    // MARK: - UI Style
+
+extension LoginViewController {
+    
+    func setUpUI() {
+        profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
+        signUpButton.layer.cornerRadius = 20.0
+    }
+}
+
+// MARK: - Background Animation Func
+
+extension LoginViewController {
+    // This is the func im calling in my viewWillAppear
+//    5sq5h662s6mz57c7w5
+    func animateWithParticles() {
+        SCNTransaction.begin()
+        let scene = SCNScene()
+        let particlesNode = SCNNode()
+        guard let particleSystemq = SCNParticleSystem(named: "Bokeh", inDirectory: "") else { return }
+        particlesNode.addParticleSystem(particleSystemq)
+        scene.rootNode.addChildNode(particlesNode)
+        particles.scene = scene
+        
+        SCNTransaction.commit()
+    }
+    
+    //     This was for trying to bring in a custom image. ive been struggling to finish this function
+    
+//    func animateWithParticlesAsLogo() {
+//        let scene = SCNScene()
+//        scene.background.contents = UIImage(named: "bokehClock")
+//        let particleNode = SCNScene()
+//        guard let particleSceneSystem = SCNParticleSystem(named: "Bokeh", inDirectory: "") else { return }
+//        particleNode.addParticleSystem(particleSceneSystem, transform: <#SCNMatrix4#>)
+//        scene.rootNode.addChildNode(particleSceneSystem)
+//        particles.scene = scene
+//        
+//    }
+}

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 class TimeTracker {
     
@@ -87,6 +88,14 @@ extension Date {
         if secondsTill > 0 {
             displayString += " \(secondsTill)s"
         }
+        
+        func animate(string: String) {
+            
+            SKAction.sequence([SKAction.fadeOut(withDuration: 1.5), SKAction.wait(forDuration: 2.0), SKAction.fadeIn(withDuration: 1.5)])
+            
+        }
+        animate(string: displayString)
+        
         
         return displayString
     }

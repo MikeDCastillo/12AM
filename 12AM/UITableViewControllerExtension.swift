@@ -12,9 +12,6 @@ import SpriteKit
 
 extension UITableViewController {
     
-    var FadeInOutAnimationSequence: SKAction {
-        return SKAction.sequence([SKAction.fadeOut(withDuration: 1.5), SKAction.wait(forDuration: 2.0), SKAction.fadeIn(withDuration: 1.5)])
-    }
     
     func animateTableFromBottom() {
         tableView.reloadData()
@@ -28,18 +25,14 @@ extension UITableViewController {
         }
         
         for cell in visibleTableViewCells {
-            UIView.animate(withDuration: 1.75, delay: incrementTimeDelay, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: { 
+            UIView.animate(withDuration: 1.75, delay: incrementTimeDelay, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.01, options: .curveEaseInOut, animations: {
                 cell.transform = CGAffineTransform.identity
             }, completion: nil)
             incrementTimeDelay += 0.5
         }
     }
     
-    func animate(desiredLabelToAnimate: UILabel) {
     
-        let label = desiredLabelToAnimate
-        
-    }
     
 }
 
