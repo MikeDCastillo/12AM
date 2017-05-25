@@ -100,6 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qAe-rx-Qjn">
                             <connections>
                                 <action selector="addButtonTapped:" destination="vDB-Xm-Gx6" id="Hqo-1O-uTX"/>
+                                <segue destination="EOO-dF-n6F" kind="show" identifier="toCamera" id="LEa-n9-zmg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -119,6 +120,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKy-z7-nw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1709.5999999999999" y="-376.46176911544228"/>
+        </scene>
+        <!--CameraView-->
+        <scene sceneID="wwS-Re-6qk">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Camera2" storyboardName="CameraView" id="EOO-dF-n6F" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u4K-kf-jDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2259" y="-895"/>
         </scene>
         <!--Camera-->
         <scene sceneID="qbD-i5-4Ok">

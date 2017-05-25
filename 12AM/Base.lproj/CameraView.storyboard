@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jVq-bo-zxQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Camera2 View Controller-->
+        <scene sceneID="ahZ-kO-uo6">
+            <objects>
+                <viewController id="iEC-dy-gPr" customClass="Camera2ViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JLM-4b-KyK"/>
+                        <viewControllerLayoutGuide type="bottom" id="CTR-KN-FST"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wZe-sV-i4F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-gm-2ua">
+                                <rect key="frame" x="156" y="563" width="66" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="Gul-EF-365"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="plussButton"/>
+                                <connections>
+                                    <action selector="takePicture:" destination="iEC-dy-gPr" eventType="touchUpInside" id="1gg-gL-DHg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bsP-gm-2ua" firstAttribute="leading" secondItem="wZe-sV-i4F" secondAttribute="leading" constant="156" id="Azc-u2-BEY"/>
+                            <constraint firstItem="bsP-gm-2ua" firstAttribute="top" secondItem="JLM-4b-KyK" secondAttribute="bottom" constant="499" id="Zlc-nM-AF7"/>
+                            <constraint firstItem="CTR-KN-FST" firstAttribute="top" secondItem="bsP-gm-2ua" secondAttribute="bottom" constant="38" id="gwo-w8-2Cq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jPe-35-SwC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-Pv-oQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1013.6" y="147.97601199400302"/>
+        </scene>
+        <!--Image Preview View Controller-->
+        <scene sceneID="Rxi-RL-JPf">
+            <objects>
+                <viewController restorationIdentifier="ImagePreviewViewController" storyboardIdentifier="ImagePreviewViewController" id="ErW-iC-Ppr" customClass="ImagePreviewViewController" customModule="_2AM" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jbY-DN-62q"/>
+                        <viewControllerLayoutGuide type="bottom" id="N42-ga-pnc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Il6-Dw-zIQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBE-64-4Y8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWC-Xg-djg">
+                                <rect key="frame" x="295" y="595" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="forwardArrow"/>
+                                <connections>
+                                    <action selector="usePhotoButtonTapped:" destination="ErW-iC-Ppr" eventType="touchUpInside" id="H7x-3f-amK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="GBE-64-4Y8" id="sk5-zw-BGU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HvJ-Mj-MFr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1728.8" y="152.47376311844079"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Zp3-Ci-oLd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jVq-bo-zxQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="560-N6-kK4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iEC-dy-gPr" kind="relationship" relationship="rootViewController" id="Ngd-xK-cn4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lXD-aR-GhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="266" y="148"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="forwardArrow" width="44" height="44"/>
+        <image name="plussButton" width="84" height="84"/>
+    </resources>
+</document>
