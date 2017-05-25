@@ -12,6 +12,7 @@
 		013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57E91E9D51A900AA9CA4 /* User.swift */; };
 		013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */; };
 		0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0165FEB41E9EEC6300A4F2A1 /* UserController.swift */; };
+		016EB90B1ED6635000DFEA3F /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EB90A1ED6635000DFEA3F /* AnimationHelper.swift */; };
 		0170A7791EB3D50A0040E431 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0170A7781EB3D50A0040E431 /* CommentTableViewCell.swift */; };
 		28BA3B7FC383D19FB8F72BB6 /* Pods_12AM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */; };
 		7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD71EAC4D61006E304A /* ImageTextField.swift */; };
@@ -49,6 +50,7 @@
 		013F57E91E9D51A900AA9CA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		0165FEB41E9EEC6300A4F2A1 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		016EB90A1ED6635000DFEA3F /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		0170A7781EB3D50A0040E431 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12AM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5FC89D0967B4E10736ED7F /* Pods-12AM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.debug.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				7334ADD71EAC4D61006E304A /* ImageTextField.swift */,
 				7334ADD91EAC53E2006E304A /* UIColorHelper.swift */,
 				7334ADDB1EAC63D4006E304A /* StringExtensions.swift */,
+				016EB90A1ED6635000DFEA3F /* AnimationHelper.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016EB90B1ED6635000DFEA3F /* AnimationHelper.swift in Sources */,
 				013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */,
 				7366ADAC1EAE591100E070E8 /* RotationGestureRecgonizer.swift in Sources */,
 				013F3A5C1EA93CC2004BCEBE /* FacebookController.swift in Sources */,
