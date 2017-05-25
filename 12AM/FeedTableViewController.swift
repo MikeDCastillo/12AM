@@ -15,14 +15,14 @@ class FeedTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpTimer()
         performInitialAppLogic()
         self.tableView.backgroundColor = UIColor.black
         //        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
-
+        
         PostController.sharedController.requestFullSync {
             DispatchQueue.main.async {
                 self.reloadData()
@@ -53,6 +53,8 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - Action s
+    
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
         //        handleRefresh(sender)
         PostController.sharedController.requestFullSync {
@@ -60,6 +62,18 @@ class FeedTableViewController: UITableViewController {
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    @IBAction func imageButtonTapped(_ sender: UIImage) {
+       // TODO: Fix the segue 
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "feedToPostDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
+            let post = PostController.sharedController.filteredPosts[indexPath.row]
+            detailVC.post = post
         }
     }
     
@@ -112,7 +126,7 @@ class FeedTableViewController: UITableViewController {
                 return
             } else {
                 DispatchQueue.main.async {
-                  self.performSegue(withIdentifier: self.presentSignUpSegue, sender: self)
+                    self.performSegue(withIdentifier: self.presentSignUpSegue, sender: self)
                 }
             }
         }
@@ -133,14 +147,14 @@ class FeedTableViewController: UITableViewController {
                 cameraOrCancelAlertController.addAction(cameraAction)
                 cameraOrCancelAlertController.addAction(cancelAction)
                 present(cameraOrCancelAlertController, animated: true, completion: nil)
-            
+                
             } else {
                 let noUserAlertController = UIAlertController(title: "User needed", message: "In order to post photos, please log in", preferredStyle: .alert)
                 let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
                 noUserAlertController.addAction(dismissAction)
                 present(noUserAlertController, animated: true, completion: nil)
             }
-        
+            
         } else {
             let notMidnightAlertController = UIAlertController(title: "Can't Post photos until midnight", message: "Post photos between 12AM and 1AM", preferredStyle: .alert)
             let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
@@ -149,20 +163,11 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "feedToPostDetail" {
-            guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
-            let post = PostController.sharedController.filteredPosts[indexPath.row]
-            detailVC.post = post
-        }
-        if segue.identifier == "toDetailTVC" {
-           // TODO: Fix the seque to the detail from selecting the image. 
-        }
-    }
+    
 }
 
 //extension FeedTableViewController {
-//    
+//
 //    func setUpNavBar() {
 //        self.navigationController?.navigationBar. = #imageLiteral(resourceName: "userIcon2")
 //        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "userIcon2")

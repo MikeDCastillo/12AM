@@ -48,8 +48,13 @@ class PostTableViewCell: UITableViewCell {
     // MARK: - Action
     
     @IBAction func imageButtonTapped(_ sender: Any) { // Do stuff to make the imageButtonTapped segue to the detailVC
-      
-
+     let segue = UIStoryboardSegue(identifier: "toPostDVC", source: FeedTableViewController(), destination: PostDetailTableViewController())
+        if segue.identifier == "feedToPostDetail" {
+            let indexPath = self.index(ofAccessibilityElement: PostTableViewCell())
+            guard let detailVC = segue.destination as? PostDetailTableViewController else { return }
+            let post = PostController.sharedController.filteredPosts[indexPath]
+            detailVC.post = post
+        }
     }
     @IBAction func blockUserButtonTapped(_ sender: UIButton) {
         blockUserActionSheet()

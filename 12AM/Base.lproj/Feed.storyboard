@@ -44,10 +44,11 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIE-K5-wnp">
                                             <rect key="frame" x="0.0" y="78" width="375" height="279"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
                                             <state key="normal" title="Button"/>
                                             <connections>
+                                                <action selector="imageButtonTapped:" destination="vDB-Xm-Gx6" eventType="touchUpInside" id="GGT-ta-OjG"/>
                                                 <action selector="imageButtonTapped:" destination="kkh-UU-IVS" eventType="touchUpInside" id="xYm-UT-0Hd"/>
-                                                <segue destination="O3M-fJ-7V9" kind="show" identifier="toDetailTVC" id="T7I-fb-hIm"/>
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XbI-yo-AKL">
@@ -270,6 +271,5 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="iJ8-my-oJz"/>
-        <segue reference="T7I-fb-hIm"/>
     </inferredMetricsTieBreakers>
 </document>
