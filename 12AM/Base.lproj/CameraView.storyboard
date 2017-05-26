@@ -39,7 +39,21 @@
                             <constraint firstItem="CTR-KN-FST" firstAttribute="top" secondItem="bsP-gm-2ua" secondAttribute="bottom" constant="38" id="gwo-w8-2Cq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jPe-35-SwC"/>
+                    <navigationItem key="navigationItem" id="jPe-35-SwC">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hbK-Ab-YiP">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="J6N-1g-Tjk">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fRt-6D-26l">
+                                <rect key="frame" x="314" y="1" width="45" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="camera180"/>
+                                <connections>
+                                    <action selector="cameraToggleButton:" destination="iEC-dy-gPr" eventType="touchUpInside" id="jjh-wg-edI"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-Pv-oQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -100,6 +114,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera180" width="200" height="200"/>
         <image name="forwardArrow" width="44" height="44"/>
         <image name="plussButton" width="84" height="84"/>
     </resources>
