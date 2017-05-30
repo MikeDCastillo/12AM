@@ -14,6 +14,8 @@ class Camera2ViewController : UIViewController {
     
     // MARK: - TODO: No BANGS! & Call the CamearController (Same functions, but doesn't work) 
     
+    // MARK: - Properties 
+
    fileprivate let captureSession = AVCaptureSession()
    fileprivate var camera : AVCaptureDevice?
    fileprivate var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
