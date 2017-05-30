@@ -116,12 +116,12 @@ class ImagePreviewViewController : UIViewController, UITextFieldDelegate {
 //    }
     
     // Function which brings up textField when UIImageView is tapped, called in imageTapGesture
-//    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-//    {
-//        let tappedImage = tapGestureRecognizer.view as! UIImageView
-//        
-//        // Your action
-//    }
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        
+        // Your action
+    }
 
     
     // MARK: - Action
