@@ -40,8 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateViews()
-        userInterface()
+        setUpUI()
         // TODO: - add me back int
         //        setUpFacebookLogInButton()
         
@@ -62,6 +61,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         //        if AccessToken.current != nil && !imagePickerWasDismissed {
         //            performSegue(withIdentifier: "presentSignUp", sender: self)
         //        }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -241,14 +242,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
 
 // MARK: UI
 
-extension LoginViewController {
-    
-    func userInterface() {
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
-        profileImageView.clipsToBounds = true
-        signUpButton.layer.cornerRadius = 20.0
-    }
-}
 
 // MARK: Alerts
 
@@ -288,6 +281,7 @@ extension LoginViewController {
     
     func setUpUI() {
         profileImageView.layer.cornerRadius = profileImageButton.frame.size.width / 2
+        profileImageView.clipsToBounds = true
         signUpButton.layer.cornerRadius = 20.0
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class ImagePreviewViewController : UIViewController, UITextFieldDelegate {
     
     var location = CGPoint(x: 0, y: 0)
-    var capturedImage : UIImage?
+    var capturedImage: UIImage?
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageCaptionTextField: UITextField!
     
@@ -116,20 +116,32 @@ class ImagePreviewViewController : UIViewController, UITextFieldDelegate {
 //    }
     
     // Function which brings up textField when UIImageView is tapped, called in imageTapGesture
+<<<<<<< HEAD
 //    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
 //    {
 //        let tappedImage = tapGestureRecognizer.view as! UIImageView
 //        
 //        // Your action
 //    }
+=======
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        // let tappedImage
+        _ = tapGestureRecognizer.view as! UIImageView
+        
+        // Your action
+    }
+>>>>>>> launch
 
     
     // MARK: - Action
     
     @IBAction func usePhotoButtonTapped(_ sender: Any) {
-        
+        usePhoto()
+        self.dismiss(animated: true, completion: nil)
     }
     
+<<<<<<< HEAD
     @IBAction func imageToTextFieldButton(_ sender: Any) {
         
         
@@ -138,4 +150,15 @@ class ImagePreviewViewController : UIViewController, UITextFieldDelegate {
     
     
    
+=======
+    func usePhoto() {
+        
+        guard let caption = imageCaptionTextField.text, let image = imageView.image else { return }
+        
+        PostController.sharedController.createPost(image: image, caption: caption) { (post) in
+//            guard let post = post else { return }
+        }
+    }
+
+>>>>>>> launch
 }

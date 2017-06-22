@@ -33,8 +33,8 @@ struct FacebookAPIController {
                 if let responseDictionary = graphResponse.dictionaryValue {
                     print(responseDictionary)
                     
-                    print(responseDictionary["name"])
-                    print(responseDictionary["email"])
+//                    print(responseDictionary["name"])
+//                    print(responseDictionary["email"])
                 }
             }
         }

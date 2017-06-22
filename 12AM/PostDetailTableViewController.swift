@@ -72,6 +72,7 @@ class PostDetailTableViewController: UITableViewController {
             let post = post else { return }
         if commentText != "" {
         let comment = PostController.sharedController.addComment(post: post, commentText: commentText)
+           
         }
         commentTextField.text = ""
     }
