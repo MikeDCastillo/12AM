@@ -16,8 +16,6 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    weak var delegate: isBlockedUserButtonTappedTableViewCellDelegate?
-    
     var post: Post? {
         didSet {
             updateViews()

@@ -18,7 +18,6 @@ class FeedTableViewController: UITableViewController {
         
         setUpTimer()
         performInitialAppLogic()
-        self.tableView.backgroundColor = UIColor.black
         //        self.refreshControl?.addTarget(self, action: #selector(FeedTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(reloadData), name: Notification.Name("PostCommentsChangedNotification"), object: nil)
@@ -29,8 +28,6 @@ class FeedTableViewController: UITableViewController {
             }
         }
     }
-    
-    
     
     func setUpTimer() {
         Timer.every(1.second) {

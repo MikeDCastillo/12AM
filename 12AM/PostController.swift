@@ -120,12 +120,12 @@ class PostController {
     
     // Fetching new post only. Say there are 1,000 posts and 500 are on the phone and 500 are in CloudKit, using the above functions will help retriee only the 500 not on the phone saving data and time
     func fetchNewRecords(ofType type: String, completion: @escaping (() -> Void) = { _ in }) {
-        
+      
         var referencesToExclude = [CKReference]()
-        let midnight = TimeTracker.shared.midnight.timeIntervalSince1970
-        let midnightDate = NSDate(timeIntervalSince1970: midnight)
-        let oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
-        let oneAMDate = NSDate(timeIntervalSince1970: oneAM)
+//        let midnight = TimeTracker.shared.midnight.timeIntervalSince1970
+//        let midnightDate = NSDate(timeIntervalSince1970: midnight)
+//        let oneAM = TimeTracker.shared.midnight.timeIntervalSince1970 + 3600
+//        let oneAMDate = NSDate(timeIntervalSince1970: oneAM)
         
         var predicate: NSPredicate?
         if type == "User"{

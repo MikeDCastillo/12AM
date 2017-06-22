@@ -17,7 +17,7 @@ class Camera2ViewController : UIViewController {
     // MARK: - Properties 
 
    fileprivate let captureSession = AVCaptureSession()
-   fileprivate var camera : AVCaptureDevice?
+   fileprivate var camera: AVCaptureDevice!
    fileprivate var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
    fileprivate var cameraCaptureOutput: AVCapturePhotoOutput?
     
@@ -46,6 +46,10 @@ class Camera2ViewController : UIViewController {
         takePicture()
     }
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Main
     
     func initializeCaptureSession() {
@@ -54,7 +58,7 @@ class Camera2ViewController : UIViewController {
         camera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         do {
-            let cameraCaptureInput = try AVCaptureDeviceInput(device: camera!)
+            let cameraCaptureInput = try AVCaptureDeviceInput(device: camera)
             cameraCaptureOutput = AVCapturePhotoOutput()
             
             captureSession.addInput(cameraCaptureInput)
