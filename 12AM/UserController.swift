@@ -106,7 +106,7 @@ class UserController {
         
         CloudKitManager.shared.modifyRecords([record], perRecordCompletion: nil) { (records, error) in
             if let error = error {
-                print("Error modifying record \(error.localizedDescription)")
+                print("Error modifying record for blocked user \(error.localizedDescription)")
             } else {
                 completion()
             }
@@ -120,6 +120,14 @@ class UserController {
     
     func updateCurrentUser(username: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
         guard let currentUser = currentUser, let profileImage = profileImage else { return }
+       
+        let record = CKRecord(user: currentUser)
+        CloudKitManager.shared.modifyRecords([record], perRecordCompletion: nil) { (records, error) in
+            if let error = error {
+                print("Error updateding user \(error.localizedDescription)")
+                return
+            }
+        }
         
         DispatchQueue.main.async {
             currentUser.username = username
