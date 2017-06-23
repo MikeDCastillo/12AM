@@ -15,6 +15,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var commentButton: UIButton!
+    
     
     var post: Post? {
         didSet {
@@ -25,7 +27,7 @@ class PostTableViewCell: UITableViewCell {
     
     private func updateViews() {
         guard let post = self.post else { return }
-       
+        
         imageButton?.setImage(post.photo, for: .normal)
         guard let username = post.owner?.username else { return }
         //this lets the captionLabel just display the first 25 chars of the caption
@@ -39,24 +41,19 @@ class PostTableViewCell: UITableViewCell {
         profileImageView.image = post.owner?.profileImage
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = UIColor.black
-    }
-    
     // MARK: - Action
     
-    @IBAction func imageButtonTapped(_ sender: Any) { // Do stuff to make the imageButtonTapped segue to the detailVC
-     let segue = UIStoryboardSegue(identifier: "toPostDVC", source: FeedTableViewController(), destination: PostDetailTableViewController())
-        if segue.identifier == "feedToPostDetail" {
-            let indexPath = self.index(ofAccessibilityElement: PostTableViewCell())
-            guard let detailVC = segue.destination as? PostDetailTableViewController else { return }
-            let post = PostController.sharedController.filteredPosts[indexPath]
-            detailVC.post = post
-        }
+    @IBAction func imageButtonTapped(_ sender: Any) {
+
     }
     @IBAction func blockUserButtonTapped(_ sender: UIButton) {
         blockUserActionSheet()
     }
+    
+    @IBAction func commentButtonTapped(_ sender: Any) {
+        // TODO Fix the comment button segue 
+    }
+    
     
     func blockUserActionSheet() {
         let blockUserAlertController = UIAlertController(title: "Block User", message: "Would you like to block this user? \nYou will no longer be able to \nsee their posts or comments", preferredStyle: .actionSheet)
@@ -67,7 +64,7 @@ class PostTableViewCell: UITableViewCell {
         blockUserAlertController.addAction(blockUserAction)
         blockUserAlertController.addAction(cancelAction)
         UIApplication.shared.keyWindow?.rootViewController?.present(blockUserAlertController, animated: true, completion: nil)
-
+        
     }
     
     func blockUser() {
@@ -92,7 +89,7 @@ protocol isBlockedUserButtonTappedTableViewCellDelegate: class {
     func isCompleteButtonTapped(sender: PostTableViewCell)
 }
 
-// TODO: = Add a liking feature 
+// TODO: = Add a liking feature
 protocol isLikedButtonTappedTableViewCellDelegate: class {
     func isLikedButtonTapped(sender: PostTableViewCell)
 }

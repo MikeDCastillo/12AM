@@ -39,7 +39,7 @@ class FeedTableViewController: UITableViewController {
     
     func reloadData() {
         tableView.reloadData()
-        //FIXME: - do we need to call reload data multiple times? or can we use the animateTableFromBottom func since it has reload data?????
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +50,7 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Action s
+    // MARK: - Actions
     
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
         //        handleRefresh(sender)
@@ -72,6 +72,7 @@ class FeedTableViewController: UITableViewController {
             let post = PostController.sharedController.filteredPosts[indexPath.row]
             detailVC.post = post
         }
+    
     }
     
     //    func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -92,9 +93,10 @@ class FeedTableViewController: UITableViewController {
         
         let post = PostController.sharedController.filteredPosts[indexPath.row]
         cell.post = post
-        
+
         return cell
     }
+    
     
     // MARK: - Navigation
     
@@ -106,13 +108,9 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = UIColor.black
-    }
-    
     @IBAction func addButtonTapped(_ sender: Any) {
         addPicButtonTapped()
-        print("Josh is sexy")
+        
     }
     
     // to here to test photo posting at whatever time
@@ -159,8 +157,6 @@ class FeedTableViewController: UITableViewController {
             present(notMidnightAlertController, animated: true, completion: nil) ; return
         }
     }
-    
-    
 }
 
 //extension FeedTableViewController {

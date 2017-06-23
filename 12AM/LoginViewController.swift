@@ -39,8 +39,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpUI()
+        updateViews()
         // TODO: - add me back int
         //        setUpFacebookLogInButton()
         
