@@ -17,6 +17,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var commentButton: UIButton!
     
+    weak var delegate: PostTableViewCellDelegate?
     
     var post: Post? {
         didSet {
@@ -51,7 +52,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @IBAction func commentButtonTapped(_ sender: Any) {
-        // TODO Fix the comment button segue 
+        delegate?.postButtonTapped(self)
     }
     
     
@@ -81,6 +82,10 @@ extension PostTableViewCell {
     func setUpUI() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
     }
+}
+
+protocol PostTableViewCellDelegate: class {
+    func postButtonTapped(_ sender: PostTableViewCell)
 }
 
 

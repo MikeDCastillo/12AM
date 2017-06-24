@@ -19,6 +19,9 @@
 		016EB9341ED7ADFD00DFEA3F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EB9331ED7ADFD00DFEA3F /* CameraController.swift */; };
 		0170A7791EB3D50A0040E431 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0170A7781EB3D50A0040E431 /* CommentTableViewCell.swift */; };
 		01EE2DA11EFD86C100557F44 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA01EFD86C100557F44 /* DateFormatter.swift */; };
+		01EE2DA41EFDFFCA00557F44 /* 12AM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA21EFDFFCA00557F44 /* 12AM.xcdatamodeld */; };
+		01EE2DA61EFE00BF00557F44 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA51EFE00BF00557F44 /* CoreDataStack.swift */; };
+		01EE2DA81EFE012300557F44 /* Like+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA71EFE012300557F44 /* Like+Convenience.swift */; };
 		28BA3B7FC383D19FB8F72BB6 /* Pods_12AM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */; };
 		7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD71EAC4D61006E304A /* ImageTextField.swift */; };
 		7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD91EAC53E2006E304A /* UIColorHelper.swift */; };
@@ -68,6 +71,9 @@
 		016EB9331ED7ADFD00DFEA3F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		0170A7781EB3D50A0040E431 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		01EE2DA01EFD86C100557F44 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		01EE2DA31EFDFFCA00557F44 /* 12AM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = 12AM.xcdatamodel; sourceTree = "<group>"; };
+		01EE2DA51EFE00BF00557F44 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		01EE2DA71EFE012300557F44 /* Like+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Like+Convenience.swift"; sourceTree = "<group>"; };
 		3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12AM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5FC89D0967B4E10736ED7F /* Pods-12AM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.debug.xcconfig"; sourceTree = "<group>"; };
 		7334ADD71EAC4D61006E304A /* ImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextField.swift; sourceTree = "<group>"; };
@@ -257,6 +263,9 @@
 				013F57E91E9D51A900AA9CA4 /* User.swift */,
 				738E78FE1E9D2D630072CE95 /* Post.swift */,
 				738E79001E9D30220072CE95 /* Comment.swift */,
+				01EE2DA21EFDFFCA00557F44 /* 12AM.xcdatamodeld */,
+				01EE2DA51EFE00BF00557F44 /* CoreDataStack.swift */,
+				01EE2DA71EFE012300557F44 /* Like+Convenience.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -425,12 +434,15 @@
 				016EB9301ED7571A00DFEA3F /* ImagePreviewViewController.swift in Sources */,
 				013F57EA1E9D51A900AA9CA4 /* User.swift in Sources */,
 				7366ADAC1EAE591100E070E8 /* RotationGestureRecgonizer.swift in Sources */,
+				01EE2DA81EFE012300557F44 /* Like+Convenience.swift in Sources */,
 				016EB9321ED7588C00DFEA3F /* Camera2ViewController.swift in Sources */,
 				013F3A5C1EA93CC2004BCEBE /* FacebookController.swift in Sources */,
+				01EE2DA61EFE00BF00557F44 /* CoreDataStack.swift in Sources */,
 				738E79011E9D30220072CE95 /* Comment.swift in Sources */,
 				73D396591EA845FC00D488A1 /* PostTableViewCell.swift in Sources */,
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				7366ADAA1EAE58E600E070E8 /* TimerExtension.swift in Sources */,
+				01EE2DA41EFDFFCA00557F44 /* 12AM.xcdatamodeld in Sources */,
 				737E36141EA9210A00D77825 /* PostDetailTableViewController.swift in Sources */,
 				7336F7BB1EB2687C00CD1FBE /* UITableViewControllerExtension.swift in Sources */,
 				C893C47E1E9C41B400185BB9 /* CameraViewController.swift in Sources */,
@@ -665,6 +677,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		01EE2DA21EFDFFCA00557F44 /* 12AM.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				01EE2DA31EFDFFCA00557F44 /* 12AM.xcdatamodel */,
+			);
+			currentVersion = 01EE2DA31EFDFFCA00557F44 /* 12AM.xcdatamodel */;
+			path = 12AM.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 737E793C1E9B180200172355 /* Project object */;
 }

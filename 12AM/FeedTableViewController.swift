@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedTableViewController: UITableViewController {
+class FeedTableViewController: UITableViewController, PostTableViewCellDelegate {
     
     fileprivate let presentSignUpSegue =  "presentSignUp"
     fileprivate let showEditProfileSegue = "editProfile"
@@ -39,7 +39,7 @@ class FeedTableViewController: UITableViewController {
     
     func reloadData() {
         tableView.reloadData()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +48,14 @@ class FeedTableViewController: UITableViewController {
         DispatchQueue.main.async {
             self.animateTableFromBottom()
         }
+    }
+    
+    // MARK: - Custom Protocols
+    
+    func postButtonTapped(_ sender: PostTableViewCell) {
+        guard let indexPath = self.tableView.indexPath(for: sender) else { return }
+        let post = PostController.sharedController.filteredPosts[indexPath.row]
+        
     }
     
     // MARK: - Actions
@@ -63,16 +71,16 @@ class FeedTableViewController: UITableViewController {
     }
     
     @IBAction func imageButtonTapped(_ sender: UIImage) {
-       // TODO: Fix the segue 
+        // TODO: Fix the segue
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
             let post = PostController.sharedController.filteredPosts[indexPath.row]
             detailVC.post = post
         }
-    
+        
     }
     
     //    func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -93,9 +101,15 @@ class FeedTableViewController: UITableViewController {
         
         let post = PostController.sharedController.filteredPosts[indexPath.row]
         cell.post = post
-
+        cell.delegate = self
+        
+        
         return cell
     }
+    
+    
+    
+    
     
     
     // MARK: - Navigation
