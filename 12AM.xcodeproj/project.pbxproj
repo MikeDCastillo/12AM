@@ -22,6 +22,7 @@
 		01EE2DA41EFDFFCA00557F44 /* 12AM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA21EFDFFCA00557F44 /* 12AM.xcdatamodeld */; };
 		01EE2DA61EFE00BF00557F44 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA51EFE00BF00557F44 /* CoreDataStack.swift */; };
 		01EE2DA81EFE012300557F44 /* Like+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA71EFE012300557F44 /* Like+Convenience.swift */; };
+		01EE2DAA1EFE057600557F44 /* LikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA91EFE057600557F44 /* LikeController.swift */; };
 		28BA3B7FC383D19FB8F72BB6 /* Pods_12AM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */; };
 		7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD71EAC4D61006E304A /* ImageTextField.swift */; };
 		7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD91EAC53E2006E304A /* UIColorHelper.swift */; };
@@ -74,6 +75,7 @@
 		01EE2DA31EFDFFCA00557F44 /* 12AM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = 12AM.xcdatamodel; sourceTree = "<group>"; };
 		01EE2DA51EFE00BF00557F44 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		01EE2DA71EFE012300557F44 /* Like+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Like+Convenience.swift"; sourceTree = "<group>"; };
+		01EE2DA91EFE057600557F44 /* LikeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeController.swift; sourceTree = "<group>"; };
 		3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12AM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5FC89D0967B4E10736ED7F /* Pods-12AM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.debug.xcconfig"; sourceTree = "<group>"; };
 		7334ADD71EAC4D61006E304A /* ImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextField.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				73A538191E9EB97C0013A5CE /* PostController.swift */,
 				0165FEB41E9EEC6300A4F2A1 /* UserController.swift */,
 				013F57EB1E9D51DB00AA9CA4 /* CloudKitManager.swift */,
+				01EE2DA91EFE057600557F44 /* LikeController.swift */,
 			);
 			name = "Model Controllers";
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				013F3A5C1EA93CC2004BCEBE /* FacebookController.swift in Sources */,
 				01EE2DA61EFE00BF00557F44 /* CoreDataStack.swift in Sources */,
 				738E79011E9D30220072CE95 /* Comment.swift in Sources */,
+				01EE2DAA1EFE057600557F44 /* LikeController.swift in Sources */,
 				73D396591EA845FC00D488A1 /* PostTableViewCell.swift in Sources */,
 				738E79041E9D471C0072CE95 /* CloudKitSyncable.swift in Sources */,
 				7366ADAA1EAE58E600E070E8 /* TimerExtension.swift in Sources */,

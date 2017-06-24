@@ -11,4 +11,11 @@ import CoreData
 
 extension Like {
     
+    @discardableResult convenience init(name: String, context: NSManagedObjectContext = Stack.context) {
+        
+        self.init(context: context)
+        
+        self.name = name
+        self.isLiked = false
+    }
 }
