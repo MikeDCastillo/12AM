@@ -12,7 +12,7 @@ import AVFoundation
 
 class Camera2ViewController : UIViewController {
     
-    // MARK: - TODO: No BANGS! & Call the CamearController (Same functions, but doesn't work) 
+    // MARK: - TODO:  Call the CamearController (Same functions, but doesn't work) 
     
     // MARK: - Properties 
 

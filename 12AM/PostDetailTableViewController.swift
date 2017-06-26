@@ -17,21 +17,22 @@ class PostDetailTableViewController: UITableViewController {
     }
     
     func updateViews() {
-        
-        guard let post = post, isViewLoaded else { return }
-        let date = post.timestamp.timeIntervalSince1970
+        guard let post = post, isViewLoaded,
+            let date = post.timestamp.formatter else { return }
+       
         imageView.image = post.photo
-        timeLabel.text = String(date)
+        timeLabel.text = "\(date.string(from: post.timestamp as Date))"
         captionLabel.text = post.text
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = UIColor.black
-        view.backgroundColor = UIColor.black
+        hideKeyboard()
+        dismissKeyboard()
         tableView.reloadData()
         updateViews()
     }
+
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = UIColor.clear
@@ -85,4 +86,20 @@ class PostDetailTableViewController: UITableViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var commentTextField: UITextField!
+}
+
+extension PostDetailTableViewController {
+    
+    // MARK: Keyboard
+    
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(PostDetailTableViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

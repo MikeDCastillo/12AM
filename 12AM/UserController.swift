@@ -45,6 +45,7 @@ class UserController {
                 let users = records.flatMap { User(cloudKitRecord: $0) }
                 let user = users.first
                 self.currentUser = user
+                print("Fetched loged in user")
                 completion(user)
             })
         }
@@ -121,13 +122,13 @@ class UserController {
     func updateCurrentUser(username: String, email: String, profileImage: UIImage?, completion: @escaping (User?) -> Void) {
         guard let currentUser = currentUser, let profileImage = profileImage else { return }
        
-        let record = CKRecord(user: currentUser)
-        CloudKitManager.shared.modifyRecords([record], perRecordCompletion: nil) { (records, error) in
-            if let error = error {
-                print("Error updateding user \(error.localizedDescription)")
-                return
-            }
-        }
+//        let record = CKRecord(user: currentUser)
+//        CloudKitManager.shared.modifyRecords([record], perRecordCompletion: nil) { (records, error) in
+//            if let error = error {
+//                print("Error updateding user \(error.localizedDescription)")
+//                return
+//            }
+//        }
         
         DispatchQueue.main.async {
             currentUser.username = username

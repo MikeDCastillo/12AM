@@ -18,6 +18,7 @@
 		016EB9321ED7588C00DFEA3F /* Camera2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EB9311ED7588C00DFEA3F /* Camera2ViewController.swift */; };
 		016EB9341ED7ADFD00DFEA3F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016EB9331ED7ADFD00DFEA3F /* CameraController.swift */; };
 		0170A7791EB3D50A0040E431 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0170A7781EB3D50A0040E431 /* CommentTableViewCell.swift */; };
+		01EE2DA11EFD86C100557F44 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE2DA01EFD86C100557F44 /* DateFormatter.swift */; };
 		28BA3B7FC383D19FB8F72BB6 /* Pods_12AM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */; };
 		7334ADD81EAC4D61006E304A /* ImageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD71EAC4D61006E304A /* ImageTextField.swift */; };
 		7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334ADD91EAC53E2006E304A /* UIColorHelper.swift */; };
@@ -66,6 +67,7 @@
 		016EB9311ED7588C00DFEA3F /* Camera2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera2ViewController.swift; sourceTree = "<group>"; };
 		016EB9331ED7ADFD00DFEA3F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		0170A7781EB3D50A0040E431 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		01EE2DA01EFD86C100557F44 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		3D0B5C1D4A98B9C373BB85AA /* Pods_12AM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12AM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D5FC89D0967B4E10736ED7F /* Pods-12AM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12AM.debug.xcconfig"; path = "Pods/Target Support Files/Pods-12AM/Pods-12AM.debug.xcconfig"; sourceTree = "<group>"; };
 		7334ADD71EAC4D61006E304A /* ImageTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextField.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				0119C62B1EB03E880006863A /* Assets.xcassets */,
 				737E79531E9B180200172355 /* Info.plist */,
 				7338E1101EB3EEDB0087900E /* AnimationHelper.swift */,
+				01EE2DA01EFD86C100557F44 /* DateFormatter.swift */,
 				7336F7BA1EB2687C00CD1FBE /* UITableViewControllerExtension.swift */,
 				7366ADA91EAE58E600E070E8 /* TimerExtension.swift */,
 				7366ADAD1EAE597A00E070E8 /* TimeTracker.swift */,
@@ -441,6 +444,7 @@
 				7334ADDA1EAC53E2006E304A /* UIColorHelper.swift in Sources */,
 				0165FEB51E9EEC6300A4F2A1 /* UserController.swift in Sources */,
 				7366ADB61EB140A900E070E8 /* NetworkController.swift in Sources */,
+				01EE2DA11EFD86C100557F44 /* DateFormatter.swift in Sources */,
 				7366ADB41EB1409600E070E8 /* ImageController.swift in Sources */,
 				C893C47C1E9C40D700185BB9 /* FeedTableViewController.swift in Sources */,
 				013F57EC1E9D51DB00AA9CA4 /* CloudKitManager.swift in Sources */,

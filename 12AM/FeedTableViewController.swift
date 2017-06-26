@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedTableViewController: UITableViewController {
+class FeedTableViewController: UITableViewController, PostTableViewCellDelegate {
     
     fileprivate let presentSignUpSegue =  "presentSignUp"
     fileprivate let showEditProfileSegue = "editProfile"
@@ -39,7 +39,7 @@ class FeedTableViewController: UITableViewController {
     
     func reloadData() {
         tableView.reloadData()
-        //FIXME: - do we need to call reload data multiple times? or can we use the animateTableFromBottom func since it has reload data?????
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +50,19 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Action s
+    // MARK: - Custom Protocols
+    
+    func postButtonTapped(_ sender: PostTableViewCell) {
+        guard let indexPath = self.tableView.indexPath(for: sender) else { return }
+        let _ = PostController.sharedController.filteredPosts[indexPath.row]
+        
+    }
+    
+    func likedButtonTapped(_ sender: PostTableViewCell) {
+       // TODO delete delegates
+    }
+    
+    // MARK: - Actions
     
     @IBAction func swipToRefresh(_ sender: UIRefreshControl, forEvent event: UIEvent) {
         //        handleRefresh(sender)
@@ -63,15 +75,16 @@ class FeedTableViewController: UITableViewController {
     }
     
     @IBAction func imageButtonTapped(_ sender: UIImage) {
-       // TODO: Fix the segue 
+        // TODO: Fix the segue
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "feedToPostDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow, let detailVC = segue.destination as? PostDetailTableViewController else { return }
             let post = PostController.sharedController.filteredPosts[indexPath.row]
             detailVC.post = post
         }
+        
     }
     
     //    func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -92,7 +105,8 @@ class FeedTableViewController: UITableViewController {
         
         let post = PostController.sharedController.filteredPosts[indexPath.row]
         cell.post = post
-        
+        cell.delegate = self
+    
         return cell
     }
     
@@ -106,13 +120,9 @@ class FeedTableViewController: UITableViewController {
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = UIColor.black
-    }
-    
     @IBAction func addButtonTapped(_ sender: Any) {
         addPicButtonTapped()
-        print("Josh is sexy")
+        
     }
     
     // to here to test photo posting at whatever time
@@ -159,8 +169,6 @@ class FeedTableViewController: UITableViewController {
             present(notMidnightAlertController, animated: true, completion: nil) ; return
         }
     }
-    
-    
 }
 
 //extension FeedTableViewController {

@@ -22,7 +22,7 @@ class CommentTableViewCell: UITableViewCell {
     func updateViews() {
         guard let comment = comment else { return }
         commentUsernameLabel.text = comment.owner?.username
-        commentBodyTextLabel.text = "User: \(comment.text)"
+        commentBodyTextLabel.text = " \(comment.text)"
     }
     
     @IBAction func commentBlockButtonTapped(_ sender: Any) {
