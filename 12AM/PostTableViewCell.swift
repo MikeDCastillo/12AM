@@ -16,6 +16,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var likeImageButton: UIButton!
     
     weak var delegate: PostTableViewCellDelegate?
     
@@ -55,7 +56,6 @@ class PostTableViewCell: UITableViewCell {
         delegate?.postButtonTapped(self)
     }
     
-    
     func blockUserActionSheet() {
         let blockUserAlertController = UIAlertController(title: "Block User", message: "Would you like to block this user? \nYou will no longer be able to \nsee their posts or comments", preferredStyle: .actionSheet)
         let blockUserAction = UIAlertAction(title: "Block", style: .default) { (_) in
@@ -75,9 +75,17 @@ class PostTableViewCell: UITableViewCell {
             print("Sucessfully blocked user from the Cell")
         }
     }
+    
+    fileprivate func updateLikeButton(_ isLiked: Bool) {
+        let imageName = isLiked ? #imageLiteral(resourceName: "emptyHeart") : #imageLiteral(resourceName: "filledHeart")
+        commentButton.setImage(imageName, for: .normal)
+    }
 }
 
 extension PostTableViewCell {
+    
+    
+    // MARK: - UI
     
     func setUpUI() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
@@ -86,6 +94,7 @@ extension PostTableViewCell {
 
 protocol PostTableViewCellDelegate: class {
     func postButtonTapped(_ sender: PostTableViewCell)
+    func likedButtonTapped(_ sender: PostTableViewCell)
 }
 
 

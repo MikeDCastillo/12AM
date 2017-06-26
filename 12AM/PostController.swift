@@ -11,6 +11,7 @@
 import Foundation
 import UIKit
 import CloudKit
+import CoreData
 
 extension PostController {
     static let PostChangeNotified = Notification.Name("PostChangeNotified")
@@ -245,4 +246,5 @@ class PostController {
     //            }
     //        }
     //    }
+
 }

@@ -54,8 +54,12 @@ class FeedTableViewController: UITableViewController, PostTableViewCellDelegate 
     
     func postButtonTapped(_ sender: PostTableViewCell) {
         guard let indexPath = self.tableView.indexPath(for: sender) else { return }
-        let post = PostController.sharedController.filteredPosts[indexPath.row]
+        let _ = PostController.sharedController.filteredPosts[indexPath.row]
         
+    }
+    
+    func likedButtonTapped(_ sender: PostTableViewCell) {
+       // TODO delete delegates
     }
     
     // MARK: - Actions
@@ -102,15 +106,9 @@ class FeedTableViewController: UITableViewController, PostTableViewCellDelegate 
         let post = PostController.sharedController.filteredPosts[indexPath.row]
         cell.post = post
         cell.delegate = self
-        
-        
+    
         return cell
     }
-    
-    
-    
-    
-    
     
     // MARK: - Navigation
     
