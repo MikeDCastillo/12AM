@@ -28,13 +28,6 @@ class Camera2ViewController : UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.clearBlur
     }
     
-    func displayCapturedPhoto(capturedPhoto : UIImage) {
-        
-        let imagePreviewViewController = storyboard?.instantiateViewController(withIdentifier: "ImagePreviewViewController") as! ImagePreviewViewController
-        imagePreviewViewController.capturedImage = capturedPhoto
-        navigationController?.pushViewController(imagePreviewViewController, animated: true)
-    }
-    
     // MARK: - Actions 
     
     @IBAction func cameraToggleButton(_ sender: Any) {
@@ -123,6 +116,15 @@ class Camera2ViewController : UIViewController {
 }
 
 extension Camera2ViewController : AVCapturePhotoCaptureDelegate {
+    
+    // MARK: Display Photo 
+    
+    func displayCapturedPhoto(capturedPhoto : UIImage) {
+        
+        let imagePreviewViewController = storyboard?.instantiateViewController(withIdentifier: "ImagePreviewViewController") as! ImagePreviewViewController
+        imagePreviewViewController.capturedImage = capturedPhoto
+        navigationController?.pushViewController(imagePreviewViewController, animated: true)
+    }
     
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         

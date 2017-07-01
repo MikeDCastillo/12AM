@@ -116,23 +116,30 @@ class ImagePreviewViewController : UIViewController, UITextFieldDelegate {
 //    }
     
     // Function which brings up textField when UIImageView is tapped, called in imageTapGesture
-<<<<<<< HEAD
-//    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-//    {
-//        let tappedImage = tapGestureRecognizer.view as! UIImageView
-//        
-//        // Your action
-//    }
-=======
+    
+    // MARK: - Image Gesture Functions
+    
+    // Function to add tap gesture to UIImageView
+    //    func imageTapGesture() {
+    //
+    //        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+    //
+    //        imageView.addGestureRecognizer(tap)
+    //
+    //        imageView.isUserInteractionEnabled = true
+    //
+    //        self.view.addSubview(view)
+    //
+    //    }
+    
+    //     Function which brings up textField when UIImageView is tapped, called in imageTapGesture
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        // let tappedImage
         _ = tapGestureRecognizer.view as! UIImageView
         
         // Your action
     }
->>>>>>> launch
-
+    
     
     // MARK: - Action
     
@@ -141,24 +148,16 @@ class ImagePreviewViewController : UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-<<<<<<< HEAD
     @IBAction func imageToTextFieldButton(_ sender: Any) {
         
         
-        
     }
     
-    
-   
-=======
     func usePhoto() {
+        guard let commentText = imageCaptionTextField.text, let image = imageView.image else { return }
         
-        guard let caption = imageCaptionTextField.text, let image = imageView.image else { return }
-        
-        PostController.sharedController.createPost(image: image, caption: caption) { (post) in
-//            guard let post = post else { return }
+        PostController.sharedController.createPost(image: image, caption: commentText) { (post) in
+            // TODO: post
         }
     }
-
->>>>>>> launch
 }

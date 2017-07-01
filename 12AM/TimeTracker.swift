@@ -20,8 +20,7 @@ class TimeTracker {
     }
     
     // for testing make this next line ... var isMidnight: Bool? = false
-    var isMidnight: Bool?
-    {
+    var isMidnight: Bool? {
         didSet {
             guard let isMidnight = isMidnight, isMidnight != oldValue else { return }
             let notificationName: Notification.Name = isMidnight ? .didEnterMidnightHour : .didExitMidnightHour

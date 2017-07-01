@@ -16,9 +16,6 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var blockUserButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var likeImageButton: UIButton!
-    
-    weak var delegate: PostTableViewCellDelegate?
     
     var post: Post? {
         didSet {
@@ -30,6 +27,7 @@ class PostTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let post = self.post else { return }
         
+        imageButton.imageView?.contentMode = UIViewContentMode.scaleAspectFill
         imageButton?.setImage(post.photo, for: .normal)
         guard let username = post.owner?.username else { return }
         //this lets the captionLabel just display the first 25 chars of the caption
@@ -53,7 +51,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @IBAction func commentButtonTapped(_ sender: Any) {
-        delegate?.postButtonTapped(self)
+        
     }
     
     func blockUserActionSheet() {
@@ -84,17 +82,11 @@ class PostTableViewCell: UITableViewCell {
 
 extension PostTableViewCell {
     
-    
     // MARK: - UI
     
     func setUpUI() {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
     }
-}
-
-protocol PostTableViewCellDelegate: class {
-    func postButtonTapped(_ sender: PostTableViewCell)
-    func likedButtonTapped(_ sender: PostTableViewCell)
 }
 
 

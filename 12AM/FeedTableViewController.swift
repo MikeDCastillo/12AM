@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedTableViewController: UITableViewController, PostTableViewCellDelegate {
+class FeedTableViewController: UITableViewController {
     
     fileprivate let presentSignUpSegue =  "presentSignUp"
     fileprivate let showEditProfileSegue = "editProfile"
@@ -50,17 +50,6 @@ class FeedTableViewController: UITableViewController, PostTableViewCellDelegate 
         }
     }
     
-    // MARK: - Custom Protocols
-    
-    func postButtonTapped(_ sender: PostTableViewCell) {
-        guard let indexPath = self.tableView.indexPath(for: sender) else { return }
-        let _ = PostController.sharedController.filteredPosts[indexPath.row]
-        
-    }
-    
-    func likedButtonTapped(_ sender: PostTableViewCell) {
-       // TODO delete delegates
-    }
     
     // MARK: - Actions
     
@@ -105,7 +94,6 @@ class FeedTableViewController: UITableViewController, PostTableViewCellDelegate 
         
         let post = PostController.sharedController.filteredPosts[indexPath.row]
         cell.post = post
-        cell.delegate = self
     
         return cell
     }
@@ -149,7 +137,7 @@ class FeedTableViewController: UITableViewController, PostTableViewCellDelegate 
                 
                 let cameraOrCancelAlertController = UIAlertController(title: "Add Photo", message: "Take a photo to post", preferredStyle: .alert)
                 let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
-                    self.performSegue(withIdentifier: "addPhotoButtonTappedToCamera", sender: self) }
+                    self.performSegue(withIdentifier: "toCamera", sender: self) }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 cameraOrCancelAlertController.addAction(cameraAction)
                 cameraOrCancelAlertController.addAction(cancelAction)
@@ -171,13 +159,3 @@ class FeedTableViewController: UITableViewController, PostTableViewCellDelegate 
     }
 }
 
-//extension FeedTableViewController {
-//
-//    func setUpNavBar() {
-//        self.navigationController?.navigationBar. = #imageLiteral(resourceName: "userIcon2")
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "userIcon2")
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-//    }
-//}
-
-//potential feature: replace login button with a Map button that shows where in the world is currently active
