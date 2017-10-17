@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CloudKit
 import FBSDKLoginKit
-import FacebookCore
+
 
 class UserController {
     
@@ -51,7 +51,7 @@ class UserController {
         }
     }
     
-    func createUser(with userName: String, email: String, profileImage: UIImage?, accessToken: AccessToken? = nil, blockedUserRef: [CKReference]? = [], completion: @escaping (User?) -> Void) {
+    func createUser(with userName: String, email: String, profileImage: UIImage?, blockedUserRef: [CKReference]? = [], completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
@@ -59,7 +59,7 @@ class UserController {
             let appleUserRef = CKReference(recordID: recordId, action: .deleteSelf)
             guard let blockUserRef = self.blockUserRef else { return }
             
-            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: nil, blockUserRefs: blockUserRef)
+            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, blockUserRefs: blockUserRef)
             let userRecord = CKRecord(user: user)
             
             self.publicDB.save(userRecord) { (record, error) in
@@ -76,7 +76,7 @@ class UserController {
         }
     }
     
-    func createUserWithFacebook(userName: String, email: String, profileImage: UIImage?, accessToken: AccessToken, blockedUser: [CKReference?] = [], completion: @escaping (User?) -> Void) {
+    func createUserWithFacebook(userName: String, email: String, profileImage: UIImage?, blockedUser: [CKReference?] = [], completion: @escaping (User?) -> Void) {
         CKContainer.default().fetchUserRecordID { recordId, error in
             guard let recordId = recordId, error == nil else {
                 print("Error creating recordId \(String(describing: error?.localizedDescription))"); return }
@@ -84,7 +84,7 @@ class UserController {
             
             let appleUserRef = CKReference(recordID: recordId, action: .deleteSelf)
             guard let blockUserRef = self.blockUserRef else { return }
-            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, accessToken: accessToken, blockUserRefs: blockUserRef)
+            let user = User(username: userName, email: email, profileImage: profileImage, appleUserRef: appleUserRef, blockUserRefs: blockUserRef)
             let userRecord = CKRecord(user: user)
             
             self.publicDB.save(userRecord) { (record, error) in

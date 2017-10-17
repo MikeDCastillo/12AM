@@ -8,8 +8,8 @@
 
 import UIKit
 import CloudKit
-import FBSDKLoginKit
-import FacebookCore
+
+
 
 class User {
     
@@ -26,7 +26,6 @@ class User {
     var email: String
     var profileImage: UIImage?
     var currentTimeZone: String { return TimeZone.current.identifier }
-    var accessToken: AccessToken?
     var blockUserRefs: [CKReference]? = []
     var blocUsersArray: [User] = []
     var users: [User] = []
@@ -68,12 +67,11 @@ class User {
     
     // Sign up page. Exists locally - its a new user that doesn't exist yet.
     // To create a instace from a new user
-    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, accessToken: AccessToken?, blockUserRefs: [CKReference]? = []) {
+    init(username: String, email: String, profileImage: UIImage?, appleUserRef: CKReference, blockUserRefs: [CKReference]? = []) {
         self.username = username
         self.profileImage = profileImage
         self.email = email
         self.appleUserRef = appleUserRef
-        self.accessToken = accessToken
         self.blockUserRefs = blockUserRefs
     }
     
@@ -86,7 +84,7 @@ class User {
             else { return nil }
         
         self.blockUserRefs = cloudKitRecord[User.blockUserRefKey] as? [CKReference] ?? []
-        self.accessToken = cloudKitRecord[User.accessTokenKey] as? AccessToken ?? nil
+       
         
         self.username = username
         self.email = email
@@ -109,7 +107,6 @@ extension CKRecord {
         self.setValue(user.email, forKey: User.emailKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
         self.setValue(user.blockUserRefs, forKey: User.blockUserRefKey)
-        self.setValue(user.accessToken, forKey: User.accessTokenKey)
         guard user.profileImage != nil else { return }
         let imageAsset = CKAsset(fileURL: user.temporaryPhotoURL)
         self.setValue(imageAsset, forKey: User.imageKey)

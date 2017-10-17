@@ -8,7 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
-import FacebookCore
+
 import SceneKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     fileprivate let emailLine = UIView()
     fileprivate let usernameLine = UIView()
     fileprivate let imagePicker = UIImagePickerController()
-    fileprivate let accessToken = AccessToken.current
+    
     
     fileprivate var currentUser: User? {
         return UserController.shared.currentUser
@@ -235,7 +235,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             print("error")
             return
         }
-        FacebookAPIController.fetchFacebookUserInfo()
         print("Succesfully logged into Facebook")
     }
 }
